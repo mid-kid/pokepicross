@@ -716,7 +716,8 @@ class Symbols:
 
         for line in f:
             # ignore comments and empty lines
-            if line[0] != ';' and len(line.strip()):
+            line = line.split(";")[0].strip()
+            if line:
                 self.add_symbol_definition(line)
 
         f.close()
