@@ -889,7 +889,7 @@ class ROM:
         return ((self.data[0x143] & 0x80) == 0x80)
 
 
-    def disassemble(self, output_dir):
+    def disassemble(self, output_dir, onebank=None):
 
         self.output_directory = os.path.abspath(output_dir.rstrip(os.sep))
 
@@ -904,7 +904,11 @@ class ROM:
 
 
         print('Generating labels...')
-        self.generate_labels()
+        if onebank is not None:
+            self.banks[onebank].disassemble(rom, True)
+        else:
+            for bank in range(0, self.num_banks):
+                self.banks[bank].disassemble(rom, True)
 
         self.image_dependencies = []
 
@@ -912,19 +916,18 @@ class ROM:
         if debug:
             print('')
 
-        for bank in range(0, self.num_banks):
-            self.write_bank_asm(bank)
+        if onebank is not None:
+            self.write_bank_asm(onebank)
+        else:
+            for bank in range(0, self.num_banks):
+                self.write_bank_asm(bank)
 
-        self.copy_hardware_inc()
-        self.write_game_asm()
-        self.write_makefile()
+        if onebank is None:
+            self.copy_hardware_inc()
+            self.write_game_asm()
+            self.write_makefile()
 
         print('\nDisassembly generated in "{}"'.format(self.output_directory))
-
-
-    def generate_labels(self):
-        for bank in range(0, self.num_banks):
-            self.banks[bank].disassemble(rom, True)
 
 
     def write_bank_asm(self, bank):
@@ -1162,6 +1165,7 @@ parser.add_argument('--disable-halt-nops', help='Disable RGBDS\'s automatic inse
 parser.add_argument('--disable-auto-ldh', help='Disable RGBDS\'s automatic optimisation of \'ld [$ff00+a8], a\' to \'ldh [a8], a\' instructions. Requires RGBDS >= v0.3.7', action='store_true')
 parser.add_argument('--overwrite', help='Allow generating a disassembly into an already existing directory', action='store_true')
 parser.add_argument('--debug', help='Display debug output', action='store_true')
+parser.add_argument('--bank', help='Disassemble only one bank', type=lambda x: int(x, 16), default=None)
 args = parser.parse_args()
 
 debug = args.debug
@@ -1181,4 +1185,4 @@ style = {
 instructions = apply_style_to_instructions(style, instructions)
 
 rom = ROM(args.rom_path, style)
-rom.disassemble(args.output_dir)
+rom.disassemble(args.output_dir, args.bank)
