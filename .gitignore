@@ -1,2 +1,7 @@
 /DMGAKVJ0.1
+/disassembly
+/build
 *.sav
+*.gbc
+*.map
+*.sym
