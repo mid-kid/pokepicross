@@ -207,20 +207,23 @@ class Bank:
         self.target_addresses = dict({
             'call': set(),
             'jp': set(),
-            'jr': set()
+            'jr': set(),
+            'data': set()
         })
 
         self.instruction_label_prefixes = dict({
             'call': 'Call',
             'jp': 'Jump',
-            'jr': 'jr'
+            'jr': 'jr',
+            'data': 'Data'
         })
 
         self.disassemble_block_range = dict({
             'code': self.process_code_in_range,
             'data': self.process_data_in_range,
             'text': self.process_text_in_range,
-            'image': self.process_image_in_range
+            'image': self.process_image_in_range,
+            'ptrtable': self.process_ptrtable_in_range
         })
 
 
@@ -332,7 +335,7 @@ class Bank:
                 labels.append(label + '::')
         else:
             # otherwise, if the address was marked as a target address, generate a label
-            for instruction_name in ['call', 'jp', 'jr']:
+            for instruction_name in self.target_addresses:
                 if address in self.target_addresses[instruction_name]:
                     labels.append(self.format_label(instruction_name, address) + ':')
 
@@ -703,6 +706,48 @@ class Bank:
         full_filename = rom.write_image(basename, arguments, rom.data[start_address:end_address])
         self.append_output(self.format_instruction('INCBIN', ['\"' + full_filename + '\"']))
 
+    def process_ptrtable_in_range(self, rom, start_address, end_address, arguments = None):
+        if not self.first_pass and debug:
+            print('Outputting ptrtable in range: {} - {}'.format(hex_word(start_address), hex_word(end_address)))
+
+        values = list()
+
+        for address in range(start_address, end_address, 2):
+            mem_address = rom_address_to_mem_address(address)
+            labels = self.get_labels_for_non_code_address(mem_address)
+            if len(labels):
+                self.append_labels_to_output(labels)
+
+            if address >= end_address - 1:
+                self.append_output(self.format_data((hex_byte(rom.data[address]),)))
+                break
+
+            value = rom.data[address+1] << 8 | rom.data[address]
+
+            instruction_name = None
+            if arguments and arguments in ['code', 'data']:
+                instruction_name = {'code': 'call', 'data': 'data'}[arguments]
+
+            mem_address = rom_address_to_mem_address(value)
+            label = None
+            if value < 0x8000 and instruction_name:
+                if self.first_pass:
+                    # dont allow switched banks to create labels in bank 0
+                    is_address_in_current_bank = (mem_address < 0x4000 and self.bank_number == 0) or (mem_address >= 0x4000 and self.bank_number > 0)
+                    if is_address_in_current_bank:
+                        # add the label
+                        self.add_target_address(instruction_name, mem_address)
+                else:
+                    # fetch the label name
+                    label = self.symbols.get_label(self.bank_number, mem_address)
+                    if label is None and mem_address in self.target_addresses[instruction_name]:
+                        label = self.format_label(instruction_name, mem_address)
+
+            if not self.first_pass:
+                if label:
+                    self.append_output(self.format_instruction('dw', (label,)))
+                else:
+                    self.append_output(self.format_instruction('dw', (hex_word(value),)))
 
 
 
@@ -751,6 +796,9 @@ class Symbols:
 
                 elif block_type in ['.image']:
                     block_type = 'image'
+
+                elif block_type in ['.ptrtable']:
+                    block_type = 'ptrtable'
 
                 else:
                     return
