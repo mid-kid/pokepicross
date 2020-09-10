@@ -1,4 +1,4 @@
-SECTION "print_char", ROMX[$4c80], BANK[$02]
+SECTION "text_char_draw", ROMX[$4c80], BANK[$02]
 ; Parameters:
 ; de - character to print
 ; b - x position
