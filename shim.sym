@@ -1,2 +1,28 @@
-00:c31e w_bank_temp
-00:c315 w_bank_rom
+00:c31e w_bank_temp ; db
+00:c317 w_farcall_target ; dw
+00:c315 w_bank_rom ; db
+
+00:c336 w_c336
+00:c35b w_vwf_char_start_x ; db
+00:c35c w_vwf_char_start_y ; db
+00:c35d w_vwf_char_end_x ; db
+00:c35e w_vwf_char_end_y ; db
+00:c35f w_vwf_char_addr ; dw
+00:c361 w_vwf_char_bank ; db
+00:c362 w_c362
+00:c363 w_c363
+00:c364 w_c364
+00:c365 w_c365
+00:c366 w_c366
+00:c367 w_c367
+00:c368 w_c368
+00:c369 w_c369
+00:c36a w_c36a
+00:c36b w_c36b
+00:c36c w_c36c
+00:c36d w_vwf_char_buffer ; ds ??
+00:cd6d w_cd6d
+00:cd6e w_cd6e
+
+01:d560 w_textbox_width ; db
+01:d561 w_textbox_height ; db
