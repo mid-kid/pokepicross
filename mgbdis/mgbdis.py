@@ -427,6 +427,7 @@ class Bank:
         comment = None
         operands = None
         operand_values = list()
+        instruction_bytes = None
 
         if opcode not in instructions:
             abort('Unhandled opcode: {} at {}'.format(hex_byte(opcode), hex_word(pc)))
@@ -440,6 +441,36 @@ class Bank:
         else:
             instruction_name = rom.instruction_names[opcode]
             operands = rom.instruction_operands[opcode]
+
+        if (rom.data[pc+0:pc+2]   == bytes((0xF5, 0x3E)) and
+            rom.data[pc+3:pc+7]   == bytes((0xEA, 0x17, 0xC3, 0x3E)) and
+            rom.data[pc+8:pc+12]  == bytes((0xEA, 0x18, 0xC3, 0x3E)) and
+            rom.data[pc+13:pc+20] == bytes((0xEA, 0x1E, 0xC3, 0xF1, 0xCD, 0xCD, 0x10))):
+            # Yep, that's a farcall alright
+            instruction_name = 'farcall'
+            length = 20
+            operands = list()
+
+            addr = rom.data[pc+2] | (rom.data[pc+7] << 8)
+            bank = rom.data[pc+12]
+            operand_values = (hex_byte(bank), hex_word(addr))
+
+            instruction_bytes = bytes((0, rom.data[pc+2], rom.data[pc+7], rom.data[pc+12]))
+
+            if self.first_pass and bank is not None:
+                # make sure this is a ROM address
+                if (addr < 0x4000 and bank == 0) or (addr >= 0x4000 and addr < 0x8000):
+                    # add the label
+                    if self.symbols.get_label(bank, addr) is None:
+                        self.symbols.add_label(bank, addr, 'Farcall_{:03x}_{:04x}'.format(bank, addr))
+            else:
+                # fetch the label name
+                if bank is None:
+                    bank = self.bank_number
+                label = self.symbols.get_label(bank, addr)
+                if label is not None:
+                    # use the label instead of the address
+                    operand_values = (label,)
 
         if instruction_name == 'stop' or (instruction_name == 'halt' and not self.style['disable_halt_nops']):
             if rom.data[pc + 1] == 0x00:
@@ -606,7 +637,8 @@ class Bank:
             if comment is not None:
                 self.append_output(comment)
 
-            instruction_bytes = rom.data[pc:pc + length]
+            if instruction_bytes is None:
+                instruction_bytes = rom.data[pc:pc + length]
             self.append_output(self.format_instruction(instruction_name, operand_values, pc_mem_address, instruction_bytes))
 
             # add some empty lines after returns and jumps to break up the code blocks
