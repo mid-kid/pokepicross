@@ -629,6 +629,9 @@ class Bank:
             print('Outputting data in range: {} - {}'.format(hex_word(start_address), hex_word(end_address)))
 
         values = list()
+        width = 16
+        if arguments:
+            width = int(arguments, 16)
 
         for address in range(start_address, end_address):
             mem_address = rom_address_to_mem_address(address)
@@ -644,8 +647,8 @@ class Bank:
 
             values.append(hex_byte(rom.data[address]))
 
-            # output max of 16 bytes per line, and ensure any remaining values are output
-            if len(values) == 16 or (address == end_address - 1 and len(values)):
+            # output max of width bytes per line, and ensure any remaining values are output
+            if len(values) == width or (address == end_address - 1 and len(values)):
                 self.append_output(self.format_data(values))
                 values = list()
 
