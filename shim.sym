@@ -1,11 +1,87 @@
+00:04c5 lcd
+00:0531 timer
+00:0533 joypad
+
+00:0df5 function_00_0df5
+00:0ecf function_00_0ecf
+00:0f20 function_00_0f20
+00:103c function_00_103c
+00:114e function_00_114e
+00:11f1 function_00_11f1
+00:1caa function_00_1caa
+00:1cfa function_00_1cfa
+00:1d59 function_00_1d59
+00:1de7 function_00_1de7
+00:2312 function_00_2312
+00:26c1 function_00_26c1
+
+04:43ec function_04_43ec
+
 05:420f text_scroll_char_print
 
-00:c31e w_bank_temp ; db
-00:c317 w_farcall_target ; dw
-00:c315 w_bank_rom ; db
+00:a03e s_a03e
+00:a040 s_a040
+00:a041 s_a041
+00:a042 s_a042
+00:a043 s_a043
+00:a04a s_a04a
+00:a04b s_a04b
+00:a054 s_a054
+00:a055 s_a055
+00:a056 s_a056
+00:a057 s_a057
+00:a058 s_a058
+00:a059 s_a059
+00:a05b s_a05b
+00:a06c s_a06c
+00:a06d s_a06d
+00:a071 s_a071
+00:a072 s_a072
+00:a073 s_a073
+00:a07d s_a07d
 
-00:c336 w_c336
+00:c315 w_bank_rom ; db
+00:c317 w_farcall_target ; dw
+00:c317 w_farcall_target_low
+00:c318 w_farcall_target_high
+00:c31e w_bank_temp ; db
+
+00:c301 w_c301
+00:c314 w_c314
+00:c316 w_c316
+00:c320 w_c320
+00:c321 w_c321
+00:c322 w_c322
+00:c325 w_c325
+00:c326 w_c326
+00:c327 w_c327
+00:c329 w_c329
+00:c32a w_c32a
+00:c32c w_c32c
+00:c32d w_c32d
+00:c330 w_c330
+00:c333 w_c333
+
+00:c336 w_LCDC
+00:c337 w_BGP
+00:c338 w_OBP0
+00:c339 w_OBP1
+00:c33a w_SCX
+00:c33b w_SCY
+00:c33c w_WX
+00:c33d w_WY
+00:c33e w_LYC
+00:c33f w_STAT
+
+00:c340 w_c340
+00:c341 w_vblank_ran
 00:c342 w_c342
+00:c344 w_c344
+00:c345 w_c345
+00:c357 w_c357
+00:c358 w_c358
+00:c359 w_c359
+00:c35a w_c35a
 00:c35b w_vwf_char_start_x ; db
 00:c35c w_vwf_char_start_y ; db
 00:c35d w_vwf_char_end_x ; db
@@ -26,6 +102,14 @@
 00:c36d w_vwf_char_buffer ; ds ??
 00:cd6d w_cd6d
 00:cd6e w_cd6e
+00:cd73 w_cd73
+00:cdcc w_cdcc
+00:cdce w_cdce
+00:cdd0 w_cdd0
+00:cdfc w_cdfc
+
+00:ff80 h_oam_dma
+00:fffe h_stack_bottom
 
 01:d548 w_text_cur_string ; dw
 01:d546 w_text_cur_x ; db
@@ -33,3 +117,12 @@
 01:d55e w_textbox_x ; db
 01:d560 w_textbox_width ; db
 01:d561 w_textbox_height ; db
+
+01:d568 w_d568
+01:d61b w_d61b
+01:d6b5 w_d6b5
+01:df3f w_df3f ; ds 3
+01:df47 w_df47
+01:df62 w_df62
+
+01:dfff w_stack_bottom
