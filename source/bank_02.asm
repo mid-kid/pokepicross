@@ -25,14 +25,14 @@ text_char_print::
     ld e, a
     ld a, [hl+]
 
-	; Check if we've reached the end of the string
+    ; Check if we've reached the end of the string
     ld d, a
     and e
     cp TX_EOM
     jp z, farcall_ret
     push hl
 
-	; Check for line feed
+    ; Check for line feed
     ld a, e
     cp LOW(TX_LF)
     jr nz, .not_line_feed
@@ -41,7 +41,7 @@ text_char_print::
     jr z, .line_feed
 .not_line_feed
 
-	; Draw ピ one pixel higher
+    ; Draw ピ one pixel higher
     ld a, e
     cp "ピ"
     jr nz, .not_pi
@@ -51,10 +51,10 @@ text_char_print::
     dec c
 .not_pi
 
-	; Draw character
+    ; Draw character
     farcall text_char_draw
 
-	; Leave two pixels space between each character
+    ; Leave two pixels space between each character
     ld hl, w_text_cur_x
     add 2
     add [hl]
@@ -62,7 +62,7 @@ text_char_print::
     jr .done
 
 .line_feed
-	; Advance to the next line
+    ; Advance to the next line
     ld a, [w_textbox_x]
     ld [w_text_cur_x], a
     ld a, [w_text_cur_y]
@@ -70,14 +70,14 @@ text_char_print::
     ld [w_text_cur_y], a
 
 .done
-	; Back up string pointer
+    ; Back up string pointer
     pop hl
     ld a, l
     ld [w_text_cur_string + 0], a
     ld a, h
     ld [w_text_cur_string + 1], a
 
-	; Check if the next character is a terminator
+    ; Check if the next character is a terminator
     ld a, [hl+]
     and [hl]
     cp TX_EOM
@@ -92,7 +92,7 @@ text_char_print::
 text_char_draw::
     push de
 
-	; Get char address
+    ; Get char address
     sla e
     rl d
     ld hl, text_chars_offsets
@@ -112,7 +112,7 @@ text_char_draw::
     ld a, b
     ld [w_vwf_char_start_x], a
 
-	; Get character width
+    ; Get character width
     pop de
     ld hl, text_chars_widths
     add hl, de
@@ -120,7 +120,7 @@ text_char_draw::
     and a
     jp z, farcall_ret
 
-	; Check we aren't drawing outside the textbox
+    ; Check we aren't drawing outside the textbox
     push af
     add b
     ld hl, w_textbox_width

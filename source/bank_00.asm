@@ -437,16 +437,16 @@ vwf_char_draw::
     inc de
     ld [de], a
 
-	; Write tiles stored in the buffer
+    ; Write tiles stored in the buffer
     ld bc, w_vwf_char_buffer
 
-	; Ignore hblank (update during vblank?)
+    ; Ignore hblank (update during vblank?)
     ld a, [w_c336]
     bit 7, a
     jr z, .write_tile_ignore_hblank_loop
 
 .write_tile_loop
-	; Get location to write to
+    ; Get location to write to
     ld a, [bc]
     ld l, a
     inc bc
@@ -455,7 +455,7 @@ vwf_char_draw::
     or l
     jr z, .write_tile_done
 
-	; Get mask in e, and pixels in d
+    ; Get mask in e, and pixels in d
     inc bc
     ld a, [bc]
     ld e, a
@@ -474,7 +474,7 @@ vwf_char_draw::
     and STATF_LCD
     jr nz, .hblank_enter
 
-	; Write pixels high bit, preserving background
+    ; Write pixels high bit, preserving background
     ld a, d
     xor [hl]
     and e
@@ -489,7 +489,7 @@ vwf_char_draw::
     and STATF_LCD
     jr nz, .hblank_next
 
-	; Write 8 pixels low bit, preserving background
+    ; Write 8 pixels low bit, preserving background
     ld a, d
     xor [hl]
     and e
@@ -504,7 +504,7 @@ vwf_char_draw::
     ret
 
 .write_tile_ignore_hblank_loop
-	; Get location to write to
+    ; Get location to write to
     ld a, [bc]
     ld l, a
     inc bc
@@ -513,7 +513,7 @@ vwf_char_draw::
     or l
     jr z, .write_tile_done
 
-	; Get mask in e, and pixels in d
+    ; Get mask in e, and pixels in d
     inc bc
     ld a, [bc]
     ld e, a
@@ -521,7 +521,7 @@ vwf_char_draw::
     ld a, [bc]
     inc bc
 
-	; Write pixels high bit, preserving background
+    ; Write pixels high bit, preserving background
     xor [hl]
     and e
     xor [hl]
@@ -529,7 +529,7 @@ vwf_char_draw::
     ld a, [bc]
     inc bc
 
-	; Write 8 pixels low bit, preserving background
+    ; Write 8 pixels low bit, preserving background
     xor [hl]
     and e
     xor [hl]
@@ -540,12 +540,12 @@ vwf_char_draw::
     db $ff, $7f, $3f, $1f, $0f, $07, $03, $01
 
 .Data_000_0a2c:
-	db $00
+    db $00
 
 .pixel_masks_left:
-	db $80, $c0, $e0, $f0, $f8, $fc, $fe, $ff
+    db $80, $c0, $e0, $f0, $f8, $fc, $fe, $ff
 
-	db $00, $00, $68, $01, $d0, $02, $38, $04, $a0, $05, $08, $07, $70, $08, $d8, $09, $40, $0b, $a8, $0c, $fa, $57, $c3, $a7, $c8, $f0, $00, $f6, $30, $e0, $00, $f0, $4d, $3e, $01, $e0, $4d, $10, $6f
+    db $00, $00, $68, $01, $d0, $02, $38, $04, $a0, $05, $08, $07, $70, $08, $d8, $09, $40, $0b, $a8, $0c, $fa, $57, $c3, $a7, $c8, $f0, $00, $f6, $30, $e0, $00, $f0, $4d, $3e, $01, $e0, $4d, $10, $6f
 
 SECTION "vram_copy", ROM0[$0fbd]
 ; Parameters:
