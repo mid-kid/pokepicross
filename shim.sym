@@ -1,8 +1,11 @@
+05:420f text_scroll_char_print
+
 00:c31e w_bank_temp ; db
 00:c317 w_farcall_target ; dw
 00:c315 w_bank_rom ; db
 
 00:c336 w_c336
+00:c342 w_c342
 00:c35b w_vwf_char_start_x ; db
 00:c35c w_vwf_char_start_y ; db
 00:c35d w_vwf_char_end_x ; db
@@ -24,5 +27,9 @@
 00:cd6d w_cd6d
 00:cd6e w_cd6e
 
+01:d548 w_text_cur_string ; dw
+01:d546 w_text_cur_x ; db
+01:d547 w_text_cur_y ; db
+01:d55e w_textbox_x ; db
 01:d560 w_textbox_width ; db
 01:d561 w_textbox_height ; db

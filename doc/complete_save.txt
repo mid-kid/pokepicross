@@ -1,0 +1,3 @@
+D6E6-D721: Stage clear flags, set all to FF
+DB19: Mew appear flag
+DB1A: Mew pokedex flag

@@ -7,5 +7,5 @@ farcall: macro
 	ld a, BANK(\1)
 	ld [w_bank_temp], a
 	pop af
-	call farcall
+	call _farcall
 endm

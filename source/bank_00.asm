@@ -603,7 +603,7 @@ vram_copy::
 
 SECTION "farcall", ROM0[$10cd]
 ; Save current bank and jump to w_farcall_target in w_bank_temp
-farcall::
+_farcall::
     push af
     push af
     push af
