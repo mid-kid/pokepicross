@@ -8,7 +8,7 @@ RGBGFX := rgbgfx
 RGBLINK := rgblink
 RGBFIX := rgbfix
 
-RGBASMFLAGS := -p 0xff -L
+RGBASMFLAGS := -p 0xff -L -h -E
 RGBLINKFLAGS := -p 0xff -d
 RGBFIXFLAGS := -p 0xff -c -m 0x1b -r 0x03 -k "01" -i "AKVJ" -t "POKEPICROSS"
 

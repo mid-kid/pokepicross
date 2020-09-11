@@ -1,4 +1,487 @@
 INCLUDE "hardware.inc"
+INCLUDE "macros.inc"
+
+SECTION "rst0", ROM0[$0000]
+rst0::
+    di
+    jp start
+
+SECTION "rst8", ROM0[$0008]
+rst8::
+    ldh a, [rLCDC]
+    bit 7, a ; LCDCF_ON
+    ret z
+    ld hl, w_vblank_ran
+    xor a
+    ld [hl], a
+.wait
+    halt
+    ld a, [hl]
+    and a
+    jr z, .wait
+    ret
+
+SECTION "jumptable", ROM0[$0018]
+jumptable::
+    add a
+    pop hl
+    ld e, a
+    ld d, 0
+    add hl, de
+    ld e, [hl]
+    inc hl
+    ld d, [hl]
+    ld l, e
+    ld h, d
+    jp hl
+
+SECTION "vblank_interrupt", ROM0[$0040]
+vblank_interrupt::
+    jp vblank
+
+SECTION "lcd_interrupt", ROM0[$0048]
+lcd_interrupt::
+    jp lcd
+
+SECTION "timer_interrupt", ROM0[$0050]
+timer_interrupt::
+    jp timer
+
+SECTION "serial_interrupt", ROM0[$0058]
+serial_interrupt::
+    jp serial
+
+SECTION "joypad_interrupt", ROM0[$0060]
+joypad_interrupt::
+    jp joypad
+
+SECTION "start", ROM0[$0100]
+start::
+    nop
+    jp _start
+
+SECTION "_start, etc", ROM0[$0150]
+_start::
+    ld c, a
+    xor a
+    ld [w_c357], a
+    ld [w_c358], a
+    ld a, c
+    cp $11
+    jr nz, .no_speed_switch
+    ld a, $1
+    ld [w_c357], a
+    ld [w_c358], a
+    ld hl, rSPD
+    bit 7, [hl] ; KEY1F_DBLSPEED
+    jr nz, .no_speed_switch
+    xor a
+    ldh [rIF], a
+    ldh [rIE], a
+    ldh a, [rP1]
+    or P1F_GET_NONE
+    ldh [rP1], a
+    ldh a, [rSPD]
+    ld a, KEY1F_PREPARE
+    ldh [rSPD], a
+    ei
+    di
+    db $10, $6f ; corrupted stop
+.no_speed_switch
+
+    ld a, $1
+    ld [w_c325], a
+    xor a
+    ld [w_c326], a
+    ld [w_c329], a
+    ld [w_c32c], a
+    ld [w_c327], a
+    ld [w_c32a], a
+    ld [w_c32d], a
+    ld [w_c330], a
+    ld [w_c333], a
+
+    ld sp, h_stack_bottom
+    di
+    xor a
+    ldh [rIF], a
+
+    ldh a, [rLCDC]
+    bit 7, a ; LCDCF_ON
+    jr nz, .lcd_on
+    set 7, a ; LCDCF_ON
+    ldh [rLCDC], a
+.lcd_on
+    ld bc, 2
+    call function_00_1120
+.wait_vblank
+    ldh a, [rLY]
+    cp SCRN_Y + 1
+    jr c, .wait_vblank
+    ld a, LCDCF_ON
+    ldh [rLCDC], a
+    xor a
+    ldh [rBGP], a
+    ldh [rOBP0], a
+    ldh [rOBP1], a
+    ld bc, 2
+    call function_00_1120
+
+    call function_00_0ecf
+    ld a, CART_SRAM_ENABLE
+    ld [rRAMG], a
+    ld a, $01
+    ld [rROMB0], a
+    ld a, $00
+    ld [rRAMB], a
+    ld a, $01
+    ld [w_bank_rom], a
+
+    ld a, [w_c344]
+    push af
+    ld a, [w_c357]
+    push af
+    ld a, [w_c358]
+    push af
+    ld hl, _RAM
+    ld bc, $1fff
+    call clear_mem
+    pop af
+    ld [w_c358], a
+    pop af
+    ld [w_c357], a
+    pop af
+    ld [w_c344], a
+
+    ld a, $02
+    ld [w_c316], a
+    ld a, $01
+    ld [w_d61b], a
+
+    ld a, $7e ; BANK(???)
+    ld [w_c35a], a
+    ld sp, w_stack_bottom
+    call function_00_0f20
+    call function_00_1085
+    call clear_scrn0
+    call function_00_103c
+    xor a
+    ld [w_c320], a
+    ld [w_c321], a
+    ld [w_c322], a
+    ld [w_c340], a
+    ld [w_cdcc], a
+    ld [w_c325], a
+    ld [s_a07d], a
+    ld [s_a072], a
+    ld [w_cdce], a
+
+    ld hl, w_LCDC
+    xor a
+    ld [hl+], a ; w_LCDC
+    ld [hl+], a ; w_BGP
+    ld [hl+], a ; w_OBP0
+    ld [hl+], a ; w_OBP1
+    ld [hl+], a ; w_SCX
+    ld [hl+], a ; w_SCY
+    ld a, SCRN_X + 6
+    ld [hl+], a ; w_WX
+    ld a, SCRN_Y - 1
+    ld [hl+], a ; w_WY
+    xor a
+    ld [hl+], a ; w_LYC
+    ld [hl+], a ; w_STAT
+    ld [w_c359], a
+
+    call function_00_24b7
+    ld a, IEF_SERIAL | IEF_VBLANK
+    ldh [rIE], a
+    ei
+
+    call function_00_1caa
+    rl a
+    and $1
+    ld [w_c344], a
+    jr z, .skip_call
+    call function_00_1d59
+.skip_call
+
+    xor a
+    ld [w_c345], a
+    ld a, $0
+    call function_00_0d91
+    ld a, $40
+    ld [w_cd73], a
+    call function_00_114e
+    xor a
+    ld [w_d568], a
+
+    farjp function_04_43ec
+
+function_00_0295::
+    ld a, $01
+    ld [w_c325], a
+    xor a
+    ld [w_c326], a
+    ld [w_c329], a
+    ld [w_c32c], a
+    ld [w_c327], a
+    ld [w_c32a], a
+    ld [w_c32d], a
+    ld [w_c330], a
+    ld [w_c333], a
+
+    ld sp, h_stack_bottom
+
+    ld a, $5
+    call function_00_0d91
+    ld a, $1
+    ld c, $0
+    call function_00_0d91
+    call function_00_0d58
+    ld c, $0
+    ld a, $1
+    call function_00_0d91
+
+    xor a
+    ld [w_BGP], a
+    ld [w_OBP0], a
+    ld [w_OBP1], a
+    ld bc, 2
+    call function_00_1120
+
+    di
+    xor a
+    ldh [rIF], a
+    ld sp, h_stack_bottom
+
+    call function_00_0ecf
+    ld a, CART_SRAM_ENABLE
+    ld [rRAMG], a
+    ld a, $01
+    ld [rROMB0], a
+    ld a, $00
+    ld [rRAMB], a
+    ld a, $01
+    ld [w_bank_rom], a
+
+    ld a, [w_d6b5]
+    push af
+    ld a, [w_c358]
+    push af
+    ld a, [w_c357]
+    push af
+    ld a, [w_c344]
+    push af
+    ld hl, _RAM
+    ld bc, $2000
+    call clear_mem
+    pop af
+    ld [w_c344], a
+    pop af
+    ld [w_c357], a
+    pop af
+    ld [w_c358], a
+    pop af
+    ld [w_d6b5], a
+
+    ld sp, w_stack_bottom
+    call function_00_0f20
+    call function_00_1085
+    call clear_scrn0
+    call function_00_103c
+    xor a
+    ld [w_c320], a
+    ld [w_c321], a
+    ld [w_c322], a
+    ld [w_c340], a
+    ld [w_cdcc], a
+    ld [w_c359], a
+    ld [s_a07d], a
+    ld [s_a072], a
+    ld [w_cdce], a
+    ld a, $7e ; BANK(???)
+    ld [w_c35a], a
+
+    ld hl, w_LCDC
+    xor a
+    ld [hl+], a ; w_LCDC
+    ld [hl+], a ; w_BGP
+    ld [hl+], a ; w_OBP0
+    ld [hl+], a ; w_OBP1
+    ld [hl+], a ; w_SCX
+    ld [hl+], a ; w_SCY
+    ld a, SCRN_X + 6
+    ld [hl+], a ; w_WX
+    ld a, SCRN_Y - 1
+    ld [hl+], a ; w_WY
+    xor a
+    ld [hl+], a ; w_LYC
+    ld [hl+], a ; w_STAT
+
+    call function_00_24b7
+    ld a, IEF_SERIAL | IEF_VBLANK
+    ldh [rIE], a
+    ei
+
+    xor a
+    ld [w_c345], a
+    ld a, $0
+    call function_00_0d91
+    ld a, $40
+    ld [w_cd73], a
+    call function_00_114e
+    xor a
+    ld [w_d568], a
+
+    ld a, $ff
+    ld hl, w_df3f
+    ld [hl+], a
+    ld [hl+], a
+    ld [hl], a
+
+    ld a, [w_df62]
+    and a
+    jr z, .jr_000_03a6
+    ld a, [w_c344]
+    and a
+    jr z, .jr_000_03a6
+    call function_00_1de7
+    ld a, $3
+    ld hl, $48cc ; ???
+    call function_00_1cfa
+    xor a
+    ld [w_df62], a
+.jr_000_03a6
+
+    farjp function_04_43ec
+
+vblank::
+    push af
+    push bc
+    push de
+    push hl
+    ld a, [s_a072]
+    and a
+    call nz, function_00_284d
+    ld a, [w_c301]
+    and a
+    jr z, .jr_000_03d5
+    ld a, $1
+    ld [w_vblank_ran], a
+    pop hl
+    pop de
+    pop bc
+    pop af
+    reti
+
+.jr_000_03d5:
+    call h_oam_dma
+
+    ld a, [w_cdcc]
+    and a
+    jr nz, .set_bg_8000
+    ld a, [w_LCDC]
+    ldh [rLCDC], a
+    jr .lcdc_done
+.set_bg_8000
+    ld a, [w_LCDC]
+    set 4, a ; LCDCF_BG8000
+    ldh [rLCDC], a
+.lcdc_done
+
+    ld a, [w_c345]
+    and a
+    jr nz, .skip_video_update
+    ld hl, w_BGP
+    ld a, [hl+] ; w_BGP
+    ldh [rBGP], a
+    ld a, [hl+] ; w_OBP0
+    ldh [rOBP0], a
+    ld a, [hl+] ; w_OBP1
+    ldh [rOBP1], a
+    ld a, [hl+] ; w_SCX
+    ldh [rSCX], a
+    ld a, [hl+] ; w_SCY
+    ldh [rSCY], a
+    ld a, [hl+] ; w_WX
+    ldh [rWX], a
+    ld a, [hl+] ; w_WY
+    ldh [rWY], a
+    ld a, [hl+] ; w_LYC
+    ldh [rLYC], a
+    ld a, [hl+] ; w_STAT
+    ldh [rSTAT], a
+    call function_00_11f1
+.skip_video_update
+
+    ld a, [w_cdd0]
+    and a
+    jr z, .continue
+    ld a, [w_c326]
+    cp $0f
+    jr nz, .continue
+    ld a, [w_c329]
+    and $0f
+    jr z, .continue
+    ld hl, function_00_0295
+    push hl
+    reti
+.continue
+
+    ld a, [w_c342]
+    inc a
+    ld [w_c342], a
+    ld a, $01
+    ld [w_vblank_ran], a
+    ld hl, w_cdfc
+    inc [hl]
+
+    ld a, [w_c345]
+    and a
+    jr nz, .continue_2
+    ld hl, function_00_0458
+    push hl
+    ld hl, function_00_0df5
+    push hl
+    reti
+.continue_2
+
+    ld hl, rSTAT
+.hblank_enter
+    ld a, STATF_LCD
+    and [hl]
+    jr nz, .hblank_enter
+
+    pop hl
+    pop de
+    pop bc
+    pop af
+    reti
+
+function_00_0458::
+    pop hl
+    pop de
+    pop bc
+
+    ld a, [w_c301]
+    and a
+    jr nz, .skip_hblank_wait
+    ldh a, [rLCDC]
+    bit 7, a ; LCDCF_ON
+    jr z, .hblank_enter
+.hblank_finish
+    ldh a, [rSTAT]
+    and STATF_LCD
+    jr z, .hblank_finish
+.hblank_enter
+    ldh a, [rSTAT]
+    and STATF_LCD
+    jr nz, .hblank_enter
+.skip_hblank_wait
+
+    pop af
+    ret
 
 SECTION "vwf_draw_char", ROM0[$0723]
 vwf_char_draw::
@@ -441,8 +924,8 @@ vwf_char_draw::
     ld bc, w_vwf_char_buffer
 
     ; Ignore hblank (update during vblank?)
-    ld a, [w_c336]
-    bit 7, a
+    ld a, [w_LCDC]
+    bit 7, a ; LCDCF_ON
     jr z, .write_tile_ignore_hblank_loop
 
 .write_tile_loop
@@ -547,6 +1030,142 @@ vwf_char_draw::
 
     db $00, $00, $68, $01, $d0, $02, $38, $04, $a0, $05, $08, $07, $70, $08, $d8, $09, $40, $0b, $a8, $0c, $fa, $57, $c3, $a7, $c8, $f0, $00, $f6, $30, $e0, $00, $f0, $4d, $3e, $01, $e0, $4d, $10, $6f
 
+SECTION "function_00_0d58, etc", ROM0[$0d58]
+function_00_0d58::
+    push hl
+    ldh a, [rLCDC]
+    bit 7, a ; LCDCF_ON
+    jr nz, .lcd_on
+
+; Wait for 70,000 clock cycles (17,500 machine cycles)
+    ld de, 1750
+.wait_loop
+    nop
+    nop
+    nop
+    dec de
+    ld a, d
+    or e
+    jr nz, .wait_loop
+
+    pop hl
+    ret
+
+.lcd_on
+    xor a
+    ld [w_c325], a
+    ld [w_c326], a
+    ld [w_c329], a
+    ld [w_c32c], a
+    rst rst8
+
+    xor a
+    ld [w_c327], a
+    ld [w_c32a], a
+    ld [w_c32d], a
+    ld a, $1
+    ld [w_c325], a
+
+.wait_ly
+    ldh a, [rLY]
+    cp 64
+    jr c, .wait_ly
+
+    pop hl
+    ret
+
+function_00_0d91::
+    push af
+    push bc
+    push de
+    push hl
+
+    cp $1
+    jr nz, .jr_000_0d9f
+    push af
+    ld a, c
+    ld [w_df47], a
+    pop af
+.jr_000_0d9f
+    ld l, a
+
+.wait_ly
+    ldh a, [rLY]
+    and a
+    jr z, .ly_ready
+    cp 48
+    jr c, .wait_ly
+    cp 130
+    jr nc, .wait_ly
+    ccf
+.ly_ready
+
+    ldh a, [rIE]
+    push af
+    res 0, a ; IEF_VBLANK
+    ldh [rIE], a
+    di
+    ld a, [w_c35a]
+    ld [rROMB0], a
+
+.main_loop
+    push bc
+    push hl
+    ld a, l
+    cp $1
+    jr nz, .skip_bankswitch
+    ld a, c
+    cp $80
+    jr c, .bank_7e
+    and $7f
+    ld c, a
+    ld a, $7f
+    jr .got_bank
+.bank_7e
+    ld a, $7e
+.got_bank
+    ld [w_c35a], a
+    ld [rROMB0], a
+    ld a, l
+.skip_bankswitch
+    call $4000
+    pop hl
+    pop bc
+    jr nc, .done
+    nop
+    nop
+    nop
+    nop
+    nop
+    jr .main_loop
+.done
+
+    ld a, [w_bank_rom]
+    ld [rROMB0], a
+    pop af
+    ldh [rIE], a
+    ei
+
+    pop hl
+    pop de
+    pop bc
+    pop af
+    ret
+
+SECTION "clear_mem", ROM0[$0f38]
+; Zeroes out RAM
+; Parameters:
+; hl - dest
+; bc - length
+clear_mem::
+    xor a
+    ld [hl+], a
+    dec bc
+    ld a, c
+    or b
+    jr nz, clear_mem
+    ret
+
 SECTION "vram_copy", ROM0[$0fbd]
 ; Parameters:
 ; a - bank
@@ -601,6 +1220,48 @@ vram_copy::
     ld [rROMB0], a
     ret
 
+SECTION "function_00_1085", ROM0[$1085]
+; Fills $c000--$c0ff with $f0 and sets [w_c314] = 0
+function_00_1085::
+    ld a, $f0
+    ld hl, _RAM
+.loop
+    ld [hl+], a
+    bit 0, h
+    jr z, .loop
+    xor a
+    ld [w_c314], a
+    ret
+
+SECTION "farjp", ROM0[$10b4]
+; Jump to w_farcall_target in w_bank_temp
+_farjp::
+    push af
+    push af
+    push hl
+    ld hl, sp + 4
+    ld a, [w_farcall_target + 0]
+    ld [hl+], a
+    ld a, [w_farcall_target + 1]
+    ld [hl], a
+    ld a, [w_bank_temp]
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    pop hl
+    pop af
+    ret
+
+SECTION "clear_scrn0", ROM0[$1031]
+; Fills _SCRN0 ($9800--$9BFF) with tile $01
+clear_scrn0::
+    ld a, $01
+    ld hl, _SCRN0
+.loop
+    ld [hl+], a
+    bit 2, h
+    jr z, .loop
+    ret
+
 SECTION "farcall", ROM0[$10cd]
 ; Save current bank and jump to w_farcall_target in w_bank_temp
 _farcall::
@@ -634,4 +1295,93 @@ farcall_ret::
     pop af
     inc sp
     inc sp
+    ret
+
+SECTION "function_00_1120", ROM0[$1120]
+; Wait for 70,000 * bc clock cycles (17,500 * bc machine cycles)
+function_00_1120::
+    ld de, 1750
+.wait_loop
+    nop
+    nop
+    nop
+    dec de
+    ld a, d
+    or e
+    jr nz, .wait_loop
+    dec bc
+    ld a, b
+    or c
+    jr nz, function_00_1120
+    ret
+
+SECTION "function_00_24b7", ROM0[$24b7]
+function_00_24b7::
+    xor a
+    ldh [rSB], a
+    ldh [rSC], a
+    ld [s_a03e], a
+    dec a
+    ld [s_a058], a
+    ld [s_a059], a
+    call .sub
+    ret
+
+.sub
+    xor a
+    ld [s_a056], a
+    ld [s_a05b], a
+    ld [s_a06c], a
+    xor a
+    ld [s_a040], a
+    ld [s_a041], a
+    ld [s_a042], a
+    ld [s_a043], a
+    ld [s_a057], a
+    ld [s_a054], a
+    ld [s_a055], a
+    ld [s_a04a], a
+    ld [s_a04b], a
+    ld [s_a06d], a
+    ld [s_a073], a
+    ret
+
+SECTION "serial, etc", ROM0[$2836]
+serial::
+    push af
+    ldh a, [rSC]
+    bit 7, a ; transfer start flag
+    jr nz, .skip
+    push bc
+    push de
+    push hl
+    ld a, $01
+    ld [s_a05b], a
+    call function_00_2312
+    pop hl
+    pop de
+    pop bc
+.skip
+    pop af
+    reti
+
+function_00_284d::
+    ld a, [s_a03e]
+    cp $01
+    ret nz
+    ld a, [s_a058]
+    cp $ff
+    ret z
+    ld a, [s_a06c]
+    and a
+    ret nz
+    ld hl, s_a071
+    inc [hl]
+    ld a, [hl]
+    cp $06
+    ret c
+    xor a
+    ld [hl], a
+    ld [s_a073], a
+    call function_00_26c1
     ret
