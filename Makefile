@@ -44,8 +44,21 @@ $(dir_build)/%.o: $(dir_build)/%.asm | $(gfx) $$(dir $$@)
 $(dir_build)/%.o: %.asm | $(gfx) $$(dir $$@)
 	$(RGBASM) $(RGBASMFLAGS) -i $(dir_build)/ -i include/ -M $(@:.o=.d) -o $@ $<
 
+$(dir_build)/%.bin: RGBGFXFLAGS =
 $(dir_build)/%.bin: %.png | $$(dir $$@)
-	$(RGBGFX) -o $@ $<
+	$(RGBGFX) $(RGBGFXFLAGS) -o $@ $<
+
+$(dir_build)/gfx/pikachu_walk.bin: RGBGFXFLAGS = -h
+$(dir_build)/gfx/bulbasaur_walk.bin: RGBGFXFLAGS = -h
+$(dir_build)/gfx/charmander_walk.bin: RGBGFXFLAGS = -h
+$(dir_build)/gfx/squirtle_walk.bin: RGBGFXFLAGS = -h
+$(dir_build)/gfx/clefairy_walk.bin: RGBGFXFLAGS = -h
+$(dir_build)/gfx/jigglypuff_walk.bin: RGBGFXFLAGS = -h
+$(dir_build)/gfx/misty_walk.bin: RGBGFXFLAGS = -h
+$(dir_build)/gfx/mew_walk.bin: RGBGFXFLAGS = -h
+$(dir_build)/gfx/mew_silhouette_walk.bin: RGBGFXFLAGS = -h
+$(dir_build)/gfx/psyduck_walk.bin: RGBGFXFLAGS = -h
+$(dir_build)/gfx/bill_walk.bin: RGBGFXFLAGS = -h
 
 .PRECIOUS: %/
 %/:
