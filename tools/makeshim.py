@@ -1,47 +1,49 @@
 #!/usr/bin/env python3
 
-from sys import argv
+from sys import argv, stderr
 
-for line in open(argv[1]):
-    split = line.split(";")[0].split(" ")
-    if len(split) < 2:
+def warn(s):
+    print("WARNING:", s.rstrip(), file=stderr)
+
+for i, line in enumerate(open(argv[1])):
+    content = line.split(";", 1)[0].strip()
+
+    bankaddr_name = content.split(" ", 1)
+    if len(bankaddr_name) != 2:
         continue
-    name = " ".join(split[1:]).strip()
+    name = bankaddr_name[1].strip()
 
-    split = split[0].split(":")
-    if len(split) != 2:
+    bank_addr = bankaddr_name[0].split(":")
+    if len(bank_addr) != 2:
+        warn("Can't shim line %d: %s" % (i+1, line))
         continue
-    bank = int(split[0], 16)
-    addr = int(split[1], 16)
+    bank = int(bank_addr[0], 16)
+    addr = int(bank_addr[1], 16)
 
-    section = None
-    bankdec = None
-    if bank == 0 and addr >= 0x0000 and addr < 0x4000:
+    if 0x0000 <= addr < 0x4000 and bank == 0:
         section = "ROM0"
-    elif addr >= 0x4000 and addr < 0x8000:
+        bank = None
+    elif 0x4000 <= addr < 0x8000 and 1 <= bank < 128:
         section = "ROMX"
-        bankdec = bank
-    elif addr >= 0x8000 and addr < 0xA000:
+    elif 0x8000 <= addr < 0xA000 and 0 <= bank < 2:
         section = "VRAM"
-        bankdec = bank
-    elif addr >= 0xA000 and addr < 0xC000:
+    elif 0xA000 <= addr < 0xC000 and 0 <= bank < 16:
         section = "SRAM"
-        bankdec = bank
-    elif bank == 0 and addr >= 0xC000 and addr < 0xD000:
+    elif 0xC000 <= addr < 0xD000 and bank == 0:
         section = "WRAM0"
-    elif addr >= 0xD000 and addr < 0xE000:
+        bank = None
+    elif 0xD000 <= addr < 0xE000 and 0 <= bank < 16:
         section = "WRAMX"
-        bankdec = bank
-    elif bank == 0 and addr >= 0xFE00 and addr < 0xFEA0:
+    elif 0xFE00 <= addr < 0xFEA0 and bank == 0:
         section = "OAM"
-    elif bank == 0 and addr >= 0xFF80 and addr < 0xFFFF:
+        bank = None
+    elif 0xFF80 <= addr < 0xFFFF and bank == 0:
         section = "HRAM"
+        bank = None
     else:
+        warn("Invalid bank/address on line %d: %s" % (i+1, line))
         continue
 
-    if bankdec is not None:
-        bankdec = ", BANK[$%x]" % bankdec
-    else:
-        bankdec = ""
-    print("SECTION \"Shim %s\",%s[$%x]%s" % (name, section, addr, bankdec))
+    bankdec = ", BANK[$%x]" % bank if bank is not None else ""
+    print('SECTION "Shim %s", %s[$%x]%s' % (name, section, addr, bankdec))
     print("%s::" % name)
