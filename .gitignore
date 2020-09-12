@@ -5,3 +5,4 @@
 *.gbc
 *.map
 *.sym
+!shim.sym

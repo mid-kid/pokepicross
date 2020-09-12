@@ -9,7 +9,7 @@ rst0::
 SECTION "rst8", ROM0[$0008]
 rst8::
     ldh a, [rLCDC]
-    bit 7, a ; LCDCF_ON
+    bit LCDCF_ON_F, a
     ret z
     ld hl, w_vblank_ran
     xor a
@@ -73,7 +73,7 @@ _start::
     ld [w_c357], a
     ld [w_c358], a
     ld hl, rSPD
-    bit 7, [hl] ; KEY1F_DBLSPEED
+    bit KEY1F_DBLSPEED_F, [hl]
     jr nz, .no_speed_switch
     xor a
     ldh [rIF], a
@@ -107,9 +107,9 @@ _start::
     ldh [rIF], a
 
     ldh a, [rLCDC]
-    bit 7, a ; LCDCF_ON
+    bit LCDCF_ON_F, a
     jr nz, .lcd_on
-    set 7, a ; LCDCF_ON
+    set LCDCF_ON_F, a
     ldh [rLCDC], a
 .lcd_on
     ld bc, 2
@@ -347,8 +347,8 @@ function_00_0295::
     and a
     jr z, .jr_000_03a6
     call function_00_1de7
-    ld a, $3
-    ld hl, $48cc ; ???
+    ld a, BANK(data_00_48cc)
+    ld hl, data_00_48cc
     call function_00_1cfa
     xor a
     ld [w_df62], a
@@ -367,7 +367,7 @@ vblank::
     ld a, [w_c301]
     and a
     jr z, .jr_000_03d5
-    ld a, $1
+    ld a, 1
     ld [w_vblank_ran], a
     pop hl
     pop de
@@ -375,7 +375,7 @@ vblank::
     pop af
     reti
 
-.jr_000_03d5:
+.jr_000_03d5
     call h_oam_dma
 
     ld a, [w_cdcc]
@@ -432,7 +432,7 @@ vblank::
     ld a, [w_c342]
     inc a
     ld [w_c342], a
-    ld a, $01
+    ld a, 1
     ld [w_vblank_ran], a
     ld hl, w_cdfc
     inc [hl]
@@ -468,7 +468,7 @@ function_00_0458::
     and a
     jr nz, .skip_hblank_wait
     ldh a, [rLCDC]
-    bit 7, a ; LCDCF_ON
+    bit LCDCF_ON_F, a
     jr z, .hblank_enter
 .hblank_finish
     ldh a, [rSTAT]
@@ -530,7 +530,7 @@ vwf_char_draw::
     add hl, bc
     ld a, [hl]
     ld [w_c369], a
-    ld hl, .Data_000_0a2c
+    ld hl, .data_00_0a2c
     add hl, bc
     ld a, [hl]
     ld [w_c36a], a
@@ -551,7 +551,7 @@ vwf_char_draw::
     and $f8
     ld h, a
 
-.Jump_000_07a9
+.jump_000_07a9
     xor a
     ld [w_c36b], a
     ld [w_c36c], a
@@ -571,13 +571,13 @@ vwf_char_draw::
     and [hl]
     ld [w_c362], a
     pop hl
-    jp .Jump_000_0911
+    jp .jump_000_0911
 
 .jr_000_07d3
     push hl
     ld a, [w_bank_rom]
     push af
-    ld a, $23
+    ld a, $23 ; BANK(???)
     ld [w_bank_rom], a
     ld [rROMB0], a
     push bc
@@ -663,14 +663,14 @@ vwf_char_draw::
     ld [w_c367], a
     ld a, [w_c365]
     dec a
-    jp z, .Jump_000_090b
+    jp z, .jump_000_090b
 
-.Jump_000_085f
+.jump_000_085f
     push af
     push hl
     ld a, [w_bank_rom]
     push af
-    ld a, $23
+    ld a, $23 ; BANK(???)
     ld [w_bank_rom], a
     ld [rROMB0], a
     push bc
@@ -782,16 +782,16 @@ vwf_char_draw::
     ld [w_c367], a
     pop af
     dec a
-    jp nz, .Jump_000_085f
+    jp nz, .jump_000_085f
 
-.Jump_000_090b
+.jump_000_090b
     ld a, [w_c364]
     ld [w_c362], a
 
-.Jump_000_0911
+.jump_000_0911
     ld a, [w_bank_rom]
     push af
-    ld a, $23
+    ld a, $23 ; BANK(???)
     ld [w_bank_rom], a
     ld [rROMB0], a
     push bc
@@ -913,7 +913,7 @@ vwf_char_draw::
     inc l
     ld a, [w_vwf_char_end_y]
     cp l
-    jp nc, .Jump_000_07a9
+    jp nc, .jump_000_07a9
 
     xor a
     ld [de], a
@@ -925,7 +925,7 @@ vwf_char_draw::
 
     ; Ignore hblank (update during vblank?)
     ld a, [w_LCDC]
-    bit 7, a ; LCDCF_ON
+    bit LCDCF_ON_F, a
     jr z, .write_tile_ignore_hblank_loop
 
 .write_tile_loop
@@ -1022,7 +1022,7 @@ vwf_char_draw::
 .pixel_masks_right:
     db $ff, $7f, $3f, $1f, $0f, $07, $03, $01
 
-.Data_000_0a2c:
+.data_00_0a2c:
     db $00
 
 .pixel_masks_left:
@@ -1034,7 +1034,7 @@ SECTION "function_00_0d58, etc", ROM0[$0d58]
 function_00_0d58::
     push hl
     ldh a, [rLCDC]
-    bit 7, a ; LCDCF_ON
+    bit LCDCF_ON_F, a
     jr nz, .lcd_on
 
 ; Wait for 70,000 clock cycles (17,500 machine cycles)

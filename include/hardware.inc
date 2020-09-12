@@ -904,4 +904,8 @@ NINTENDO_LOGO : MACRO
     DB  $BB,$BB,$67,$63,$6E,$0E,$EC,$CC,$DD,$DC,$99,$9F,$BB,$B9,$33,$3E
 ENDM
 
+; Custom pokepicross additions
+KEY1F_DBLSPEED_F EQU 7
+LCDCF_ON_F EQU 7
+
     ENDC ;HARDWARE_INC
