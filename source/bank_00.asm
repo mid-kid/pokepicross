@@ -1030,6 +1030,27 @@ vwf_char_draw::
 
     db $00, $00, $68, $01, $d0, $02, $38, $04, $a0, $05, $08, $07, $70, $08, $d8, $09, $40, $0b, $a8, $0c, $fa, $57, $c3, $a7, $c8, $f0, $00, $f6, $30, $e0, $00, $f0, $4d, $3e, $01, $e0, $4d, $10, $6f
 
+SECTION "farcall_a_hl", ROM0[$0d36]
+farcall_a_hl::
+    ld [w_bank_temp], a
+    ld a, [w_bank_rom]
+    push af
+    ld a, [w_bank_temp]
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    ld de, .return
+    push de
+    ld a, [w_bank_rom]
+    ld e, a
+    push de
+    jp hl
+
+.return
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    ret
+
 SECTION "function_00_0d58, etc", ROM0[$0d58]
 function_00_0d58::
     push hl

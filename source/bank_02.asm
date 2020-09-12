@@ -145,3 +145,21 @@ text_char_draw::
     call vwf_char_draw
     pop af
     jp farcall_ret
+
+SECTION "text_delay", ROMX[$5b7a], BANK[$02]
+text_delay::
+    ld a, [w_c343]
+    bit 4, a
+    jr nz, .no_blink
+    ld a, [w_text_cur_x]
+    sub 3
+    ld b, a
+    ld a, [w_text_cur_y]
+    inc a
+    ld c, a
+    ld a, $e9
+    call function_00_208c
+.no_blink
+    ld hl, w_text_delay_timer
+    dec [hl]
+    jp farcall_ret

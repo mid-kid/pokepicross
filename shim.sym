@@ -6,20 +6,96 @@
 00:0ecf function_00_0ecf
 00:0f20 function_00_0f20
 00:103c function_00_103c
+00:1094 function_00_1094
+00:10fb function_00_10fb
 00:114e function_00_114e
 00:11f1 function_00_11f1
+00:17fb function_00_17fb
+00:1bd5 function_00_1bd5
 00:1caa function_00_1caa
 00:1cfa function_00_1cfa
 00:1d59 function_00_1d59
 00:1de7 function_00_1de7
+00:208c function_00_208c
 00:2312 function_00_2312
 00:26c1 function_00_26c1
+
+02:4147 function_02_4147
+02:4f6d function_02_4f6d
+02:5560 function_02_5560
+02:56c0 function_02_56c0
+02:5790 function_02_5790
+02:57b9 wait_press_a_blink
+02:58fe function_02_58fe
+02:5a82 function_02_5a82
+02:5b67 function_02_5b67
+02:5b77 function_02_5b77
+02:5b98 function_02_5b98
+02:6880 string_02_6880
+02:68ca string_02_68ca
+02:68e2 string_02_68e2
+02:68fe string_02_68fe
+02:693e string_02_693e
+02:6960 string_02_6960
+02:69ae string_02_69ae
+02:69e6 string_02_69e6
+02:6a06 string_02_6a06
+02:6a44 string_02_6a44
+02:6a5e string_02_6a5e
+02:6aa4 string_02_6aa4
+02:6ac4 string_02_6ac4
+02:6afc string_02_6afc
+02:6b1c string_02_6b1c
+02:6b7e string_02_6b7e
+02:6bca string_02_6bca
+02:6be4 string_02_6be4
+02:6c18 string_02_6c18
+02:6c58 string_02_6c58
+02:6cba string_02_6cba
+02:6d10 string_02_6d10
+02:6d74 string_02_6d74
+02:6d90 string_02_6d90
+02:6dde string_02_6dde
+02:6e1e string_02_6e1e
+02:6e42 string_02_6e42
+02:6e60 string_02_6e60
+02:6ed0 string_02_6ed0
+02:6ee4 string_02_6ee4
+02:6f32 string_02_6f32
+02:6f96 string_02_6f96
+02:6fe2 string_02_6fe2
+02:702c string_02_702c
+02:708c string_02_708c
+02:70c2 string_02_70c2
+02:710e string_02_710e
+02:7142 string_02_7142
+02:71be string_02_71be
 
 03:48cc data_00_48cc
 
 04:43ec function_04_43ec
 
-05:420f text_scroll_char_print
+05:5f2f function_05_5f2f
+
+06:4964 function_06_4964
+
+08:42b8 function_08_42b8
+
+09:5a50 function_09_5a50
+
+22:47e2 function_22_47e2
+22:61e8 function_22_61e8
+
+27:4bf4 function_27_4bf4
+
+29:4461 function_29_4461
+29:4ef5 function_29_4ef5
+29:5579 function_29_5579
+29:5de4 function_29_5de4
+29:5e90 function_29_5e90
+29:7421 function_29_7421
+
+3c:4377 function_3c_4377
 
 00:a03e s_a03e
 00:a040 s_a040
@@ -78,6 +154,7 @@
 00:c340 w_c340
 00:c341 w_vblank_ran ; db
 00:c342 w_c342
+00:c343 w_c343
 00:c344 w_c344
 00:c345 w_c345
 00:c357 w_c357
@@ -105,24 +182,57 @@
 00:cd6d w_cd6d
 00:cd6e w_cd6e
 00:cd73 w_cd73
+00:cdb0 w_cdb0
+00:cdaf w_cdaf
+00:cdac w_cdac
+00:cdad w_cdad
+00:cdb1 w_cdb1 ; dw
+00:cdb3 w_cdb3
 00:cdcc w_cdcc
 00:cdce w_cdce
 00:cdd0 w_cdd0
+00:cdd1 w_cdd1
+00:cdd2 w_cdd2_jumptable_index ; db
+00:cdd6 w_cdd6
+00:cdd7 w_cdd7
+00:cdf8 w_text_delay_timer ; db
 00:cdfc w_cdfc
+00:cdfd w_cdfd ; ds ??
+00:cde0 w_cde0
+00:ce00 w_ce00
 
 00:ff80 h_oam_dma
 00:fffe h_stack_bottom
 
+01:d521 w_d521
+01:d52e w_d52e
+01:d535 w_d535
+01:d536 w_d536
+01:d537 w_d537
+01:d538 w_d538 ; dw
 01:d548 w_text_cur_string ; dw
 01:d546 w_text_cur_x ; db
 01:d547 w_text_cur_y ; db
+01:d54a w_d54a
+01:d54b w_d54b
+01:d54c w_d54c ; dw
+01:d550 w_d550
 01:d55e w_textbox_x ; db
+01:d55f w_textbox_y ; db
 01:d560 w_textbox_width ; db
 01:d561 w_textbox_height ; db
 
 01:d568 w_d568
+01:d60f w_d60f
 01:d61b w_d61b
+01:d62d w_d62d
+01:d630 w_d630
+01:d641 w_tutorial_scene ; db
+01:d642 w_d642
+01:d647 w_d647
 01:d6b5 w_d6b5
+01:d6c9 w_d6c9
+01:d6ca w_d6ca
 01:df3f w_df3f ; ds 3
 01:df47 w_df47
 01:df62 w_df62

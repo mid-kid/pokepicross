@@ -44,7 +44,7 @@ $(dir_build)/%.o: $(dir_build)/%.asm | $(gfx) $$(dir $$@)
 $(dir_build)/%.o: %.asm | $(gfx) $$(dir $$@)
 	$(RGBASM) $(RGBASMFLAGS) -i $(dir_build)/ -i include/ -M $(@:.o=.d) -o $@ $<
 
-$(dir_build)/%.bin: RGBGFXFLAGS =
+RGBGFXFLAGS :=
 $(dir_build)/%.bin: %.png | $$(dir $$@)
 	$(RGBGFX) $(RGBGFXFLAGS) -o $@ $<
 
