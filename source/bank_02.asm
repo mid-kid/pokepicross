@@ -28,7 +28,7 @@ text_char_print::
     ; Check if we've reached the end of the string
     ld d, a
     and e
-    cp TX_END
+    cp LOW(TX_END)
     jp z, farcall_ret
     push hl
 
@@ -80,7 +80,7 @@ text_char_print::
     ; Check if the next character is a terminator
     ld a, [hl+]
     and [hl]
-    cp TX_END
+    cp LOW(TX_END)
     jp farcall_ret
 
 ; Returns:
