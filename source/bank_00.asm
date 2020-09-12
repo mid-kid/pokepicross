@@ -1,13 +1,13 @@
 INCLUDE "hardware.inc"
 INCLUDE "macros.inc"
 
-SECTION "rst0", ROM0[$0000]
-rst0::
+SECTION "reset", ROM0[$0000]
+reset::
     di
     jp start
 
-SECTION "rst8", ROM0[$0008]
-rst8::
+SECTION "vblank_wait", ROM0[$0008]
+vblank_wait::
     ldh a, [rLCDC]
     bit LCDCF_ON_F, a
     ret z
@@ -1057,7 +1057,7 @@ function_00_0d58::
     ld [w_c326], a
     ld [w_c329], a
     ld [w_c32c], a
-    rst rst8
+    rst vblank_wait
 
     xor a
     ld [w_c327], a
