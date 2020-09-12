@@ -1,7 +1,7 @@
 SECTION "bank6e", ROMX[$4000], BANK[$6e]
 
 gfx_text_chars_bw::
-INCBIN "gfx/fonts/text_chars_2.bin"
+INCBIN "gfx/fonts/text_chars_bw.bin"
 .end::
 
 gfx_pikachu_walk::
