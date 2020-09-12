@@ -6,28 +6,29 @@ SECTION "tutorial", ROMX[$4000], BANK[$05]
 tutorial::
     ld a, [w_cdd2_jumptable_index]
     rst jumptable
-    dw function_05_400a
-    dw function_05_401b
-    dw function_05_4028
+    const_def
+    const_dw TUTORIAL_0, function_05_400a
+    const_dw TUTORIAL_1, function_05_401b
+    const_dw TUTORIAL_2, function_05_4028
 
 function_05_400a:
     xor a
     ld [w_d535], a
     ld a, $00
     ld [w_d550], a
-    ld a, 2
+    ld a, TUTORIAL_2
     ld [w_cdd2_jumptable_index], a
     jp farcall_ret
 
 function_05_401b:
     ld a, $01
     ld [w_d550], a
-    ld a, 2
+    ld a, TUTORIAL_2
     ld [w_cdd2_jumptable_index], a
     jp farcall_ret
 
 function_05_4028:
-    xor a
+    xor a ; TUTORIAL_0
     ld [w_cdd2_jumptable_index], a
     ld a, [w_c357]
     and a
@@ -52,10 +53,7 @@ function_05_4028:
     ld [w_textbox_width], a
     ld a, 141
     ld [w_textbox_height], a
-    ld a, LOW(tutorial_message_00)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_00)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_00
     ld a, $01
     ld [w_d6ca], a
     ld a, [w_d61b]
@@ -146,67 +144,69 @@ function_05_4028:
 tutorial_scene::
     ld a, [w_tutorial_scene]
     rst jumptable
-    dw tutorial_scene_00
-    dw tutorial_scene_01
-    dw tutorial_scene_02
-    dw tutorial_scene_03
-    dw tutorial_scene_04
-    dw tutorial_scene_05
-    dw tutorial_scene_06
-    dw tutorial_scene_07
-    dw tutorial_scene_08
-    dw tutorial_scene_09
-    dw tutorial_scene_10
-    dw tutorial_scene_11
-    dw tutorial_scene_12
-    dw tutorial_scene_13
-    dw tutorial_scene_14
-    dw tutorial_scene_15
-    dw tutorial_scene_16
-    dw tutorial_scene_17
-    dw tutorial_scene_18
-    dw tutorial_scene_19
-    dw tutorial_scene_20
-    dw tutorial_scene_21
-    dw tutorial_scene_22
-    dw tutorial_scene_23
-    dw tutorial_scene_24
-    dw tutorial_scene_25
-    dw tutorial_scene_26
-    dw tutorial_scene_27
-    dw tutorial_scene_28
-    dw tutorial_scene_29
-    dw tutorial_scene_30
-    dw tutorial_scene_31
-    dw tutorial_scene_32
-    dw tutorial_scene_33
-    dw tutorial_scene_34
-    dw tutorial_scene_35
-    dw tutorial_scene_36
-    dw tutorial_scene_37
-    dw tutorial_scene_38
-    dw tutorial_scene_39
-    dw tutorial_scene_40
-    dw tutorial_scene_41
-    dw tutorial_scene_42
-    dw tutorial_scene_43
-    dw tutorial_scene_44
-    dw tutorial_scene_45
-    dw tutorial_scene_46
-    dw tutorial_scene_47
-    dw tutorial_scene_48
-    dw tutorial_scene_49
-    dw tutorial_scene_50
-    dw tutorial_scene_51
-    dw tutorial_scene_52
-    dw tutorial_scene_53
-    dw tutorial_scene_54
-    dw tutorial_scene_55
-    dw tutorial_scene_56
-    dw tutorial_scene_57
-    dw tutorial_scene_58
-    dw tutorial_scene_59
-    dw tutorial_scene_60
+    const_def
+    const_dw TUTORIAL_SCENE_00, tutorial_scene_00
+    const_dw TUTORIAL_SCENE_01, tutorial_scene_01
+    const_dw TUTORIAL_SCENE_02, tutorial_scene_02
+    const_dw TUTORIAL_SCENE_03, tutorial_scene_03
+    const_dw TUTORIAL_SCENE_04, tutorial_scene_04
+    const_dw TUTORIAL_SCENE_05, tutorial_scene_05
+    const_dw TUTORIAL_SCENE_06, tutorial_scene_06
+    const_dw TUTORIAL_SCENE_07, tutorial_scene_07
+    const_dw TUTORIAL_SCENE_08, tutorial_scene_08
+    const_dw TUTORIAL_SCENE_09, tutorial_scene_09
+    const_dw TUTORIAL_SCENE_10, tutorial_scene_10
+    const_dw TUTORIAL_SCENE_11, tutorial_scene_11
+    const_dw TUTORIAL_SCENE_12, tutorial_scene_12
+    const_dw TUTORIAL_SCENE_13, tutorial_scene_13
+    const_dw TUTORIAL_SCENE_14, tutorial_scene_14
+    const_dw TUTORIAL_SCENE_15, tutorial_scene_15
+    const_dw TUTORIAL_SCENE_16, tutorial_scene_16
+    const_dw TUTORIAL_SCENE_17, tutorial_scene_17
+    const_dw TUTORIAL_SCENE_18, tutorial_scene_18
+    const_dw TUTORIAL_SCENE_19, tutorial_scene_19
+    const_dw TUTORIAL_SCENE_20, tutorial_scene_20
+    const_dw TUTORIAL_SCENE_21, tutorial_scene_21
+    const_dw TUTORIAL_SCENE_22, tutorial_scene_22
+    const_dw TUTORIAL_SCENE_23, tutorial_scene_23
+    const_dw TUTORIAL_SCENE_24, tutorial_scene_24
+    const_dw TUTORIAL_SCENE_25, tutorial_scene_25
+    const_dw TUTORIAL_SCENE_26, tutorial_scene_26
+    const_dw TUTORIAL_SCENE_27, tutorial_scene_27
+    const_dw TUTORIAL_SCENE_28, tutorial_scene_28
+    const_dw TUTORIAL_SCENE_29, tutorial_scene_29
+    const_dw TUTORIAL_SCENE_30, tutorial_scene_30
+    const_dw TUTORIAL_SCENE_31, tutorial_scene_31
+    const_dw TUTORIAL_SCENE_32, tutorial_scene_32
+    const_dw TUTORIAL_SCENE_33, tutorial_scene_33
+    const_dw TUTORIAL_SCENE_34, tutorial_scene_34
+    const_dw TUTORIAL_SCENE_35, tutorial_scene_35
+    const_dw TUTORIAL_SCENE_36, tutorial_scene_36
+    const_dw TUTORIAL_SCENE_37, tutorial_scene_37
+    const_dw TUTORIAL_SCENE_38, tutorial_scene_38
+    const_dw TUTORIAL_SCENE_39, tutorial_scene_39
+    const_dw TUTORIAL_SCENE_40, tutorial_scene_40
+    const_dw TUTORIAL_SCENE_41, tutorial_scene_41
+    const_dw TUTORIAL_SCENE_42, tutorial_scene_42
+    const_dw TUTORIAL_SCENE_43, tutorial_scene_43
+    const_dw TUTORIAL_SCENE_44, tutorial_scene_44
+    const_dw TUTORIAL_SCENE_45, tutorial_scene_45
+    const_dw TUTORIAL_SCENE_46, tutorial_scene_46
+    const_dw TUTORIAL_SCENE_47, tutorial_scene_47
+    const_dw TUTORIAL_SCENE_48, tutorial_scene_48
+    const_dw TUTORIAL_SCENE_49, tutorial_scene_49
+    const_dw TUTORIAL_SCENE_50, tutorial_scene_50
+    const_dw TUTORIAL_SCENE_51, tutorial_scene_51
+    const_dw TUTORIAL_SCENE_52, tutorial_scene_52
+    const_dw TUTORIAL_SCENE_53, tutorial_scene_53
+    const_dw TUTORIAL_SCENE_54, tutorial_scene_54
+    const_dw TUTORIAL_SCENE_55, tutorial_scene_55
+    const_dw TUTORIAL_SCENE_56, tutorial_scene_56
+    const_dw TUTORIAL_SCENE_57, tutorial_scene_57
+    const_dw TUTORIAL_SCENE_58, tutorial_scene_58
+    const_dw TUTORIAL_SCENE_59, tutorial_scene_59
+    const_dw TUTORIAL_SCENE_60, tutorial_scene_60
+NUM_TUTORIAL_SCENES EQU const_value
 
 tutorial_scene_00:
     ld a, [w_cdd2_jumptable_index]
@@ -230,10 +230,7 @@ tutorial_scene_01:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_01)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_01)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_01
 
     xor a
     ld [w_cdb0], a
@@ -242,10 +239,7 @@ tutorial_scene_01:
     ld [w_cdac], a
     ld a, $0e
     ld [w_cdad], a
-    ld a, LOW(tutorial_data_42c8)
-    ld [w_cdb1 + 0], a
-    ld a, HIGH(tutorial_data_42c8)
-    ld [w_cdb1 + 1], a
+    ld16 w_cdb1, tutorial_data_42c8
     ld a, $05
     ld [w_cdb3], a
     ld a, 60
@@ -278,10 +272,7 @@ tutorial_scene_03:
     farcall text_delay
     jp nz, farcall_ret
 
-    ld a, LOW(tutorial_message_02)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_02)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_02
 
     xor a
     ld [w_cdb0], a
@@ -290,10 +281,7 @@ tutorial_scene_03:
     ld [w_cdac], a
     ld a, $31
     ld [w_cdad], a
-    ld a, LOW(tutorial_data_42c8)
-    ld [w_cdb1 + 0], a
-    ld a, HIGH(tutorial_data_42c8)
-    ld [w_cdb1 + 1], a
+    ld16 w_cdb1, tutorial_data_42c8
     ld a, $05
     ld [w_cdb3], a
     ld a, 60
@@ -323,10 +311,7 @@ tutorial_scene_05:
     farcall text_delay
     jp nz, farcall_ret
 
-    ld a, LOW(tutorial_message_03)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_03)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_03
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -345,10 +330,7 @@ tutorial_scene_06:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_04)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_04)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_04
     ld a, 10
     ld [w_text_delay_timer], a
 
@@ -384,10 +366,7 @@ tutorial_scene_09:
     xor a
     ld [w_d54a], a
     ld [w_d54b], a
-    ld a, LOW(.data)
-    ld [w_d54c + 0], a
-    ld a, HIGH(.data)
-    ld [w_d54c + 1], a
+    ld16 w_d54c, .data
     farcall function_02_5b67
     ld a, $00
     ld [w_d6ca], a
@@ -413,10 +392,7 @@ tutorial_scene_10:
     ld [w_text_delay_timer], a
     farcall function_02_5b67
 
-    ld a, LOW(tutorial_message_05)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_05)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_05
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -437,10 +413,7 @@ tutorial_scene_11:
     farcall function_06_4964
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_06)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_06)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_06
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -462,10 +435,7 @@ tutorial_scene_12:
     farcall function_02_5560
     farcall function_02_5a82
 
-    ld a, LOW(tutorial_message_07)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_07)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_07
 
     xor a
     ld [w_cdb0], a
@@ -474,10 +444,7 @@ tutorial_scene_12:
     ld [w_cdac], a
     ld a, $0e
     ld [w_cdad], a
-    ld a, LOW(tutorial_data_42c8)
-    ld [w_cdb1 + 0], a
-    ld a, HIGH(tutorial_data_42c8)
-    ld [w_cdb1 + 1], a
+    ld16 w_cdb1, tutorial_data_42c8
     ld a, $05
     ld [w_cdb3], a
     ld a, 60
@@ -507,10 +474,7 @@ tutorial_scene_14:
     farcall text_delay
     jp nz, farcall_ret
 
-    ld a, LOW(tutorial_message_08)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_08)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_08
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -529,10 +493,7 @@ tutorial_scene_15:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_09)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_09)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_09
 
     xor a
     ld [w_cdb0], a
@@ -541,10 +502,7 @@ tutorial_scene_15:
     ld [w_cdac], a
     ld a, $0e
     ld [w_cdad], a
-    ld a, LOW(tutorial_data_497d)
-    ld [w_cdb1 + 0], a
-    ld a, HIGH(tutorial_data_497d)
-    ld [w_cdb1 + 1], a
+    ld16 w_cdb1, tutorial_data_497d
     ld a, $05
     ld [w_cdb3], a
     ld a, 60
@@ -577,10 +535,7 @@ tutorial_scene_17:
     farcall text_delay
     jp nz, farcall_ret
 
-    ld a, LOW(tutorial_message_10)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_10)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_10
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -595,10 +550,7 @@ tutorial_scene_18:
     xor a
     ld [w_d54a], a
     ld [w_d54b], a
-    ld a, LOW(.data)
-    ld [w_d54c + 0], a
-    ld a, HIGH(.data)
-    ld [w_d54c + 1], a
+    ld16 w_d54c, .data
     ld a, $00
     ld [w_cdd6], a
     ld a, $00
@@ -637,19 +589,13 @@ tutorial_scene_19:
     ld [w_cdac], a
     ld a, $31
     ld [w_cdad], a
-    ld a, LOW(tutorial_data_42c8)
-    ld [w_cdb1 + 0], a
-    ld a, HIGH(tutorial_data_42c8)
-    ld [w_cdb1 + 1], a
+    ld16 w_cdb1, tutorial_data_42c8
     ld a, $05
     ld [w_cdb3], a
     ld a, 60
     ld [w_text_delay_timer], a
 
-    ld a, LOW(tutorial_message_11)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_11)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_11
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -674,10 +620,7 @@ tutorial_scene_21:
     farcall text_delay
     jp nz, farcall_ret
 
-    ld a, LOW(tutorial_message_12)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_12)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_12
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -693,10 +636,7 @@ tutorial_scene_22:
     ld hl, function_02_5b77
     farcall wait_press_a_blink
 
-    ld a, LOW(tutorial_message_13)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_13)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_13
 
     call function_00_1085
     farcall function_02_5b98
@@ -708,10 +648,7 @@ tutorial_scene_22:
     ld [w_cdac], a
     ld a, $37
     ld [w_cdad], a
-    ld a, LOW(tutorial_data_4c91)
-    ld [w_cdb1 + 0], a
-    ld a, HIGH(tutorial_data_4c91)
-    ld [w_cdb1 + 1], a
+    ld16 w_cdb1, tutorial_data_4c91
     ld a, $05
     ld [w_cdb3], a
     ld a, 60
@@ -743,10 +680,7 @@ tutorial_scene_24:
     farcall text_delay
     jp nz, farcall_ret
 
-    ld a, LOW(tutorial_message_14)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_14)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_14
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -761,10 +695,7 @@ tutorial_scene_25:
     xor a
     ld [w_d54a], a
     ld [w_d54b], a
-    ld a, LOW(.data)
-    ld [w_d54c + 0], a
-    ld a, HIGH(.data)
-    ld [w_d54c + 1], a
+    ld16 w_d54c, .data
     ld a, $00
     ld [w_cdd6], a
     ld a, $01
@@ -796,10 +727,7 @@ tutorial_scene_26:
     ld hl, w_tutorial_scene
     inc [hl]
 
-    ld a, LOW(tutorial_message_15)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_15)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_15
 
     call function_00_1085
     farcall function_02_5b98
@@ -835,10 +763,7 @@ tutorial_scene_28:
     ld [w_ce00], a
     farcall function_3c_4377
 
-    ld a, LOW(tutorial_message_16)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_16)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_16
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -857,10 +782,7 @@ tutorial_scene_29:
     ld hl, w_tutorial_scene
     inc [hl]
 
-    ld a, LOW(tutorial_message_17)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_17)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_17
 
     call function_00_1085
     farcall function_02_5b98
@@ -879,10 +801,7 @@ tutorial_scene_30:
     xor a
     ld [w_d54a], a
     ld [w_d54b], a
-    ld a, LOW(.data)
-    ld [w_d54c + 0], a
-    ld a, HIGH(.data)
-    ld [w_d54c + 1], a
+    ld16 w_d54c, .data
     ld a, $03
     ld [w_cdd6], a
     ld a, $01
@@ -915,10 +834,7 @@ tutorial_scene_32:
 
     call function_00_1085
 
-    ld a, LOW(tutorial_message_18)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_18)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_18
 
     ld a, $01
     ld [w_d6ca], a
@@ -940,10 +856,7 @@ tutorial_scene_33:
     ld hl, w_tutorial_scene
     inc [hl]
 
-    ld a, LOW(tutorial_message_19)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_19)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_19
 
     call function_00_1085
     farcall function_02_5b98
@@ -960,10 +873,7 @@ tutorial_scene_34:
     xor a
     ld [w_d54a], a
     ld [w_d54b], a
-    ld a, LOW(.data)
-    ld [w_d54c + 0], a
-    ld a, HIGH(.data)
-    ld [w_d54c + 1], a
+    ld16 w_d54c, .data
     ld a, $03
     ld [w_cdd6], a
     ld a, $01
@@ -998,10 +908,7 @@ tutorial_scene_35:
     farcall function_02_5a82
     farcall function_29_7421
 
-    ld a, LOW(tutorial_message_20)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_20)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_20
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1016,15 +923,12 @@ tutorial_scene_36:
     ld a, $01
     ld [w_d60f], a
     farcall function_29_5579
-    ld a, $02
+    ld a, TUTORIAL_2
     ld [w_cdd2_jumptable_index], a
     xor a
     ld [w_d54a], a
     ld [w_d54b], a
-    ld a, LOW(.data)
-    ld [w_d54c + 0], a
-    ld a, HIGH(.data)
-    ld [w_d54c + 1], a
+    ld16 w_d54c, .data
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1056,10 +960,7 @@ tutorial_scene_37:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_21)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_21)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_21
 
     ld a, $01
     ld [w_c329], a
@@ -1097,10 +998,7 @@ tutorial_scene_39:
     cp $3f
     jp c, farcall_ret
 
-    ld a, LOW(tutorial_message_22)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_22)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_22
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1134,10 +1032,7 @@ tutorial_scene_41:
     cp $3f
     jp c, farcall_ret
 
-    ld a, LOW(tutorial_message_23)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_23)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_23
 
     call function_00_1085
     farcall function_02_5b98
@@ -1162,10 +1057,7 @@ tutorial_scene_42:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_24)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_24)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_24
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1185,10 +1077,7 @@ tutorial_scene_43:
     farcall function_02_5b98
     farcall function_02_5a82
 
-    ld a, LOW(tutorial_message_25)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_25)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_25
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1203,10 +1092,7 @@ tutorial_scene_44:
     xor a
     ld [w_d54a], a
     ld [w_d54b], a
-    ld a, LOW(.data)
-    ld [w_d54c + 0], a
-    ld a, HIGH(.data)
-    ld [w_d54c + 1], a
+    ld16 w_d54c, .data
     farcall function_02_5b67
     xor a
     ld [w_cdd6], a
@@ -1232,10 +1118,7 @@ tutorial_scene_45:
     ld hl, function_02_5b77
     farcall wait_press_a_blink
 
-    ld a, LOW(tutorial_message_26)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_26)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_26
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1259,10 +1142,7 @@ tutorial_scene_46:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_27)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_27)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_27
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1281,10 +1161,7 @@ tutorial_scene_47:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_28)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_28)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_28
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1317,10 +1194,7 @@ tutorial_scene_48:
     farcall function_02_5b98
     farcall function_02_5a82
 
-    ld a, LOW(tutorial_message_29)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_29)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_29
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1339,10 +1213,7 @@ tutorial_scene_49:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_30)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_30)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_30
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1361,10 +1232,7 @@ tutorial_scene_50:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_31)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_31)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_31
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1383,10 +1251,7 @@ tutorial_scene_51:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_32)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_32)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_32
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1411,10 +1276,7 @@ tutorial_scene_52:
     ld a, $27
     ld [w_cdad], a
 
-    ld a, LOW(tutorial_data_5b4e)
-    ld [w_cdb1 + 0], a
-    ld a, HIGH(tutorial_data_5b4e)
-    ld [w_cdb1 + 1], a
+    ld16 w_cdb1, tutorial_data_5b4e
     ld a, $05
     ld [w_cdb3], a
     jp farcall_ret
@@ -1435,10 +1297,7 @@ tutorial_scene_53:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_33)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_33)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_33
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1469,10 +1328,7 @@ tutorial_scene_54:
     ld [w_cdac], a
     ld a, $27
     ld [w_cdad], a
-    ld a, LOW(tutorial_data_5b4e)
-    ld [w_cdb1 + 0], a
-    ld a, HIGH(tutorial_data_5b4e)
-    ld [w_cdb1 + 1], a
+    ld16 w_cdb1, tutorial_data_5b4e
     ld a, $05
     ld [w_cdb3], a
     jp farcall_ret
@@ -1490,10 +1346,7 @@ tutorial_scene_55:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_34)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_34)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_34
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1512,10 +1365,7 @@ tutorial_scene_56:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_35)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_35)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_35
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1534,10 +1384,7 @@ tutorial_scene_57:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_36)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_36)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_36
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1556,10 +1403,7 @@ tutorial_scene_58:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_37)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_37)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_37
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1578,10 +1422,7 @@ tutorial_scene_59:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(tutorial_message_38)
-    ld [w_text_cur_string + 0], a
-    ld a, HIGH(tutorial_message_38)
-    ld [w_text_cur_string + 1], a
+    ld16 w_text_cur_string, tutorial_message_38
 
     ld hl, w_tutorial_scene
     inc [hl]

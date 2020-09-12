@@ -7,3 +7,7 @@ __pycache__
 *.map
 *.sym
 !shim.sym
+__pycache__
+*.pyc
+/coverage.png
+/picross.png
