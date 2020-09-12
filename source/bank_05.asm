@@ -6,28 +6,29 @@ SECTION "tutorial", ROMX[$4000], BANK[$05]
 tutorial::
     ld a, [w_cdd2_jumptable_index]
     rst jumptable
-    dw function_05_400a
-    dw function_05_401b
-    dw function_05_4028
+    const_def
+    const_dw TUTORIAL_0, function_05_400a
+    const_dw TUTORIAL_1, function_05_401b
+    const_dw TUTORIAL_2, function_05_4028
 
 function_05_400a:
     xor a
     ld [w_d535], a
     ld a, $00
     ld [w_d550], a
-    ld a, 2
+    ld a, TUTORIAL_2
     ld [w_cdd2_jumptable_index], a
     jp farcall_ret
 
 function_05_401b:
     ld a, $01
     ld [w_d550], a
-    ld a, 2
+    ld a, TUTORIAL_2
     ld [w_cdd2_jumptable_index], a
     jp farcall_ret
 
 function_05_4028:
-    xor a
+    xor a ; TUTORIAL_0
     ld [w_cdd2_jumptable_index], a
     ld a, [w_c357]
     and a
@@ -143,67 +144,69 @@ function_05_4028:
 tutorial_scene::
     ld a, [w_tutorial_scene]
     rst jumptable
-    dw tutorial_scene_00
-    dw tutorial_scene_01
-    dw tutorial_scene_02
-    dw tutorial_scene_03
-    dw tutorial_scene_04
-    dw tutorial_scene_05
-    dw tutorial_scene_06
-    dw tutorial_scene_07
-    dw tutorial_scene_08
-    dw tutorial_scene_09
-    dw tutorial_scene_10
-    dw tutorial_scene_11
-    dw tutorial_scene_12
-    dw tutorial_scene_13
-    dw tutorial_scene_14
-    dw tutorial_scene_15
-    dw tutorial_scene_16
-    dw tutorial_scene_17
-    dw tutorial_scene_18
-    dw tutorial_scene_19
-    dw tutorial_scene_20
-    dw tutorial_scene_21
-    dw tutorial_scene_22
-    dw tutorial_scene_23
-    dw tutorial_scene_24
-    dw tutorial_scene_25
-    dw tutorial_scene_26
-    dw tutorial_scene_27
-    dw tutorial_scene_28
-    dw tutorial_scene_29
-    dw tutorial_scene_30
-    dw tutorial_scene_31
-    dw tutorial_scene_32
-    dw tutorial_scene_33
-    dw tutorial_scene_34
-    dw tutorial_scene_35
-    dw tutorial_scene_36
-    dw tutorial_scene_37
-    dw tutorial_scene_38
-    dw tutorial_scene_39
-    dw tutorial_scene_40
-    dw tutorial_scene_41
-    dw tutorial_scene_42
-    dw tutorial_scene_43
-    dw tutorial_scene_44
-    dw tutorial_scene_45
-    dw tutorial_scene_46
-    dw tutorial_scene_47
-    dw tutorial_scene_48
-    dw tutorial_scene_49
-    dw tutorial_scene_50
-    dw tutorial_scene_51
-    dw tutorial_scene_52
-    dw tutorial_scene_53
-    dw tutorial_scene_54
-    dw tutorial_scene_55
-    dw tutorial_scene_56
-    dw tutorial_scene_57
-    dw tutorial_scene_58
-    dw tutorial_scene_59
-    dw tutorial_scene_60
+    const_def
+    const_dw TUTORIAL_SCENE_00, tutorial_scene_00
+    const_dw TUTORIAL_SCENE_01, tutorial_scene_01
+    const_dw TUTORIAL_SCENE_02, tutorial_scene_02
+    const_dw TUTORIAL_SCENE_03, tutorial_scene_03
+    const_dw TUTORIAL_SCENE_04, tutorial_scene_04
+    const_dw TUTORIAL_SCENE_05, tutorial_scene_05
+    const_dw TUTORIAL_SCENE_06, tutorial_scene_06
+    const_dw TUTORIAL_SCENE_07, tutorial_scene_07
+    const_dw TUTORIAL_SCENE_08, tutorial_scene_08
+    const_dw TUTORIAL_SCENE_09, tutorial_scene_09
+    const_dw TUTORIAL_SCENE_10, tutorial_scene_10
+    const_dw TUTORIAL_SCENE_11, tutorial_scene_11
+    const_dw TUTORIAL_SCENE_12, tutorial_scene_12
+    const_dw TUTORIAL_SCENE_13, tutorial_scene_13
+    const_dw TUTORIAL_SCENE_14, tutorial_scene_14
+    const_dw TUTORIAL_SCENE_15, tutorial_scene_15
+    const_dw TUTORIAL_SCENE_16, tutorial_scene_16
+    const_dw TUTORIAL_SCENE_17, tutorial_scene_17
+    const_dw TUTORIAL_SCENE_18, tutorial_scene_18
+    const_dw TUTORIAL_SCENE_19, tutorial_scene_19
+    const_dw TUTORIAL_SCENE_20, tutorial_scene_20
+    const_dw TUTORIAL_SCENE_21, tutorial_scene_21
+    const_dw TUTORIAL_SCENE_22, tutorial_scene_22
+    const_dw TUTORIAL_SCENE_23, tutorial_scene_23
+    const_dw TUTORIAL_SCENE_24, tutorial_scene_24
+    const_dw TUTORIAL_SCENE_25, tutorial_scene_25
+    const_dw TUTORIAL_SCENE_26, tutorial_scene_26
+    const_dw TUTORIAL_SCENE_27, tutorial_scene_27
+    const_dw TUTORIAL_SCENE_28, tutorial_scene_28
+    const_dw TUTORIAL_SCENE_29, tutorial_scene_29
+    const_dw TUTORIAL_SCENE_30, tutorial_scene_30
+    const_dw TUTORIAL_SCENE_31, tutorial_scene_31
+    const_dw TUTORIAL_SCENE_32, tutorial_scene_32
+    const_dw TUTORIAL_SCENE_33, tutorial_scene_33
+    const_dw TUTORIAL_SCENE_34, tutorial_scene_34
+    const_dw TUTORIAL_SCENE_35, tutorial_scene_35
+    const_dw TUTORIAL_SCENE_36, tutorial_scene_36
+    const_dw TUTORIAL_SCENE_37, tutorial_scene_37
+    const_dw TUTORIAL_SCENE_38, tutorial_scene_38
+    const_dw TUTORIAL_SCENE_39, tutorial_scene_39
+    const_dw TUTORIAL_SCENE_40, tutorial_scene_40
+    const_dw TUTORIAL_SCENE_41, tutorial_scene_41
+    const_dw TUTORIAL_SCENE_42, tutorial_scene_42
+    const_dw TUTORIAL_SCENE_43, tutorial_scene_43
+    const_dw TUTORIAL_SCENE_44, tutorial_scene_44
+    const_dw TUTORIAL_SCENE_45, tutorial_scene_45
+    const_dw TUTORIAL_SCENE_46, tutorial_scene_46
+    const_dw TUTORIAL_SCENE_47, tutorial_scene_47
+    const_dw TUTORIAL_SCENE_48, tutorial_scene_48
+    const_dw TUTORIAL_SCENE_49, tutorial_scene_49
+    const_dw TUTORIAL_SCENE_50, tutorial_scene_50
+    const_dw TUTORIAL_SCENE_51, tutorial_scene_51
+    const_dw TUTORIAL_SCENE_52, tutorial_scene_52
+    const_dw TUTORIAL_SCENE_53, tutorial_scene_53
+    const_dw TUTORIAL_SCENE_54, tutorial_scene_54
+    const_dw TUTORIAL_SCENE_55, tutorial_scene_55
+    const_dw TUTORIAL_SCENE_56, tutorial_scene_56
+    const_dw TUTORIAL_SCENE_57, tutorial_scene_57
+    const_dw TUTORIAL_SCENE_58, tutorial_scene_58
+    const_dw TUTORIAL_SCENE_59, tutorial_scene_59
+    const_dw TUTORIAL_SCENE_60, tutorial_scene_60
+NUM_TUTORIAL_SCENES EQU const_value
 
 tutorial_scene_00:
     ld a, [w_cdd2_jumptable_index]
@@ -920,7 +923,7 @@ tutorial_scene_36:
     ld a, $01
     ld [w_d60f], a
     farcall function_29_5579
-    ld a, $02
+    ld a, TUTORIAL_2
     ld [w_cdd2_jumptable_index], a
     xor a
     ld [w_d54a], a
