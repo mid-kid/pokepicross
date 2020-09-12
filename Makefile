@@ -29,9 +29,8 @@ all: $(name).gbc
 clean:
 	rm -rf $(name).gbc $(name).sym $(name).map $(dir_build)
 
-include data/data.mk
 include gfx/gfx.mk
-.PRECIOUS: $(gfx) $(data)
+.PRECIOUS: $(gfx)
 
 $(name).gbc: layout.link $(objects) | $(baserom)
 	$(RGBLINK) $(RGBLINKFLAGS) -O $(baserom) -l $< -n $(@:.gbc=.sym) -m $(@:.gbc=.map) -o $@ $(filter-out $<, $^)
@@ -40,9 +39,9 @@ $(name).gbc: layout.link $(objects) | $(baserom)
 $(dir_build)/shim.asm: shim.sym | $$(dir $$@)
 	tools/makeshim.py $< > $@
 
-$(dir_build)/%.o: $(dir_build)/%.asm | $(gfx) $(data) $$(dir $$@)
+$(dir_build)/%.o: $(dir_build)/%.asm | $(gfx) $$(dir $$@)
 	$(RGBASM) $(RGBASMFLAGS) -i $(dir_build)/ -i include/ -M $(@:.o=.d) -o $@ $<
-$(dir_build)/%.o: %.asm | $(gfx) $(data) $$(dir $$@)
+$(dir_build)/%.o: %.asm | $(gfx) $$(dir $$@)
 	$(RGBASM) $(RGBASMFLAGS) -i $(dir_build)/ -i include/ -M $(@:.o=.d) -o $@ $<
 
 .PRECIOUS: %/
