@@ -21,3 +21,10 @@ farjp: macro
     pop af
     jp _farjp
 endm
+
+ld16: macro
+    ld a, LOW(\2)
+    ld [\1 + 0], a
+    ld a, HIGH(\2)
+    ld [\1 + 1], a
+endm
