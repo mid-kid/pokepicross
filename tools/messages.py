@@ -55,7 +55,7 @@ def convert_message(message):
             err("%s: Unrecognized character '%s'" % (filename, char))
 
     values.append(0xffff)
-    return "    dw" + ", ".join(["$%04x" % val for val in values])
+    return "    dw " + ", ".join(["$%04x" % val for val in values])
 
 name = None
 message = None
@@ -70,8 +70,8 @@ for i, line in enumerate(open(filename)):
         if name is not None or message is not None:
             print("\n%s::" % name)
             print(convert_message(message))
-        message = ""
         name = line[1:-2]
+        message = ""
         continue
 
     if line.startswith(".org "):
@@ -83,6 +83,13 @@ for i, line in enumerate(open(filename)):
             continue
         bank = split[0]
         addr = split[1]
+
+        if name is not None or message is not None:
+            print("\n%s::" % name)
+            print(convert_message(message))
+        name = None
+        message = None
+
         if i != 0:
             print()
         print("SECTION \"%s %s:%s\", ROMX[$%s], BANK[$%s]" %
