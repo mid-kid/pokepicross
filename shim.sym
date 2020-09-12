@@ -74,7 +74,7 @@
 00:c33f w_STAT
 
 00:c340 w_c340
-00:c341 w_vblank_ran
+00:c341 w_vblank_ran ; db
 00:c342 w_c342
 00:c344 w_c344
 00:c345 w_c345
