@@ -18,10 +18,6 @@ objects := $(patsubst %.asm, $(dir_build)/%.o, \
             $(call rwildcard, source data, *.asm))
 objects += $(dir_build)/shim.o
 
-gfx := $(patsubst %.png, $(dir_build)/%.bin, \
-        $(call rwildcard, gfx, *.png))
-
-.PRECIOUS: $(gfx)
 .SECONDEXPANSION:
 
 .PHONY: all
@@ -32,6 +28,10 @@ all: $(name).gbc
 clean:
 	rm -rf $(name).gbc $(name).sym $(name).map $(dir_build)
 
+include data/data.mk
+include gfx/gfx.mk
+.PRECIOUS: $(gfx) $(data)
+
 $(name).gbc: layout.link $(objects) | $(baserom)
 	$(RGBLINK) $(RGBLINKFLAGS) -O $(baserom) -l $< -n $(@:.gbc=.sym) -m $(@:.gbc=.map) -o $@ $(filter-out $<, $^)
 	$(RGBFIX) $(RGBFIXFLAGS) -v $@
@@ -39,26 +39,10 @@ $(name).gbc: layout.link $(objects) | $(baserom)
 $(dir_build)/shim.asm: shim.sym | $$(dir $$@)
 	tools/makeshim.py $< > $@
 
-$(dir_build)/%.o: $(dir_build)/%.asm | $(gfx) $$(dir $$@)
+$(dir_build)/%.o: $(dir_build)/%.asm | $(gfx) $(data) $$(dir $$@)
 	$(RGBASM) $(RGBASMFLAGS) -i $(dir_build)/ -i include/ -M $(@:.o=.d) -o $@ $<
-$(dir_build)/%.o: %.asm | $(gfx) $$(dir $$@)
+$(dir_build)/%.o: %.asm | $(gfx) $(data) $$(dir $$@)
 	$(RGBASM) $(RGBASMFLAGS) -i $(dir_build)/ -i include/ -M $(@:.o=.d) -o $@ $<
-
-RGBGFXFLAGS :=
-$(dir_build)/%.bin: %.png | $$(dir $$@)
-	$(RGBGFX) $(RGBGFXFLAGS) -o $@ $<
-
-$(dir_build)/gfx/pikachu_walk.bin: RGBGFXFLAGS = -h
-$(dir_build)/gfx/bulbasaur_walk.bin: RGBGFXFLAGS = -h
-$(dir_build)/gfx/charmander_walk.bin: RGBGFXFLAGS = -h
-$(dir_build)/gfx/squirtle_walk.bin: RGBGFXFLAGS = -h
-$(dir_build)/gfx/clefairy_walk.bin: RGBGFXFLAGS = -h
-$(dir_build)/gfx/jigglypuff_walk.bin: RGBGFXFLAGS = -h
-$(dir_build)/gfx/misty_walk.bin: RGBGFXFLAGS = -h
-$(dir_build)/gfx/mew_walk.bin: RGBGFXFLAGS = -h
-$(dir_build)/gfx/mew_silhouette_walk.bin: RGBGFXFLAGS = -h
-$(dir_build)/gfx/psyduck_walk.bin: RGBGFXFLAGS = -h
-$(dir_build)/gfx/bill_walk.bin: RGBGFXFLAGS = -h
 
 .PRECIOUS: %/
 %/:

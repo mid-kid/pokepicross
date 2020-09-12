@@ -1,6 +1,7 @@
 /DMGAKVJ0.1
 /disassembly
 /build
+__pycache__
 *.sav
 *.gbc
 *.map

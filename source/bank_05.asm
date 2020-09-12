@@ -52,9 +52,9 @@ function_05_4028:
     ld [w_textbox_width], a
     ld a, 141
     ld [w_textbox_height], a
-    ld a, LOW(string_02_6880)
+    ld a, LOW(tutorial_message_00)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6880)
+    ld a, HIGH(tutorial_message_00)
     ld [w_text_cur_string + 1], a
     ld a, $01
     ld [w_d6ca], a
@@ -230,9 +230,9 @@ tutorial_scene_01:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_68ca)
+    ld a, LOW(tutorial_message_01)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_68ca)
+    ld a, HIGH(tutorial_message_01)
     ld [w_text_cur_string + 1], a
 
     xor a
@@ -278,9 +278,9 @@ tutorial_scene_03:
     farcall text_delay
     jp nz, farcall_ret
 
-    ld a, LOW(string_02_68e2)
+    ld a, LOW(tutorial_message_02)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_68e2)
+    ld a, HIGH(tutorial_message_02)
     ld [w_text_cur_string + 1], a
 
     xor a
@@ -323,9 +323,9 @@ tutorial_scene_05:
     farcall text_delay
     jp nz, farcall_ret
 
-    ld a, LOW(string_02_68fe)
+    ld a, LOW(tutorial_message_03)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_68fe)
+    ld a, HIGH(tutorial_message_03)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -345,9 +345,9 @@ tutorial_scene_06:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_693e)
+    ld a, LOW(tutorial_message_04)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_693e)
+    ld a, HIGH(tutorial_message_04)
     ld [w_text_cur_string + 1], a
     ld a, 10
     ld [w_text_delay_timer], a
@@ -413,9 +413,9 @@ tutorial_scene_10:
     ld [w_text_delay_timer], a
     farcall function_02_5b67
 
-    ld a, LOW(string_02_6960)
+    ld a, LOW(tutorial_message_05)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6960)
+    ld a, HIGH(tutorial_message_05)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -437,9 +437,9 @@ tutorial_scene_11:
     farcall function_06_4964
     farcall function_02_5b98
 
-    ld a, LOW(string_02_69ae)
+    ld a, LOW(tutorial_message_06)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_69ae)
+    ld a, HIGH(tutorial_message_06)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -462,9 +462,9 @@ tutorial_scene_12:
     farcall function_02_5560
     farcall function_02_5a82
 
-    ld a, LOW(string_02_69e6)
+    ld a, LOW(tutorial_message_07)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_69e6)
+    ld a, HIGH(tutorial_message_07)
     ld [w_text_cur_string + 1], a
 
     xor a
@@ -507,9 +507,9 @@ tutorial_scene_14:
     farcall text_delay
     jp nz, farcall_ret
 
-    ld a, LOW(string_02_6a06)
+    ld a, LOW(tutorial_message_08)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6a06)
+    ld a, HIGH(tutorial_message_08)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -529,9 +529,9 @@ tutorial_scene_15:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_6a44)
+    ld a, LOW(tutorial_message_09)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6a44)
+    ld a, HIGH(tutorial_message_09)
     ld [w_text_cur_string + 1], a
 
     xor a
@@ -577,9 +577,9 @@ tutorial_scene_17:
     farcall text_delay
     jp nz, farcall_ret
 
-    ld a, LOW(string_02_6a5e)
+    ld a, LOW(tutorial_message_10)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6a5e)
+    ld a, HIGH(tutorial_message_10)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -646,9 +646,9 @@ tutorial_scene_19:
     ld a, 60
     ld [w_text_delay_timer], a
 
-    ld a, LOW(string_02_6aa4)
+    ld a, LOW(tutorial_message_11)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6aa4)
+    ld a, HIGH(tutorial_message_11)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -674,9 +674,9 @@ tutorial_scene_21:
     farcall text_delay
     jp nz, farcall_ret
 
-    ld a, LOW(string_02_6ac4)
+    ld a, LOW(tutorial_message_12)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6ac4)
+    ld a, HIGH(tutorial_message_12)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -693,9 +693,9 @@ tutorial_scene_22:
     ld hl, function_02_5b77
     farcall wait_press_a_blink
 
-    ld a, LOW(string_02_6afc)
+    ld a, LOW(tutorial_message_13)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6afc)
+    ld a, HIGH(tutorial_message_13)
     ld [w_text_cur_string + 1], a
 
     call function_00_1085
@@ -743,9 +743,9 @@ tutorial_scene_24:
     farcall text_delay
     jp nz, farcall_ret
 
-    ld a, LOW(string_02_6b1c)
+    ld a, LOW(tutorial_message_14)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6b1c)
+    ld a, HIGH(tutorial_message_14)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -796,9 +796,9 @@ tutorial_scene_26:
     ld hl, w_tutorial_scene
     inc [hl]
 
-    ld a, LOW(string_02_6b7e)
+    ld a, LOW(tutorial_message_15)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6b7e)
+    ld a, HIGH(tutorial_message_15)
     ld [w_text_cur_string + 1], a
 
     call function_00_1085
@@ -835,9 +835,9 @@ tutorial_scene_28:
     ld [w_ce00], a
     farcall function_3c_4377
 
-    ld a, LOW(string_02_6bca)
+    ld a, LOW(tutorial_message_16)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6bca)
+    ld a, HIGH(tutorial_message_16)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -857,9 +857,9 @@ tutorial_scene_29:
     ld hl, w_tutorial_scene
     inc [hl]
 
-    ld a, LOW(string_02_6be4)
+    ld a, LOW(tutorial_message_17)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6be4)
+    ld a, HIGH(tutorial_message_17)
     ld [w_text_cur_string + 1], a
 
     call function_00_1085
@@ -915,9 +915,9 @@ tutorial_scene_32:
 
     call function_00_1085
 
-    ld a, LOW(string_02_6c18)
+    ld a, LOW(tutorial_message_18)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6c18)
+    ld a, HIGH(tutorial_message_18)
     ld [w_text_cur_string + 1], a
 
     ld a, $01
@@ -940,9 +940,9 @@ tutorial_scene_33:
     ld hl, w_tutorial_scene
     inc [hl]
 
-    ld a, LOW(string_02_6c58)
+    ld a, LOW(tutorial_message_19)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6c58)
+    ld a, HIGH(tutorial_message_19)
     ld [w_text_cur_string + 1], a
 
     call function_00_1085
@@ -998,9 +998,9 @@ tutorial_scene_35:
     farcall function_02_5a82
     farcall function_29_7421
 
-    ld a, LOW(string_02_6cba)
+    ld a, LOW(tutorial_message_20)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6cba)
+    ld a, HIGH(tutorial_message_20)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1056,9 +1056,9 @@ tutorial_scene_37:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_6d10)
+    ld a, LOW(tutorial_message_21)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6d10)
+    ld a, HIGH(tutorial_message_21)
     ld [w_text_cur_string + 1], a
 
     ld a, $01
@@ -1097,9 +1097,9 @@ tutorial_scene_39:
     cp $3f
     jp c, farcall_ret
 
-    ld a, LOW(string_02_6d74)
+    ld a, LOW(tutorial_message_22)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6d74)
+    ld a, HIGH(tutorial_message_22)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1134,9 +1134,9 @@ tutorial_scene_41:
     cp $3f
     jp c, farcall_ret
 
-    ld a, LOW(string_02_6d90)
+    ld a, LOW(tutorial_message_23)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6d90)
+    ld a, HIGH(tutorial_message_23)
     ld [w_text_cur_string + 1], a
 
     call function_00_1085
@@ -1162,9 +1162,9 @@ tutorial_scene_42:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_6dde)
+    ld a, LOW(tutorial_message_24)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6dde)
+    ld a, HIGH(tutorial_message_24)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1185,9 +1185,9 @@ tutorial_scene_43:
     farcall function_02_5b98
     farcall function_02_5a82
 
-    ld a, LOW(string_02_6e1e)
+    ld a, LOW(tutorial_message_25)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6e1e)
+    ld a, HIGH(tutorial_message_25)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1232,9 +1232,9 @@ tutorial_scene_45:
     ld hl, function_02_5b77
     farcall wait_press_a_blink
 
-    ld a, LOW(string_02_6e42)
+    ld a, LOW(tutorial_message_26)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6e42)
+    ld a, HIGH(tutorial_message_26)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1259,9 +1259,9 @@ tutorial_scene_46:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_6e60)
+    ld a, LOW(tutorial_message_27)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6e60)
+    ld a, HIGH(tutorial_message_27)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1281,9 +1281,9 @@ tutorial_scene_47:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_6ed0)
+    ld a, LOW(tutorial_message_28)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6ed0)
+    ld a, HIGH(tutorial_message_28)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1317,9 +1317,9 @@ tutorial_scene_48:
     farcall function_02_5b98
     farcall function_02_5a82
 
-    ld a, LOW(string_02_6ee4)
+    ld a, LOW(tutorial_message_29)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6ee4)
+    ld a, HIGH(tutorial_message_29)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1339,9 +1339,9 @@ tutorial_scene_49:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_6f32)
+    ld a, LOW(tutorial_message_30)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6f32)
+    ld a, HIGH(tutorial_message_30)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1361,9 +1361,9 @@ tutorial_scene_50:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_6f96)
+    ld a, LOW(tutorial_message_31)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6f96)
+    ld a, HIGH(tutorial_message_31)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1383,9 +1383,9 @@ tutorial_scene_51:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_6fe2)
+    ld a, LOW(tutorial_message_32)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_6fe2)
+    ld a, HIGH(tutorial_message_32)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1435,9 +1435,9 @@ tutorial_scene_53:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_702c)
+    ld a, LOW(tutorial_message_33)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_702c)
+    ld a, HIGH(tutorial_message_33)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1490,9 +1490,9 @@ tutorial_scene_55:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_708c)
+    ld a, LOW(tutorial_message_34)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_708c)
+    ld a, HIGH(tutorial_message_34)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1512,9 +1512,9 @@ tutorial_scene_56:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_70c2)
+    ld a, LOW(tutorial_message_35)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_70c2)
+    ld a, HIGH(tutorial_message_35)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1534,9 +1534,9 @@ tutorial_scene_57:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_710e)
+    ld a, LOW(tutorial_message_36)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_710e)
+    ld a, HIGH(tutorial_message_36)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1556,9 +1556,9 @@ tutorial_scene_58:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_7142)
+    ld a, LOW(tutorial_message_37)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_7142)
+    ld a, HIGH(tutorial_message_37)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene
@@ -1578,9 +1578,9 @@ tutorial_scene_59:
     call function_00_1085
     farcall function_02_5b98
 
-    ld a, LOW(string_02_71be)
+    ld a, LOW(tutorial_message_38)
     ld [w_text_cur_string + 0], a
-    ld a, HIGH(string_02_71be)
+    ld a, HIGH(tutorial_message_38)
     ld [w_text_cur_string + 1], a
 
     ld hl, w_tutorial_scene

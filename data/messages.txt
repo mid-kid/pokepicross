@@ -1,0 +1,172 @@
+.org 02:6880
+
+[tutorial_message_00]
+それじゃ　さっそく
+『ポケモンピクロス』の
+あそびかたを　おしえてやろう
+
+[tutorial_message_01]
+うえにある　すうじ　と
+
+[tutorial_message_02]
+{TX_LF}ひだりにある　すうじ　を
+
+[tutorial_message_03]
+　ヒント
+にして　フィールドにあるマスを
+けずっていくんじゃ{TX_END}
+
+[tutorial_message_04]
+ただしくけずることが　できたら{TX_LF}
+
+[tutorial_message_05]
+ポケモンの　ちょうこくが
+かんせいするんじゃ!!!
+(“モンスターボ-ル”)
+
+[tutorial_message_06]
+では　『ポケモンピクロス』の
+ルールを　せつめいするぞ
+
+[tutorial_message_07]
+うえにある　すうじの　れつ　は
+
+[tutorial_message_08]
+{TX_LF}フィールドを　たてに　けずる
+かずを　あらわしておるんじゃ
+
+[tutorial_message_09]
+たとえば　この『5』は　
+
+[tutorial_message_10]
+{TX_LF}たてに　れんぞくして　5マス
+けずることを　あらわして
+おるんじゃ
+
+[tutorial_message_11]
+ひだりにある　すうじのれつ　は
+
+[tutorial_message_12]
+{TX_LF}フィールドを　よこに　けずる
+かずを　あらわしておる
+
+[tutorial_message_13]
+たとえば　この『3』と『1』は
+
+[tutorial_message_14]
+{TX_LF}ひだりから3マスけずり　さらに　
+はなれた　ところを1マスけずる
+ことを　あらわして　おるぞ!
+
+[tutorial_message_15]
+しかし　もんだいには
+せいげんじかんが　あるので
+それまでに　とけなければ
+
+[tutorial_message_16]
+{TX_LF}ポケモンはにげてしまう
+
+[tutorial_message_17]
+じゃが　あせってまちがったマスを
+けずってしまうと
+
+[tutorial_message_18]
+{TX_LF}のこりじかんが　へってしまうから
+いそいでばかりでもいかんぞ
+
+[tutorial_message_19]
+けずってはいけないマスが
+わかったら『×』のしるしを
+つけておくと　わかりやすくて
+べんりじゃ!
+
+[tutorial_message_20]
+『ヒントをつかう?』で　はい
+を　せんたくすると　ヒントの
+ルーレットが　まわるから
+
+[tutorial_message_21]
+タイミングよく　Aボタンを
+おすんじゃ!
+さいしょは　うえのカーソル
+
+[message_02_6d56]
+{TX_LF}さいしょは　うえのカーソル
+
+[tutorial_message_22]
+{TX_LF}つぎに　ひだりのカーソル
+
+[tutorial_message_23]
+すると　とまったところの
+たてとよこのマスの
+こたえが　すべてわかるのじゃ!
+
+[tutorial_message_24]
+はしでルーレットをとめると
+そのもんだいは
+ときやすくなるぞ!
+
+[tutorial_message_25]
+あと　もんだいを
+といているときに
+
+[tutorial_message_26]
+{TX_LF}SELECTボタンをおすと
+
+[tutorial_message_27]
+SELECTボタンを　おしている
+あいだだけ　このように
+どんなもんだいを　といているか
+わかりやすくなるぞ!
+
+[tutorial_message_28]
+ためしてみるといい
+
+[tutorial_message_29]
+おっと!　いかん　いかん
+『はやとき』を　せつめいするの
+をわすれておった!
+
+[tutorial_message_30]
+『はやとき』とは
+もんだいに　きめられている
+はやときの　じかんないに
+もんだいを　とくことじゃ!
+
+[tutorial_message_31]
+まだ　『はやとき』が　できるか
+どうかは　のこりタイムをみれば
+わかるぞ!
+
+[tutorial_message_32]
+『はやとき』の　じかんない
+であれば　このようにしろく
+ひょうじされるが
+
+[tutorial_message_33]
+『はやとき』の　じかんが
+すぎてしまった　ばあいは
+このように　くろく
+ひょうじされるのじゃ!
+
+[tutorial_message_34]
+なお　『はやとき』の　じかんは
+はやときタイムとして
+
+[tutorial_message_35]
+とくもんだいを　えらんだあとに
+がめんの　ちゅうおうに
+ひょうじされるぞ!
+
+[tutorial_message_36]
+むりして　もんだいを　はやくとく
+ひつようはないが
+
+[tutorial_message_37]
+すべてのポケモンの　ちょうこくを
+かんせい　させるためには
+あるていど　もんだいを　はやく
+とくことも　ひつようなのじゃ!
+
+[tutorial_message_38]
+では　がんばるのじゃ!
