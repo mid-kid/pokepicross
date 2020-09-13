@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from sys import argv
-from charmap import parse_charmap
 
 file = open("DMGAKVJ0.1", "rb").read()
 
@@ -20,30 +19,40 @@ offset = addr
 if bank > 0:
     offset += 0x4000 * (bank - 1)
 
-o_charmap, constants = parse_charmap("data/charmap.txt")
 charmap = {}
-for char in o_charmap:
-    if o_charmap[char] not in charmap:
-        charmap[o_charmap[char]] = char
+for line in open("include/charmap.inc"):
+    if line.startswith("charmap "):
+        split = line.split(";")[0].split(" ", 1)[1].split(",")
+        if len(split) != 2:
+            continue
 
-print(".org %02x:%04x" % (bank, addr))
+        char = split[0].strip()
+        value = int(split[1].strip())
+
+        if not char.startswith("\"") or not char.endswith("\""):
+            continue
+        char = char[1:-1]
+
+        charmap[value] = char
+
 for x in range(count):
     bank = offset // 0x4000
     addr = offset % 0x4000
     if bank > 0:
         addr += 0x4000
 
-    print("[string_%02x_%04x]" % (bank, addr))
+    print("string_%02x_%04x::" % (bank, addr))
     while True:
         if multistring:
             if file[offset] == 0:
                 offset += 1
-                print("\n.db 0\n")
+                print("\"\n    db 0\n")
                 break
             val = file[offset] | (file[offset + 1] << 8)
-            print(".dw %d" % val)
+            print("    dw %d" % val)
             offset += 2
 
+        print("    text \"", end="")
         while True:
             value = file[offset] | (file[offset + 1] << 8)
             offset += 2
@@ -51,7 +60,7 @@ for x in range(count):
             if value == 0xffff:
                 break
             elif value == 0xfffe:
-                print()
+                print("\"\n    line \"")
                 continue
 
             if value in charmap:
@@ -60,5 +69,5 @@ for x in range(count):
                 print("<%02x>" % value, end="")
 
         if not multistring:
-            print("\n")
+            print("\"\n")
             break
