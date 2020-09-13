@@ -1,7 +1,7 @@
 SECTION "bank6f", ROMX[$4000], BANK[$6f]
 
-gfx_text_chars::
-INCBIN "gfx/fonts/text_chars.bin"
+gfx_text_chars_dark::
+INCBIN "gfx/fonts/text_chars_dark.bin"
 .end::
 
 gfx_lv_2_mt_otsukimi::

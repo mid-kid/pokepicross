@@ -13,7 +13,12 @@ gfx_lv_1_tokiwa_forest_duplicate::
 INCBIN "gfx/levels/lv_1_tokiwa_forest_unused.bin"
 .end::
 
-SECTION "gfx_textbox_border", ROMX[$6000], BANK[$69]
-gfx_textbox_border::
-INCBIN "gfx/textbox_border.bin"
+SECTION "gfx_textbox_border_dark", ROMX[$6000], BANK[$69]
+gfx_textbox_border_dark::
+INCBIN "gfx/fonts/textbox_border_dark.bin"
+.end::
+
+SECTION "gfx_textbox_border", ROMX[$6800], BANK[$69]
+gfx_textbox_border_bw::
+INCBIN "gfx/fonts/textbox_border_bw.bin"
 .end::

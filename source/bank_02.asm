@@ -100,13 +100,13 @@ textbox_draw_char::
     ld e, [hl]
     inc hl
     ld d, [hl]
-    ld hl, gfx_text_chars
+    ld hl, gfx_text_chars_dark
     add hl, de
     ld a, l
     ld [w_vwf_char_addr + 0], a
     ld a, h
     ld [w_vwf_char_addr + 1], a
-    ld a, BANK(gfx_text_chars)
+    ld a, BANK(gfx_text_chars_dark)
     ld [w_vwf_char_bank], a
 
     ld a, b
