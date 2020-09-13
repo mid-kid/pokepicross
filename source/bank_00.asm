@@ -145,7 +145,7 @@ _start::
     ld a, [w_c358]
     push af
     ld hl, _RAM
-    ld bc, $1fff
+    ld bc, $2000 - 1
     call clear_mem
     pop af
     ld [w_c358], a
@@ -487,26 +487,26 @@ function_00_0458::
 SECTION "vwf_draw_char", ROM0[$0723]
 vwf_char_draw::
     ld a, [w_vwf_char_start_x]
-    and $07
+    and %00000111
     ld c, a
-    ld b, $00
+    ld b, 0
     ld hl, .pixel_masks_right
     add hl, bc
     ld a, [hl]
     ld [w_c363], a
     ld a, [w_vwf_char_end_x]
-    and $07
+    and %00000111
     ld c, a
-    ld b, $00
+    ld b, 0
     ld hl, .pixel_masks_left
     add hl, bc
     ld a, [hl]
     ld [w_c364], a
     ld a, [w_vwf_char_start_x]
-    and $f8
+    and %11111000
     ld c, a
     ld a, [w_vwf_char_end_x]
-    and $f8
+    and %11111000
     sub c
     srl a
     srl a
@@ -522,11 +522,11 @@ vwf_char_draw::
     inc a
     ld [w_c366], a
     ld a, [w_vwf_char_start_x]
-    and $07
+    and %00000111
     ld c, a
     add $38
     ld [w_c368], a
-    ld b, $00
+    ld b, 0
     ld hl, .pixel_masks_right
     add hl, bc
     ld a, [hl]
@@ -549,7 +549,7 @@ vwf_char_draw::
     ld a, [w_vwf_char_start_y]
     ld l, a
     ld a, [w_vwf_char_start_x]
-    and $f8
+    and %11111000
     ld h, a
 
 .jump_000_07a9
@@ -586,11 +586,11 @@ vwf_char_draw::
     ld b, h
     ld c, l
     ld a, l
-    and $f8
+    and %11111000
     srl a
     srl a
     ld e, a
-    ld d, $00
+    ld d, 0
     ld a, [w_cd6d]
     ld l, a
     ld a, [w_cd6e]
@@ -600,17 +600,17 @@ vwf_char_draw::
     ld h, [hl]
     ld l, a
     ld a, b
-    and $f8
+    and %11111000
     srl a
     srl a
     ld e, a
-    ld d, $00
+    ld d, 0
     add hl, de
     ld a, [hl+]
     ld h, [hl]
     ld l, a
     ld a, c
-    and $07
+    and %00000111
     sla a
     add l
     ld l, a
@@ -652,7 +652,7 @@ vwf_char_draw::
     add $0f
     ld c, a
     ld a, b
-    adc $00
+    adc 0
     ld b, a
     inc de
     pop hl
@@ -679,11 +679,11 @@ vwf_char_draw::
     ld b, h
     ld c, l
     ld a, l
-    and $f8
+    and %11111000
     srl a
     srl a
     ld e, a
-    ld d, $00
+    ld d, 0
     ld a, [w_cd6d]
     ld l, a
     ld a, [w_cd6e]
@@ -693,17 +693,17 @@ vwf_char_draw::
     ld h, [hl]
     ld l, a
     ld a, b
-    and $f8
+    and %11111000
     srl a
     srl a
     ld e, a
-    ld d, $00
+    ld d, 0
     add hl, de
     ld a, [hl+]
     ld h, [hl]
     ld l, a
     ld a, c
-    and $07
+    and %00000111
     sla a
     add l
     ld l, a
@@ -754,7 +754,7 @@ vwf_char_draw::
     add $0f
     ld c, a
     ld a, b
-    adc $00
+    adc 0
     ld b, a
     pop af
 
@@ -800,11 +800,11 @@ vwf_char_draw::
     ld b, h
     ld c, l
     ld a, l
-    and $f8
+    and %11111000
     srl a
     srl a
     ld e, a
-    ld d, $00
+    ld d, 0
     ld a, [w_cd6d]
     ld l, a
     ld a, [w_cd6e]
@@ -814,17 +814,17 @@ vwf_char_draw::
     ld h, [hl]
     ld l, a
     ld a, b
-    and $f8
+    and %11111000
     srl a
     srl a
     ld e, a
-    ld d, $00
+    ld d, 0
     add hl, de
     ld a, [hl+]
     ld h, [hl]
     ld l, a
     ld a, c
-    and $07
+    and %00000111
     sla a
     add l
     ld l, a
@@ -875,7 +875,7 @@ vwf_char_draw::
     add $0f
     ld c, a
     ld a, b
-    adc $00
+    adc 0
     ld b, a
     pop af
 
@@ -900,14 +900,14 @@ vwf_char_draw::
     inc bc
     inc bc
     ld a, c
-    and $0f
+    and %00001111
     jr nz, .jr_000_09bc
 
     ld a, c
     add $f0
     ld c, a
     ld a, b
-    adc $00
+    adc 0
     ld b, a
 
 .jr_000_09bc
@@ -1150,7 +1150,7 @@ function_00_0d91::
     ld [rROMB0], a
     ld a, l
 .skip_bankswitch
-    call $4000
+    call $4000 ; ???
     pop hl
     pop bc
     jr nc, .done
@@ -1209,12 +1209,12 @@ vram_copy::
 
 .wait_vblank
     ldh a, [rSTAT]
-    and $03
+    and STATF_LCD
     jr z, .wait_vblank
 
 .in_vblank
     ldh a, [rSTAT]
-    and $03
+    and STATF_LCD
     jr nz, .in_vblank
 
     ld a, [hl+]

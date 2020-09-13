@@ -30,3 +30,30 @@ level_name_textbox_clear:
     cp 11
     jp nz, .loop
     ret
+
+SECTION "function_01_6306", ROMX[$6306], BANK[$01]
+function_01_6306::
+    ld c, 16
+.loop
+    push bc
+    push hl
+    push de
+    push af
+    ld bc, 8 tiles
+    call vram_copy
+    farcall function_05_7089
+    pop af
+    pop de
+    pop hl
+    push hl
+    ld hl, 8 tiles
+    add hl, de
+    ld e, l
+    ld d, h
+    pop hl
+    ld bc, 8 tiles
+    add hl, bc
+    pop bc
+    dec c
+    jp nz, .loop
+    ret
