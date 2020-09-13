@@ -281,6 +281,7 @@ GAMEOVERになるかも
 
 # Empty
 [message_02_693c]
+{}
 
 [tutorial_message_04]
 ただしくけずることが　できたら{TX_LF}

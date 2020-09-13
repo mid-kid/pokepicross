@@ -8,3 +8,8 @@ data += $(dir_build)/data/messages.asm
 objects += $(dir_build)/data/messages.o
 $(dir_build)/data/messages.asm: data/charmap.txt data/messages.txt | $$(dir $$@)
 	./tools/messages.py $^ > $@
+
+data += $(dir_build)/data/strings.asm
+objects += $(dir_build)/data/strings.o
+$(dir_build)/data/strings.asm: data/charmap.txt data/strings.txt | $$(dir $$@)
+	./tools/messages.py $^ > $@

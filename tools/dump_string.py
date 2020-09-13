@@ -5,6 +5,11 @@ from charmap import parse_charmap
 
 file = open("DMGAKVJ0.1", "rb").read()
 
+multistring = False
+if argv[1] == "-m":
+    argv.pop(1)
+    multistring = True
+
 bank = int(argv[1], 16)
 addr = int(argv[2], 16)
 count = 1
@@ -28,19 +33,32 @@ for x in range(count):
     if bank > 0:
         addr += 0x4000
 
-    print("[message_%02x_%04x]" % (bank, addr))
+    print("[string_%02x_%04x]" % (bank, addr))
     while True:
-        value = file[offset] | (file[offset + 1] << 8)
-        offset += 2
+        if multistring:
+            if file[offset] == 0:
+                offset += 1
+                print("\n.db 0\n")
+                break
+            val = file[offset] | (file[offset + 1] << 8)
+            print(".dw %d" % val)
+            offset += 2
 
-        if value == 0xffff:
+        while True:
+            value = file[offset] | (file[offset + 1] << 8)
+            offset += 2
+
+            if value == 0xffff:
+                break
+            elif value == 0xfffe:
+                print()
+                continue
+
+            if value in charmap:
+                print(charmap[value], end="")
+            else:
+                print("<%02x>" % value, end="")
+
+        if not multistring:
             print("\n")
             break
-        elif value == 0xfffe:
-            print()
-            continue
-
-        if value in charmap:
-            print(charmap[value], end="")
-        else:
-            print("<%02x>" % value, end="")

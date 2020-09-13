@@ -21,6 +21,9 @@ def convert_message(message):
             continue
         break
 
+    if not message:
+        return None
+
     values = []
     in_braces = False
     constant = ""
@@ -31,12 +34,13 @@ def convert_message(message):
             continue
         if char == "}" and in_braces:
             in_braces = False
-            if constant in constants:
-                values.append(constants[constant])
-            elif constant in charmap:
-                values.append(charmap[constant])
-            else:
-                err("%s: Unrecognized constant %s" % (filename, constant))
+            if constant:
+                if constant in constants:
+                    values.append(constants[constant])
+                elif constant in charmap:
+                    values.append(charmap[constant])
+                else:
+                    err("%s: Unrecognized constant %s" % (filename, constant))
             continue
 
         if in_braces:
@@ -57,8 +61,16 @@ def convert_message(message):
     values.append(0xffff)
     return "    dw " + ", ".join(["$%04x" % val for val in values])
 
-name = None
 message = None
+def print_message():
+    global message
+    if message is not None:
+        text = convert_message(message)
+        if text is not None:
+            print(text)
+    message = ""
+
+has_val = False
 for i, line in enumerate(open(filename)):
     if i == 0 and not line.startswith(".org"):
         print("SECTION \"%s\", ROMX" % filename)
@@ -67,11 +79,22 @@ for i, line in enumerate(open(filename)):
         continue
 
     if line.startswith("[") and line.endswith("]\n"):
-        if name is not None or message is not None:
-            print("\n%s::" % name)
-            print(convert_message(message))
-        name = line[1:-2]
-        message = ""
+        print_message()
+        if has_val:
+            print("    db $00")
+            has_val = False
+        print("\n%s::" % line[1:-2])
+        continue
+
+    if line.startswith(".val "):
+        split = line.split(" ", 1)
+        if len(split) < 2:
+            continue
+        value = int(split[1].strip(), 0)
+
+        print_message()
+        print("    dw $%04x" % value)
+        has_val = True
         continue
 
     if line.startswith(".org "):
@@ -84,10 +107,10 @@ for i, line in enumerate(open(filename)):
         bank = split[0]
         addr = split[1]
 
-        if name is not None or message is not None:
-            print("\n%s::" % name)
-            print(convert_message(message))
-        name = None
+        print_message()
+        if has_val:
+            print("    db $00")
+            has_val = False
         message = None
 
         if i != 0:
@@ -99,6 +122,6 @@ for i, line in enumerate(open(filename)):
     if message is not None:
         message += line
 
-if name is not None and message is not None:
-    print("\n%s::" % name)
-    print(convert_message(message))
+print_message()
+if has_val:
+    print("    db $00")
