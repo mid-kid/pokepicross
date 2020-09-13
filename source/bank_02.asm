@@ -2,24 +2,24 @@ INCLUDE "charmap.inc"
 INCLUDE "macros.inc"
 
 SECTION "text_char", ROMX[$4bf7], BANK[$02]
-far_text_char_print::
-    farcall text_char_print
+far_textbox_print_char::
+    farcall textbox_print_char
     jp farcall_ret
 
 ; Returns:
 ; flags - z if reached end of string
-text_char_print::
+textbox_print_char::
     ld a, [w_c342]
     bit 0, a
     jp nz, farcall_ret
 
-    ld a, [w_text_cur_string + 0]
+    ld a, [w_textbox_cur_string + 0]
     ld l, a
-    ld a, [w_text_cur_string + 1]
+    ld a, [w_textbox_cur_string + 1]
     ld h, a
-    ld a, [w_text_cur_x]
+    ld a, [w_textbox_cur_x]
     ld b, a
-    ld a, [w_text_cur_y]
+    ld a, [w_textbox_cur_y]
     ld c, a
     ld a, [hl+]
     ld e, a
@@ -52,10 +52,10 @@ text_char_print::
 .not_pi
 
     ; Draw character
-    farcall text_char_draw
+    farcall textbox_draw_char
 
     ; Leave two pixels space between each character
-    ld hl, w_text_cur_x
+    ld hl, w_textbox_cur_x
     add 2
     add [hl]
     ld [hl], a
@@ -64,18 +64,18 @@ text_char_print::
 .line_feed
     ; Advance to the next line
     ld a, [w_textbox_x]
-    ld [w_text_cur_x], a
-    ld a, [w_text_cur_y]
+    ld [w_textbox_cur_x], a
+    ld a, [w_textbox_cur_y]
     add 11
-    ld [w_text_cur_y], a
+    ld [w_textbox_cur_y], a
 
 .done
     ; Back up string pointer
     pop hl
     ld a, l
-    ld [w_text_cur_string + 0], a
+    ld [w_textbox_cur_string + 0], a
     ld a, h
-    ld [w_text_cur_string + 1], a
+    ld [w_textbox_cur_string + 1], a
 
     ; Check if the next character is a terminator
     ld a, [hl+]
@@ -89,7 +89,7 @@ text_char_print::
 ; de - character to print
 ; b - x position
 ; c - y position
-text_char_draw::
+textbox_draw_char::
     push de
 
     ; Get char address
@@ -146,20 +146,20 @@ text_char_draw::
     pop af
     jp farcall_ret
 
-SECTION "text_delay", ROMX[$5b7a], BANK[$02]
-text_delay::
+SECTION "textbox_delay", ROMX[$5b7a], BANK[$02]
+textbox_delay::
     ld a, [w_c343]
     bit 4, a
     jr nz, .no_blink
-    ld a, [w_text_cur_x]
+    ld a, [w_textbox_cur_x]
     sub 3
     ld b, a
-    ld a, [w_text_cur_y]
+    ld a, [w_textbox_cur_y]
     inc a
     ld c, a
     ld a, $e9
     call function_00_208c
 .no_blink
-    ld hl, w_text_delay_timer
+    ld hl, w_textbox_delay_timer
     dec [hl]
     jp farcall_ret

@@ -45,15 +45,15 @@ function_05_4028:
 
     ld a, 13
     ld [w_textbox_x], a
-    ld [w_text_cur_x], a
+    ld [w_textbox_cur_x], a
     ld a, 95
     ld [w_textbox_y], a
-    ld [w_text_cur_y], a
+    ld [w_textbox_cur_y], a
     ld a, 147
     ld [w_textbox_width], a
     ld a, 141
     ld [w_textbox_height], a
-    ld16 w_text_cur_string, tutorial_message_00
+    ld16 w_textbox_cur_string, tutorial_message_00
     ld a, $01
     ld [w_d6ca], a
     ld a, [w_d61b]
@@ -220,7 +220,7 @@ tutorial_scene_00:
 tutorial_scene_01:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -230,7 +230,7 @@ tutorial_scene_01:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_01
+    ld16 w_textbox_cur_string, tutorial_message_01
 
     xor a
     ld [w_cdb0], a
@@ -243,7 +243,7 @@ tutorial_scene_01:
     ld a, $05
     ld [w_cdb3], a
     ld a, 60
-    ld [w_text_delay_timer], a
+    ld [w_textbox_delay_timer], a
     farcall function_02_5b67
 
     ld hl, w_tutorial_scene
@@ -258,7 +258,7 @@ tutorial_scene_02:
     call function_00_17fb
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld hl, w_tutorial_scene
@@ -269,10 +269,10 @@ tutorial_scene_03:
     ld a, $00
     call function_00_17fb
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     jp nz, farcall_ret
 
-    ld16 w_text_cur_string, tutorial_message_02
+    ld16 w_textbox_cur_string, tutorial_message_02
 
     xor a
     ld [w_cdb0], a
@@ -285,7 +285,7 @@ tutorial_scene_03:
     ld a, $05
     ld [w_cdb3], a
     ld a, 60
-    ld [w_text_delay_timer], a
+    ld [w_textbox_delay_timer], a
     farcall function_02_5b67
 
     ld hl, w_tutorial_scene
@@ -297,7 +297,7 @@ tutorial_scene_04:
     call function_00_17fb
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld hl, w_tutorial_scene
@@ -308,10 +308,10 @@ tutorial_scene_05:
     ld a, $00
     call function_00_17fb
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     jp nz, farcall_ret
 
-    ld16 w_text_cur_string, tutorial_message_03
+    ld16 w_textbox_cur_string, tutorial_message_03
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -320,7 +320,7 @@ tutorial_scene_05:
 tutorial_scene_06:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -330,9 +330,9 @@ tutorial_scene_06:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_04
+    ld16 w_textbox_cur_string, tutorial_message_04
     ld a, 10
-    ld [w_text_delay_timer], a
+    ld [w_textbox_delay_timer], a
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -341,7 +341,7 @@ tutorial_scene_06:
 tutorial_scene_07:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld hl, w_tutorial_scene
@@ -350,7 +350,7 @@ tutorial_scene_07:
 
 tutorial_scene_08:
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     jp nz, farcall_ret
 
     ld hl, w_tutorial_scene
@@ -360,7 +360,7 @@ tutorial_scene_08:
 tutorial_scene_09:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     xor a
@@ -380,7 +380,7 @@ tutorial_scene_09:
 
 tutorial_scene_10:
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     farcall function_05_5f2f
     jp nz, farcall_ret
 
@@ -389,10 +389,10 @@ tutorial_scene_10:
     farcall function_06_4964
     farcall function_29_4ef5
     ld a, 10
-    ld [w_text_delay_timer], a
+    ld [w_textbox_delay_timer], a
     farcall function_02_5b67
 
-    ld16 w_text_cur_string, tutorial_message_05
+    ld16 w_textbox_cur_string, tutorial_message_05
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -402,7 +402,7 @@ tutorial_scene_11:
     farcall function_06_4964
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -413,7 +413,7 @@ tutorial_scene_11:
     farcall function_06_4964
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_06
+    ld16 w_textbox_cur_string, tutorial_message_06
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -423,7 +423,7 @@ tutorial_scene_12:
     farcall function_06_4964
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -435,7 +435,7 @@ tutorial_scene_12:
     farcall function_02_5560
     farcall function_02_5a82
 
-    ld16 w_text_cur_string, tutorial_message_07
+    ld16 w_textbox_cur_string, tutorial_message_07
 
     xor a
     ld [w_cdb0], a
@@ -448,7 +448,7 @@ tutorial_scene_12:
     ld a, $05
     ld [w_cdb3], a
     ld a, 60
-    ld [w_text_delay_timer], a
+    ld [w_textbox_delay_timer], a
     farcall function_02_5b67
 
     ld hl, w_tutorial_scene
@@ -460,7 +460,7 @@ tutorial_scene_13:
     call function_00_17fb
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld hl, w_tutorial_scene
@@ -471,10 +471,10 @@ tutorial_scene_14:
     ld a, $00
     call function_00_17fb
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     jp nz, farcall_ret
 
-    ld16 w_text_cur_string, tutorial_message_08
+    ld16 w_textbox_cur_string, tutorial_message_08
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -483,7 +483,7 @@ tutorial_scene_14:
 tutorial_scene_15:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -493,7 +493,7 @@ tutorial_scene_15:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_09
+    ld16 w_textbox_cur_string, tutorial_message_09
 
     xor a
     ld [w_cdb0], a
@@ -506,7 +506,7 @@ tutorial_scene_15:
     ld a, $05
     ld [w_cdb3], a
     ld a, 60
-    ld [w_text_delay_timer], a
+    ld [w_textbox_delay_timer], a
     farcall function_02_5b67
 
     ld hl, w_tutorial_scene
@@ -521,7 +521,7 @@ tutorial_scene_16:
     farcall function_02_56c0
     ld a, $00
     call function_00_17fb
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld hl, w_tutorial_scene
@@ -532,10 +532,10 @@ tutorial_scene_17:
     farcall function_29_5de4
     ld a, $00
     call function_00_17fb
-    farcall text_delay
+    farcall textbox_delay
     jp nz, farcall_ret
 
-    ld16 w_text_cur_string, tutorial_message_10
+    ld16 w_textbox_cur_string, tutorial_message_10
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -544,7 +544,7 @@ tutorial_scene_17:
 tutorial_scene_18:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     xor a
@@ -568,7 +568,7 @@ tutorial_scene_18:
 
 tutorial_scene_19:
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     farcall function_05_5f2f
     jp nz, farcall_ret
 
@@ -593,9 +593,9 @@ tutorial_scene_19:
     ld a, $05
     ld [w_cdb3], a
     ld a, 60
-    ld [w_text_delay_timer], a
+    ld [w_textbox_delay_timer], a
 
-    ld16 w_text_cur_string, tutorial_message_11
+    ld16 w_textbox_cur_string, tutorial_message_11
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -606,7 +606,7 @@ tutorial_scene_20:
     farcall function_02_56c0
     ld a, $00
     call function_00_17fb
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld hl, w_tutorial_scene
@@ -617,10 +617,10 @@ tutorial_scene_21:
     farcall function_29_5de4
     ld a, $00
     call function_00_17fb
-    farcall text_delay
+    farcall textbox_delay
     jp nz, farcall_ret
 
-    ld16 w_text_cur_string, tutorial_message_12
+    ld16 w_textbox_cur_string, tutorial_message_12
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -629,14 +629,14 @@ tutorial_scene_21:
 tutorial_scene_22:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
     ld hl, function_02_5b77
     farcall wait_press_a_blink
 
-    ld16 w_text_cur_string, tutorial_message_13
+    ld16 w_textbox_cur_string, tutorial_message_13
 
     call function_00_1085
     farcall function_02_5b98
@@ -652,7 +652,7 @@ tutorial_scene_22:
     ld a, $05
     ld [w_cdb3], a
     ld a, 60
-    ld [w_text_delay_timer], a
+    ld [w_textbox_delay_timer], a
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -666,7 +666,7 @@ tutorial_scene_23:
     farcall function_02_56c0
     ld a, $00
     call function_00_17fb
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld hl, w_tutorial_scene
@@ -677,10 +677,10 @@ tutorial_scene_24:
     farcall function_29_5de4
     ld a, $00
     call function_00_17fb
-    farcall text_delay
+    farcall textbox_delay
     jp nz, farcall_ret
 
-    ld16 w_text_cur_string, tutorial_message_14
+    ld16 w_textbox_cur_string, tutorial_message_14
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -689,7 +689,7 @@ tutorial_scene_24:
 tutorial_scene_25:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     xor a
@@ -713,7 +713,7 @@ tutorial_scene_25:
 
 tutorial_scene_26:
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     farcall function_05_5f2f
     jp nz, farcall_ret
 
@@ -727,7 +727,7 @@ tutorial_scene_26:
     ld hl, w_tutorial_scene
     inc [hl]
 
-    ld16 w_text_cur_string, tutorial_message_15
+    ld16 w_textbox_cur_string, tutorial_message_15
 
     call function_00_1085
     farcall function_02_5b98
@@ -736,7 +736,7 @@ tutorial_scene_26:
 tutorial_scene_27:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, $00
@@ -747,7 +747,7 @@ tutorial_scene_27:
 
 tutorial_scene_28:
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     farcall function_02_58fe
 
     ld hl, w_cdfd
@@ -763,7 +763,7 @@ tutorial_scene_28:
     ld [w_ce00], a
     farcall function_3c_4377
 
-    ld16 w_text_cur_string, tutorial_message_16
+    ld16 w_textbox_cur_string, tutorial_message_16
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -772,7 +772,7 @@ tutorial_scene_28:
 tutorial_scene_29:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -782,7 +782,7 @@ tutorial_scene_29:
     ld hl, w_tutorial_scene
     inc [hl]
 
-    ld16 w_text_cur_string, tutorial_message_17
+    ld16 w_textbox_cur_string, tutorial_message_17
 
     call function_00_1085
     farcall function_02_5b98
@@ -793,7 +793,7 @@ tutorial_scene_29:
 tutorial_scene_30:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     xor a
@@ -817,7 +817,7 @@ tutorial_scene_30:
 
 tutorial_scene_31:
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     farcall function_05_5f2f
     jp nz, farcall_ret
 
@@ -827,14 +827,14 @@ tutorial_scene_31:
 
 tutorial_scene_32:
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     ld a, [$cde0]
     and a
     jp nz, farcall_ret
 
     call function_00_1085
 
-    ld16 w_text_cur_string, tutorial_message_18
+    ld16 w_textbox_cur_string, tutorial_message_18
 
     ld a, $01
     ld [w_d6ca], a
@@ -846,7 +846,7 @@ tutorial_scene_32:
 tutorial_scene_33:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -856,7 +856,7 @@ tutorial_scene_33:
     ld hl, w_tutorial_scene
     inc [hl]
 
-    ld16 w_text_cur_string, tutorial_message_19
+    ld16 w_textbox_cur_string, tutorial_message_19
 
     call function_00_1085
     farcall function_02_5b98
@@ -865,7 +865,7 @@ tutorial_scene_33:
 tutorial_scene_34:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, $00
@@ -889,7 +889,7 @@ tutorial_scene_34:
 
 tutorial_scene_35:
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     farcall function_05_5f2f
     jp nz, farcall_ret
 
@@ -908,7 +908,7 @@ tutorial_scene_35:
     farcall function_02_5a82
     farcall function_29_7421
 
-    ld16 w_text_cur_string, tutorial_message_20
+    ld16 w_textbox_cur_string, tutorial_message_20
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -917,7 +917,7 @@ tutorial_scene_35:
 tutorial_scene_36:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, $01
@@ -949,7 +949,7 @@ tutorial_scene_36:
 
 tutorial_scene_37:
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     farcall function_05_5f2f
     jp nz, farcall_ret
 
@@ -960,7 +960,7 @@ tutorial_scene_37:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_21
+    ld16 w_textbox_cur_string, tutorial_message_21
 
     ld a, $01
     ld [w_c329], a
@@ -977,7 +977,7 @@ tutorial_scene_38:
     ld [hl+], a
     ld [hl], a
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -993,12 +993,12 @@ tutorial_scene_38:
 
 tutorial_scene_39:
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     ld a, [w_d536]
     cp $3f
     jp c, farcall_ret
 
-    ld16 w_text_cur_string, tutorial_message_22
+    ld16 w_textbox_cur_string, tutorial_message_22
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1011,7 +1011,7 @@ tutorial_scene_40:
     ld [hl+], a
     ld [hl], a
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -1027,12 +1027,12 @@ tutorial_scene_40:
 
 tutorial_scene_41:
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     ld a, [w_d537]
     cp $3f
     jp c, farcall_ret
 
-    ld16 w_text_cur_string, tutorial_message_23
+    ld16 w_textbox_cur_string, tutorial_message_23
 
     call function_00_1085
     farcall function_02_5b98
@@ -1046,7 +1046,7 @@ tutorial_scene_42:
     farcall function_09_5a50
     farcall function_08_42b8
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     farcall function_22_61e8
@@ -1057,7 +1057,7 @@ tutorial_scene_42:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_24
+    ld16 w_textbox_cur_string, tutorial_message_24
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1066,7 +1066,7 @@ tutorial_scene_42:
 tutorial_scene_43:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -1077,7 +1077,7 @@ tutorial_scene_43:
     farcall function_02_5b98
     farcall function_02_5a82
 
-    ld16 w_text_cur_string, tutorial_message_25
+    ld16 w_textbox_cur_string, tutorial_message_25
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1086,7 +1086,7 @@ tutorial_scene_43:
 tutorial_scene_44:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     xor a
@@ -1108,7 +1108,7 @@ tutorial_scene_44:
 
 tutorial_scene_45:
     farcall function_29_5de4
-    farcall text_delay
+    farcall textbox_delay
     farcall function_05_5f2f
     jp nz, farcall_ret
 
@@ -1118,7 +1118,7 @@ tutorial_scene_45:
     ld hl, function_02_5b77
     farcall wait_press_a_blink
 
-    ld16 w_text_cur_string, tutorial_message_26
+    ld16 w_textbox_cur_string, tutorial_message_26
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1127,7 +1127,7 @@ tutorial_scene_45:
 tutorial_scene_46:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -1142,7 +1142,7 @@ tutorial_scene_46:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_27
+    ld16 w_textbox_cur_string, tutorial_message_27
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1151,7 +1151,7 @@ tutorial_scene_46:
 tutorial_scene_47:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -1161,7 +1161,7 @@ tutorial_scene_47:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_28
+    ld16 w_textbox_cur_string, tutorial_message_28
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1174,7 +1174,7 @@ tutorial_scene_48:
     ld [w_c32c], a
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     xor a
@@ -1194,7 +1194,7 @@ tutorial_scene_48:
     farcall function_02_5b98
     farcall function_02_5a82
 
-    ld16 w_text_cur_string, tutorial_message_29
+    ld16 w_textbox_cur_string, tutorial_message_29
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1203,7 +1203,7 @@ tutorial_scene_48:
 tutorial_scene_49:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -1213,7 +1213,7 @@ tutorial_scene_49:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_30
+    ld16 w_textbox_cur_string, tutorial_message_30
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1222,7 +1222,7 @@ tutorial_scene_49:
 tutorial_scene_50:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -1232,7 +1232,7 @@ tutorial_scene_50:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_31
+    ld16 w_textbox_cur_string, tutorial_message_31
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1241,7 +1241,7 @@ tutorial_scene_50:
 tutorial_scene_51:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -1251,7 +1251,7 @@ tutorial_scene_51:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_32
+    ld16 w_textbox_cur_string, tutorial_message_32
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1260,14 +1260,14 @@ tutorial_scene_51:
 tutorial_scene_52:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld hl, w_tutorial_scene
     inc [hl]
 
     ld a, 120
-    ld [w_text_delay_timer], a
+    ld [w_textbox_delay_timer], a
     xor a
     ld [w_cdb0], a
     ld [w_cdaf], a
@@ -1287,7 +1287,7 @@ tutorial_data_5b4e:
 tutorial_scene_53:
     ld a, $00
     call function_00_17fb
-    farcall text_delay
+    farcall textbox_delay
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -1297,7 +1297,7 @@ tutorial_scene_53:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_33
+    ld16 w_textbox_cur_string, tutorial_message_33
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1306,7 +1306,7 @@ tutorial_scene_53:
 tutorial_scene_54:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld hl, w_tutorial_scene
@@ -1320,7 +1320,7 @@ tutorial_scene_54:
     farcall function_27_4bf4
 
     ld a, 120
-    ld [w_text_delay_timer], a
+    ld [w_textbox_delay_timer], a
     xor a
     ld [w_cdb0], a
     ld [w_cdaf], a
@@ -1336,7 +1336,7 @@ tutorial_scene_54:
 tutorial_scene_55:
     ld a, $00
     call function_00_17fb
-    farcall text_delay
+    farcall textbox_delay
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -1346,7 +1346,7 @@ tutorial_scene_55:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_34
+    ld16 w_textbox_cur_string, tutorial_message_34
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1355,7 +1355,7 @@ tutorial_scene_55:
 tutorial_scene_56:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -1365,7 +1365,7 @@ tutorial_scene_56:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_35
+    ld16 w_textbox_cur_string, tutorial_message_35
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1374,7 +1374,7 @@ tutorial_scene_56:
 tutorial_scene_57:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -1384,7 +1384,7 @@ tutorial_scene_57:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_36
+    ld16 w_textbox_cur_string, tutorial_message_36
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1393,7 +1393,7 @@ tutorial_scene_57:
 tutorial_scene_58:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -1403,7 +1403,7 @@ tutorial_scene_58:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_37
+    ld16 w_textbox_cur_string, tutorial_message_37
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1412,7 +1412,7 @@ tutorial_scene_58:
 tutorial_scene_59:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)
@@ -1422,7 +1422,7 @@ tutorial_scene_59:
     call function_00_1085
     farcall function_02_5b98
 
-    ld16 w_text_cur_string, tutorial_message_38
+    ld16 w_textbox_cur_string, tutorial_message_38
 
     ld hl, w_tutorial_scene
     inc [hl]
@@ -1431,7 +1431,7 @@ tutorial_scene_59:
 tutorial_scene_60:
     farcall function_29_5de4
     farcall function_02_56c0
-    farcall far_text_char_print
+    farcall far_textbox_print_char
     jp nz, farcall_ret
 
     ld a, BANK(function_02_5b77)

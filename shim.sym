@@ -42,6 +42,7 @@
 
 08:42b8 function_08_42b8
 
+09:4000 string_table
 09:5a50 function_09_5a50
 
 22:47e2 function_22_47e2
@@ -57,6 +58,8 @@
 29:7421 function_29_7421
 
 3c:4377 function_3c_4377
+
+7b:41e0 gfx_blank_char
 
 00:a03e s_a03e
 00:a040 s_a040
@@ -156,7 +159,9 @@
 00:cdd2 w_cdd2_jumptable_index ; db
 00:cdd6 w_cdd6
 00:cdd7 w_cdd7
-00:cdf8 w_text_delay_timer ; db
+00:cdea w_text_pos_x ; db
+00:cdec w_text_pos_y ; db
+00:cdf8 w_textbox_delay_timer ; db
 00:cdfc w_cdfc
 00:cdfd w_cdfd ; ds ??
 00:cde0 w_cde0
@@ -171,9 +176,9 @@
 01:d536 w_d536
 01:d537 w_d537
 01:d538 w_d538 ; dw
-01:d548 w_text_cur_string ; dw
-01:d546 w_text_cur_x ; db
-01:d547 w_text_cur_y ; db
+01:d548 w_textbox_cur_string ; dw
+01:d546 w_textbox_cur_x ; db
+01:d547 w_textbox_cur_y ; db
 01:d54a w_d54a
 01:d54b w_d54b
 01:d54c w_d54c ; dw
@@ -186,6 +191,7 @@
 01:d568 w_d568
 01:d60f w_d60f
 01:d61b w_d61b
+01:d625 w_text_index ; dw
 01:d62d w_d62d
 01:d630 w_d630
 01:d641 w_tutorial_scene ; db
@@ -194,6 +200,7 @@
 01:d6b5 w_d6b5
 01:d6c9 w_d6c9
 01:d6ca w_d6ca
+01:dbe4 w_dbe4 ; db
 01:df3f w_df3f ; ds 3
 01:df47 w_df47
 01:df62 w_df62

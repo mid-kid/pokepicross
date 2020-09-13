@@ -1,3 +1,4 @@
+INCLUDE "charmap.inc"
 INCLUDE "hardware.inc"
 INCLUDE "macros.inc"
 
@@ -1334,6 +1335,141 @@ function_00_1120::
     ld a, b
     or c
     jr nz, function_00_1120
+    ret
+
+SECTION "home_text", ROM0[$1883]
+text_print::
+    ld a, [w_bank_rom]
+    push af
+    ld a, BANK(string_table)
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+
+    ; Get string address
+    ld hl, string_table
+    ld a, [w_text_index + 0]
+    ld c, a
+    ld a, [w_text_index + 1]
+    ld b, a
+    sla c
+    rl b
+    add hl, bc
+    ld a, [hl+]
+    ld h, [hl]
+    ld l, a
+
+.loop
+    ld a, [hl]
+    and a
+    jr z, .done
+
+    ; Get text cooredinates
+    ld a, [w_text_pos_x]
+    ld b, a
+    inc hl
+    ld a, [w_text_pos_y]
+    inc a
+    inc a
+    ld c, a
+    inc hl
+
+.string_loop
+    ld a, [hl+]
+    ld e, a
+    ld a, [hl+]
+    ld d, a
+    and e
+    cp LOW(TX_END)
+    jr z, .loop
+
+    push bc
+    push hl
+    call text_draw_char
+    pop hl
+    pop bc
+
+    ; Leave one pixel between each character
+    add b
+    inc a
+    ld b, a
+    jr .string_loop
+
+.done
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    ret
+
+; Returns:
+; a - character width
+; Parameters:
+; de - character to print
+; b - x position
+; c - y position
+text_draw_char:
+    ld a, [w_bank_rom]
+    push af
+    ld a, BANK(text_chars_offsets)
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    push de
+
+    ; Get char address
+    sla e
+    rl d
+    ld hl, text_chars_offsets
+    add hl, de
+    ld e, [hl]
+    inc hl
+    ld d, [hl]
+    ld hl, gfx_text_chars_bw
+    add hl, de
+    ld a, l
+    ld [w_vwf_char_addr + 0], a
+    ld a, h
+    ld [w_vwf_char_addr + 1], a
+    ld a, BANK(gfx_text_chars_bw)
+    ld [w_vwf_char_bank], a
+
+    ld a, b
+    ld [w_vwf_char_start_x], a
+
+    ; Get character width
+    pop de
+    ld hl, text_chars_widths
+    add hl, de
+    ld a, [hl]
+    and a
+    jr z, .done
+    push af
+    add b
+    ld [w_vwf_char_end_x], a
+
+    ; Draw ピ one pixel higher
+    ld a, e
+    cp "ピ"
+    jr nz, .not_pi
+    ld a, d
+    and a
+    jr nz, .not_pi
+    dec c
+.not_pi
+
+    ; Set y coordinates for the character
+    ld a, c
+    ld [w_vwf_char_start_y], a
+    add 9
+    ld [w_vwf_char_end_y], a
+
+    call vwf_char_draw
+    pop af
+
+.done
+    ld e, a
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    ld a, e
     ret
 
 SECTION "function_00_24b7", ROM0[$24b7]
