@@ -59,6 +59,10 @@
 
 3c:4377 function_3c_4377
 
+6c:7eec compressed_tilemap_6c_7eec
+
+75:7d35 compressed_gfx_75_7d35
+
 7b:41e0 gfx_blank_char
 
 00:a03e s_a03e
@@ -88,6 +92,7 @@
 00:c318 w_farcall_target_high
 00:c31e w_bank_temp ; db
 
+00:c300 w_c300
 00:c301 w_c301
 00:c314 w_c314
 00:c316 w_c316

@@ -1472,6 +1472,71 @@ text_draw_char:
     ld a, e
     ret
 
+SECTION "decompress", ROM0[$20cf]
+decompress::
+; Parameters:
+; hl - source
+; de - dest
+; bc - length (not the actual source or dest length)
+    ld [w_bank_temp], a
+    ld a, [w_bank_rom]
+    push af
+    ld a, [w_bank_temp]
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+
+    xor a
+    ld [w_c300], a
+
+.main_loop
+    push bc
+    ld a, [hl+]
+    bit 7, a
+    jr nz, .alternating
+
+; uses the next a + 1 bytes of compressed data
+; to output a + 1 bytes of decompressed data
+    inc a
+    ld c, a
+    ld a, [w_c300]
+.seq_loop
+    xor [hl]
+    ld [de], a
+    inc hl
+    inc de
+    dec c
+    jr nz, .seq_loop
+    ld [w_c300], a
+    jr .next
+
+; uses the next one byte of compressed data
+; to output a - $7e bytes of decompressed data,
+; alternating between two different values
+.alternating
+    sub $7e
+    ld c, a
+    ld a, [w_c300]
+.alt_loop
+    xor [hl]
+    ld [de], a
+    inc de
+    dec c
+    jr nz, .alt_loop
+    ld [w_c300], a
+    inc hl
+
+.next
+    pop bc
+    dec bc
+    ld a, c
+    or b
+    jr nz, .main_loop
+
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    ret
+
 SECTION "function_00_24b7", ROM0[$24b7]
 function_00_24b7::
     xor a
