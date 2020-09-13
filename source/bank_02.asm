@@ -28,7 +28,7 @@ textbox_print_char::
     ; Check if we've reached the end of the string
     ld d, a
     and e
-    cp LOW(TX_END)
+    cp TX_END
     jp z, farcall_ret
     push hl
 
@@ -80,7 +80,7 @@ textbox_print_char::
     ; Check if the next character is a terminator
     ld a, [hl+]
     and [hl]
-    cp LOW(TX_END)
+    cp TX_END
     jp farcall_ret
 
 ; Returns:

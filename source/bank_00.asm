@@ -1379,7 +1379,7 @@ text_print::
     ld a, [hl+]
     ld d, a
     and e
-    cp LOW(TX_END)
+    cp TX_END
     jr z, .loop
 
     push bc
