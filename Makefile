@@ -3,10 +3,11 @@ baserom := DMGAKVJ0.1
 
 dir_build := build
 
-RGBASM := rgbasm
-RGBGFX := rgbgfx
-RGBLINK := rgblink
-RGBFIX := rgbfix
+RGBDS ?=
+RGBASM  ?= $(RGBDS)rgbasm
+RGBFIX  ?= $(RGBDS)rgbfix
+RGBGFX  ?= $(RGBDS)rgbgfx
+RGBLINK ?= $(RGBDS)rgblink
 
 RGBASMFLAGS := -p 0xff -L -h -E
 RGBLINKFLAGS := -p 0xff -d
