@@ -1341,12 +1341,12 @@ SECTION "home_text", ROM0[$1883]
 text_print::
     ld a, [w_bank_rom]
     push af
-    ld a, BANK(string_table)
+    ld a, BANK(strings_pointers)
     ld [w_bank_rom], a
     ld [rROMB0], a
 
     ; Get string address
-    ld hl, string_table
+    ld hl, strings_pointers
     ld a, [w_text_index + 0]
     ld c, a
     ld a, [w_text_index + 1]
