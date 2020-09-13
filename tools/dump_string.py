@@ -46,7 +46,7 @@ for x in range(count):
         if multistring:
             if file[offset] == 0:
                 offset += 1
-                print("\"\n    db 0\n")
+                print("    db 0\n")
                 break
             val = file[offset] | (file[offset + 1] << 8)
             print("    dw %d" % val)
@@ -68,6 +68,7 @@ for x in range(count):
             else:
                 print("<%02x>" % value, end="")
 
+        print("\"\n    done")
         if not multistring:
-            print("\"\n")
+            print()
             break
