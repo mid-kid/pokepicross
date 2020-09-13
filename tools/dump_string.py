@@ -33,7 +33,8 @@ for line in open("include/charmap.inc"):
             continue
         char = char[1:-1]
 
-        charmap[value] = char
+        if value not in charmap:
+            charmap[value] = char
 
 for x in range(count):
     bank = offset // 0x4000
