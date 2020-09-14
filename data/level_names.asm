@@ -1,8 +1,8 @@
 INCLUDE "text.inc"
 
-SECTION "strings", ROMX[$4000], BANK[$09]
+SECTION "level_names", ROMX[$4000], BANK[$09]
 
-strings_pointers::
+level_names::
     dw level_name_pokedex
     dw level_name_town_map
     dw level_name_slot_machine

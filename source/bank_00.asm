@@ -1338,18 +1338,18 @@ function_00_1120::
     ret
 
 SECTION "home_text", ROM0[$1883]
-text_print::
+level_name_print::
     ld a, [w_bank_rom]
     push af
-    ld a, BANK(strings_pointers)
+    ld a, BANK(level_names)
     ld [w_bank_rom], a
     ld [rROMB0], a
 
     ; Get string address
-    ld hl, strings_pointers
-    ld a, [w_text_index + 0]
+    ld hl, level_names
+    ld a, [w_level_index + 0]
     ld c, a
-    ld a, [w_text_index + 1]
+    ld a, [w_level_index + 1]
     ld b, a
     sla c
     rl b
