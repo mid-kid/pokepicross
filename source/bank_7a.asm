@@ -7,3 +7,8 @@ INCBIN "gfx/title/title.tilemap"
 attrmap_title::
 INCBIN "gfx/title/title.attrmap"
 .end::
+
+SECTION "compressed_tilemap_attrmap_pokemon_picross", ROMX[$7d18], BANK[$7a]
+compressed_tilemap_attrmap_pokemon_picross::
+INCBIN "gfx/game_select/pokemon_picross.tilemap_attrmap.xor"
+.end::
