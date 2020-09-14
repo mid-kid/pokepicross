@@ -5,13 +5,11 @@ INCBIN "gfx/fonts/text_chars_dark.bin"
 .end::
 
 gfx_lv_2_mt_otsukimi::
-INCBIN "gfx/levels/lv_2_mt_otsukimi.bin"
+INCBIN "gfx/town_map/lv_2_mt_otsukimi.bin"
 .end::
-
 gfx_lv_2_mt_otsukimi_sgb::
-INCBIN "gfx/levels/lv_2_mt_otsukimi_sgb.bin"
+INCBIN "gfx/town_map/lv_2_mt_otsukimi_sgb.bin"
 .end::
-
 gfx_lv_2_mt_otsukimi_duplicate::
-INCBIN "gfx/levels/lv_2_mt_otsukimi.bin"
+INCBIN "gfx/town_map/lv_2_mt_otsukimi.bin"
 .end::
