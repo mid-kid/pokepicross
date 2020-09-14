@@ -9,15 +9,15 @@
 #include <unistd.h>
 
 void usage(void) {
-	printf("Usage: scan_includes [-h] [-o output] [-s] [-i path] [-b path] filename\n"
-	       "-h, --help\n"
-	       "    Print usage and exit\n"
+    printf("Usage: scan_includes [-h] [-o output] [-s] [-i path] [-b path] filename\n"
+           "-h, --help\n"
+           "    Print usage and exit\n"
            "-o, --output\n"
            "    Filename to store the output in\n"
-	       "-s, --strict\n"
-	       "    Fail if a file cannot be read\n"
-	       "-i, --include\n"
-	       "    Add an include path\n"
+           "-s, --strict\n"
+           "    Fail if a file cannot be read\n"
+           "-i, --include\n"
+           "    Add an include path\n"
            "-b, --build-prefix\n"
            "    Set path to generate non-existing files in\n"
            "-t, --target\n"
@@ -25,11 +25,11 @@ void usage(void) {
 }
 
 struct Options {
-	bool help;
+    bool help;
     char *output;
-	bool strict;
-	char **include_paths;
-	int include_paths_len;
+    bool strict;
+    char **include_paths;
+    int include_paths_len;
     char *build_prefix;
     char *target;
 };
@@ -38,12 +38,12 @@ struct Options Options = {0};
 
 void *xmalloc(size_t size)
 {
-	void *ptr = malloc(size);
-	if (!ptr) {
-		perror("malloc");
-		exit(1);
-	}
-	return ptr;
+    void *ptr = malloc(size);
+    if (!ptr) {
+        perror("malloc");
+        exit(1);
+    }
+    return ptr;
 }
 
 void *xrealloc(void *ptr, size_t size)
@@ -61,7 +61,7 @@ void options_add_file(char *filename)
     Options.include_paths_len++;
     Options.include_paths = xrealloc(Options.include_paths,
             sizeof(Options.include_paths[0]) * Options.include_paths_len);
-	Options.include_paths[Options.include_paths_len - 1] = filename;
+    Options.include_paths[Options.include_paths_len - 1] = filename;
 }
 
 void filelist_append(char **string, char *append)
@@ -116,20 +116,20 @@ void scan_file(char **includes, char **incbins, char *filename) {
     FILE *f = fopen(filename, "r");
     if (!f) return;
 
-	fseek(f, 0, SEEK_END);
-	long size = ftell(f);
-	rewind(f);
+    fseek(f, 0, SEEK_END);
+    long size = ftell(f);
+    rewind(f);
 
-	char *buffer = xmalloc(size + 1);
-	char *orig = buffer;
-	size = fread(buffer, 1, size, f);
-	buffer[size] = '\0';
-	fclose(f);
+    char *buffer = xmalloc(size + 1);
+    char *orig = buffer;
+    size = fread(buffer, 1, size, f);
+    buffer[size] = '\0';
+    fclose(f);
 
-	for (; buffer && (buffer - orig < size); buffer++) {
-		bool is_include = false;
-		bool is_incbin = false;
-		switch (*buffer) {
+    for (; buffer && (buffer - orig < size); buffer++) {
+        bool is_include = false;
+        bool is_incbin = false;
+        switch (*buffer) {
         case ';':
             buffer = strchr(buffer, '\n');
             if (!buffer) {
@@ -186,64 +186,64 @@ void scan_file(char **includes, char **incbins, char *filename) {
             }
             break;
 
-		}
-		if (!buffer) {
-			break;
-		}
+        }
+        if (!buffer) {
+            break;
+        }
 
-	}
+    }
 
-	free(orig);
+    free(orig);
 }
 
 int main(int argc, char* argv[]) {
-	int i = 0;
-	struct option long_options[] = {
-		{"help", no_argument, 0, 'h'},
+    int i = 0;
+    struct option long_options[] = {
+        {"help", no_argument, 0, 'h'},
         {"output", required_argument, 0, 'o'},
-		{"strict", no_argument, 0, 's'},
-		{"include", required_argument, 0, 'i'},
+        {"strict", no_argument, 0, 's'},
+        {"include", required_argument, 0, 'i'},
         {"build-prefix", required_argument, 0, 'b'},
         {"target", required_argument, 0, 't'},
-		{0}
-	};
-	int opt = -1;
-	while ((opt = getopt_long(argc, argv, "ho:si:b:t:", long_options, &i)) != -1) {
-		switch (opt) {
-		case 'h':
-			Options.help = true;
-			break;
+        {0}
+    };
+    int opt = -1;
+    while ((opt = getopt_long(argc, argv, "ho:si:b:t:", long_options, &i)) != -1) {
+        switch (opt) {
+        case 'h':
+            Options.help = true;
+            break;
         case 'o':
             Options.output = optarg;
             break;
-		case 's':
-			Options.strict = true;
-			break;
-		case 'i':
-			options_add_file(optarg);
-			break;
+        case 's':
+            Options.strict = true;
+            break;
+        case 'i':
+            options_add_file(optarg);
+            break;
         case 'b':
             Options.build_prefix = optarg;
             break;
         case 't':
             Options.target = optarg;
             break;
-		default:
-			usage();
-			exit(1);
-			break;
-		}
-	}
-	argc -= optind;
-	argv += optind;
-	if (Options.help) {
-		usage();
-		return 0;
-	}
-	if (argc < 1) {
-		usage();
-		exit(1);
-	}
+        default:
+            usage();
+            exit(1);
+            break;
+        }
+    }
+    argc -= optind;
+    argv += optind;
+    if (Options.help) {
+        usage();
+        return 0;
+    }
+    if (argc < 1) {
+        usage();
+        exit(1);
+    }
 
     char *includes = NULL;
     char *incbins = NULL;
@@ -271,5 +271,5 @@ int main(int argc, char* argv[]) {
         if (includes) fprintf(f, " %s", includes);
         fprintf(f, "\n");
     }
-	return 0;
+    return 0;
 }
