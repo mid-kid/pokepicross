@@ -22,3 +22,8 @@ SECTION "gfx_textbox_border", ROMX[$6800], BANK[$69]
 gfx_textbox_border_bw::
 INCBIN "gfx/fonts/textbox_border_bw.bin"
 .end::
+
+SECTION "compressed_gfx_data_select", ROMX[$7000], BANK[$69]
+compressed_gfx_data_select::
+INCBIN "gfx/data_select/data_select.bin.xor"
+.end::
