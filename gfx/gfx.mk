@@ -1,10 +1,3 @@
-gfx_exceptions := \
-$(dir_build)/gfx/data_select/data_select.bin
-
-gfx := $(filter-out $(gfx_exceptions), \
-       $(patsubst %.png, $(dir_build)/%.bin, \
-       $(call rwildcard, gfx, *.png)))
-
 RGBGFXFLAGS :=
 $(dir_build)/%.bin: %.png | $$(dir $$@)
 	$(RGBGFX) $(RGBGFXFLAGS) -o $@ $<

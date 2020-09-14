@@ -25,13 +25,17 @@ objects += $(dir_build)/shim.o
 all: $(name).gbc
 	cmp $(name).gbc $(baserom)
 
-.PHONY: clean
-clean:
-	rm -rf $(name).gbc $(name).sym $(name).map $(dir_build)
-
 include data/data.mk
 include gfx/gfx.mk
-.PRECIOUS: $(gfx) $(data)
+include tools/tools.mk
+.PRECIOUS: $(gfx) $(data) $(tools)
+
+.PHONY: tools
+tools: $(tools)
+
+.PHONY: clean
+clean:
+	rm -rf $(name).gbc $(name).sym $(name).map $(dir_build) $(tools)
 
 $(name).gbc: layout.link $(objects) | $(baserom)
 	$(RGBLINK) $(RGBLINKFLAGS) -O $(baserom) -l $< -n $(@:.gbc=.sym) -m $(@:.gbc=.map) -o $@ $(filter-out $<, $^)
@@ -40,13 +44,18 @@ $(name).gbc: layout.link $(objects) | $(baserom)
 $(dir_build)/shim.asm: shim.sym | $$(dir $$@)
 	tools/makeshim.py $< > $@
 
-$(dir_build)/%.o: $(dir_build)/%.asm | $(gfx) $(data) $$(dir $$@)
-	$(RGBASM) $(RGBASMFLAGS) -i $(dir_build)/ -i include/ -M $(@:.o=.d) -o $@ $<
-$(dir_build)/%.o: %.asm | $(gfx) $(data) $$(dir $$@)
-	$(RGBASM) $(RGBASMFLAGS) -i $(dir_build)/ -i include/ -M $(@:.o=.d) -o $@ $<
+$(dir_build)/%.o: $(dir_build)/%.asm | $$(dir $$@)
+	$(RGBASM) $(RGBASMFLAGS) -i $(dir_build)/ -i include/ -o $@ $<
+$(dir_build)/%.o: %.asm | $$(dir $$@)
+	$(RGBASM) $(RGBASMFLAGS) -i $(dir_build)/ -i include/ -o $@ $<
+
+$(dir_build)/%.d: %.asm tools/scan_includes | $$(dir $$@)
+	@./tools/scan_includes -b $(dir_build)/ -i $(dir_build)/ -i include/ -o $@ -t $(@:.d=.o) $<
 
 .PRECIOUS: %/
 %/:
-	mkdir -p $@
+	@mkdir -p $@
 
+ifeq (,$(filter clean tools,$(MAKECMDGOALS)))
 -include $(patsubst %.o, %.d, $(objects))
+endif
