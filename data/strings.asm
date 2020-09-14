@@ -3,1682 +3,1682 @@ INCLUDE "text.inc"
 SECTION "strings", ROMX[$4000], BANK[$09]
 
 strings_pointers::
-    dw string_09_41e0
-    dw string_09_41f3
-    dw string_09_4204
-    dw string_09_4219
-    dw string_09_422a
-    dw string_09_4237
-    dw string_09_424c
-    dw string_09_425f
-    dw string_09_4274
-    dw string_09_4285
-    dw string_09_4298
-    dw string_09_42ab
-    dw string_09_42be
-    dw string_09_42cb
-    dw string_09_42da
-    dw string_09_42e5
-    dw string_09_42f2
-    dw string_09_42fd
-    dw string_09_430c
-    dw string_09_431b
-    dw string_09_4326
-    dw string_09_4333
-    dw string_09_433e
-    dw string_09_434b
-    dw string_09_4356
-    dw string_09_4363
-    dw string_09_4372
-    dw string_09_437f
-    dw string_09_438c
-    dw string_09_439b
-    dw string_09_43aa
-    dw string_09_43b7
-    dw string_09_43c4
-    dw string_09_43d1
-    dw string_09_43de
-    dw string_09_43ed
-    dw string_09_43fa
-    dw string_09_4407
-    dw string_09_4414
-    dw string_09_4421
-    dw string_09_4430
-    dw string_09_443f
-    dw string_09_444c
-    dw string_09_445b
-    dw string_09_446a
-    dw string_09_4479
-    dw string_09_4486
-    dw string_09_4493
-    dw string_09_44a2
-    dw string_09_44af
-    dw string_09_44bc
-    dw string_09_44cb
-    dw string_09_44d8
-    dw string_09_44e3
-    dw string_09_44f2
-    dw string_09_4501
-    dw string_09_450e
-    dw string_09_451d
-    dw string_09_452c
-    dw string_09_4539
-    dw string_09_4548
-    dw string_09_4555
-    dw string_09_4564
-    dw string_09_4571
-    dw string_09_4580
-    dw string_09_458d
-    dw string_09_4598
-    dw string_09_45a7
-    dw string_09_45b2
-    dw string_09_45c1
-    dw string_09_45d0
-    dw string_09_45dd
-    dw string_09_45ec
-    dw string_09_45fb
-    dw string_09_460a
-    dw string_09_4619
-    dw string_09_4628
-    dw string_09_4637
-    dw string_09_4646
-    dw string_09_4655
-    dw string_09_4664
-    dw string_09_4673
-    dw string_09_4680
-    dw string_09_468b
-    dw string_09_469a
-    dw string_09_46a7
-    dw string_09_46b6
-    dw string_09_46c3
-    dw string_09_46d2
-    dw string_09_46e1
-    dw string_09_46f0
-    dw string_09_46ff
-    dw string_09_470e
-    dw string_09_471d
-    dw string_09_472c
-    dw string_09_4739
-    dw string_09_4748
-    dw string_09_4757
-    dw string_09_4762
-    dw string_09_476f
-    dw string_09_477e
-    dw string_09_478d
-    dw string_09_479c
-    dw string_09_47ab
-    dw string_09_47b8
-    dw string_09_47c7
-    dw string_09_47d6
-    dw string_09_47e3
-    dw string_09_47f2
-    dw string_09_47ff
-    dw string_09_480c
-    dw string_09_481b
-    dw string_09_482a
-    dw string_09_4837
-    dw string_09_4842
-    dw string_09_484f
-    dw string_09_485e
-    dw string_09_486d
-    dw string_09_487c
-    dw string_09_4889
-    dw string_09_4898
-    dw string_09_48a5
-    dw string_09_48b4
-    dw string_09_48c3
-    dw string_09_48d2
-    dw string_09_48df
-    dw string_09_48ee
-    dw string_09_48fb
-    dw string_09_490a
-    dw string_09_4919
-    dw string_09_4928
-    dw string_09_4935
-    dw string_09_4944
-    dw string_09_4953
-    dw string_09_4962
-    dw string_09_4971
-    dw string_09_497e
-    dw string_09_498d
-    dw string_09_499c
-    dw string_09_49ab
-    dw string_09_49ba
-    dw string_09_49c9
-    dw string_09_49d6
-    dw string_09_49e5
-    dw string_09_49f2
-    dw string_09_49ff
-    dw string_09_4a0e
-    dw string_09_4a1d
-    dw string_09_4a28
-    dw string_09_4a35
-    dw string_09_4a44
-    dw string_09_4a53
-    dw string_09_4a60
-    dw string_09_4a6d
-    dw string_09_4a7c
-    dw string_09_4a8b
-    dw string_09_4a96
-    dw string_09_4aa1
-    dw string_09_4ab0
-    dw string_09_4abd
-    dw string_09_4aca
-    dw string_09_4ad9
-    dw string_09_4ae8
-    dw string_09_4af3
-    dw string_09_4b02
-    dw string_09_4b0f
-    dw string_09_4b1a
-    dw string_09_4b27
-    dw string_09_4b34
-    dw string_09_4b4b
-    dw string_09_4b5a
-    dw string_09_4b73
-    dw string_09_4b8a
-    dw string_09_4ba5
-    dw string_09_4bb8
-    dw string_09_4bcf
-    dw string_09_4be4
-    dw string_09_4bf3
-    dw string_09_4c08
-    dw string_09_4c13
-    dw string_09_4c28
-    dw string_09_4c41
-    dw string_09_4c56
-    dw string_09_4c6d
-    dw string_09_4c84
-    dw string_09_4c9d
-    dw string_09_4caa
-    dw string_09_4cbf
-    dw string_09_4cd6
-    dw string_09_4ced
-    dw string_09_4d02
-    dw string_09_4d19
-    dw string_09_4d26
-    dw string_09_4d35
-    dw string_09_4d4e
-    dw string_09_4d61
-    dw string_09_4d74
-    dw string_09_4d87
-    dw string_09_4d94
-    dw string_09_4da5
-    dw string_09_4db4
-    dw string_09_4dc7
-    dw string_09_4ddc
-    dw string_09_4deb
-    dw string_09_4dfe
-    dw string_09_4e0f
-    dw string_09_4e24
-    dw string_09_4e3b
-    dw string_09_4e54
-    dw string_09_4e63
-    dw string_09_4e7a
-    dw string_09_4e8f
-    dw string_09_4ea4
-    dw string_09_4eb7
-    dw string_09_4ecc
-    dw string_09_4edd
-    dw string_09_4ef6
-    dw string_09_4f0f
-    dw string_09_4f1e
-    dw string_09_4f33
-    dw string_09_4f48
-    dw string_09_4f57
-    dw string_09_4f6a
-    dw string_09_4f77
-    dw string_09_4f84
-    dw string_09_4f91
-    dw string_09_4f9e
-    dw string_09_4fab
-    dw string_09_4fb8
-    dw string_09_4fc5
-    dw string_09_4fd2
-    dw string_09_4fdf
-    dw string_09_4fec
-    dw string_09_4ff9
-    dw string_09_5006
-    dw string_09_5013
-    dw string_09_5020
-    dw string_09_502d
-    dw string_09_503a
-    dw string_09_5047
+    dw level_name_pokedex
+    dw level_name_town_map
+    dw level_name_slot_machine
+    dw level_name_rare_candy
+    dw level_name_pc
+    dw level_name_repel
+    dw level_name_sylph_scope
+    dw level_name_clefairy_doll
+    dw level_name_gold_teeth
+    dw level_name_jigglypuffs_microphone
+    dw level_name_super_rod
+    dw level_name_pokemon_flute
+    dw level_name_balloon
+    dw level_name_bicycle
+    dw level_name_hat
+    dw level_name_diglett
+    dw level_name_gastly
+    dw level_name_omanyte
+    dw level_name_muk
+    dw level_name_kabuto
+    dw level_name_rattata
+    dw level_name_jigglypuff
+    dw level_name_mankey
+    dw level_name_slowpoke
+    dw level_name_poliwag
+    dw level_name_parasect
+    dw level_name_venonat
+    dw level_name_poliwhirl
+    dw level_name_dragonair
+    dw level_name_charizard
+    dw level_name_chansey
+    dw level_name_porygon
+    dw level_name_gengar
+    dw level_name_ditto
+    dw level_name_bellsprout
+    dw level_name_haunter
+    dw level_name_koffing
+    dw level_name_pinsir
+    dw level_name_horsea
+    dw level_name_nidoran_f
+    dw level_name_dratini
+    dw level_name_weepinbell
+    dw level_name_staryu
+    dw level_name_dugtrio
+    dw level_name_venusaur
+    dw level_name_drowzee
+    dw level_name_seadra
+    dw level_name_nidoran_m
+    dw level_name_wigglytuff
+    dw level_name_magmar
+    dw level_name_ivysaur
+    dw level_name_kakuna
+    dw level_name_clefairy
+    dw level_name_spearow
+    dw level_name_starmie
+    dw level_name_zubat
+    dw level_name_voltorb
+    dw level_name_cloyster
+    dw level_name_exeggutor
+    dw level_name_magikarp
+    dw level_name_seel
+    dw level_name_shellder
+    dw level_name_meowth
+    dw level_name_fearow
+    dw level_name_weedle
+    dw level_name_magnemite
+    dw level_name_scyther
+    dw level_name_vulpix
+    dw level_name_metapod
+    dw level_name_venomoth
+    dw level_name_electabuzz
+    dw level_name_tangela
+    dw level_name_goldeen
+    dw level_name_nidoqueen
+    dw level_name_gyarados
+    dw level_name_persian
+    dw level_name_dodrio
+    dw level_name_jolteon
+    dw level_name_golduck
+    dw level_name_mr_mime
+    dw level_name_butterfree
+    dw level_name_graveler
+    dw level_name_raticate
+    dw level_name_alakazam
+    dw level_name_gangaskhan
+    dw level_name_gloom
+    dw level_name_ponyta
+    dw level_name_nidorino
+    dw level_name_nidoking
+    dw level_name_blastoise
+    dw level_name_primeape
+    dw level_name_machoke
+    dw level_name_rapidash
+    dw level_name_grimer
+    dw level_name_onix
+    dw level_name_machamp
+    dw level_name_vileplume
+    dw level_name_paras
+    dw level_name_lapras
+    dw level_name_bulbasaur
+    dw level_name_machop
+    dw level_name_magneton
+    dw level_name_seaking
+    dw level_name_squirtle
+    dw level_name_dragonite
+    dw level_name_omastar
+    dw level_name_growlithe
+    dw level_name_vaporeon
+    dw level_name_farfetchd
+    dw level_name_beedrill
+    dw level_name_golem
+    dw level_name_flareon
+    dw level_name_charmander
+    dw level_name_krabby
+    dw level_name_cubone
+    dw level_name_arbok
+    dw level_name_rhyhorn
+    dw level_name_ninetales
+    dw level_name_abra
+    dw level_name_mewtwo
+    dw level_name_rhyperior
+    dw level_name_raichu
+    dw level_name_tauros
+    dw level_name_hitmonlee
+    dw level_name_clefable
+    dw level_name_lickitung
+    dw level_name_eevee
+    dw level_name_pikachu
+    dw level_name_caterpie
+    dw level_name_nidorina
+    dw level_name_marowak
+    dw level_name_arcanine
+    dw level_name_kadabra
+    dw level_name_victreebel
+    dw level_name_moltres
+    dw level_name_doduo
+    dw level_name_jynx
+    dw level_name_golbat
+    dw level_name_sandslash
+    dw level_name_tentacruel
+    dw level_name_pidgeot
+    dw level_name_dewgong
+    dw level_name_kingler
+    dw level_name_snorlax
+    dw level_name_exeggcute
+    dw level_name_weezing
+    dw level_name_electrode
+    dw level_name_aerodactyl
+    dw level_name_wartortle
+    dw level_name_articuno
+    dw level_name_hitmonchan
+    dw level_name_slowbro
+    dw level_name_pidgeotto
+    dw level_name_hypno
+    dw level_name_kaputops
+    dw level_name_sandshrew
+    dw level_name_ekans
+    dw level_name_poliwrath
+    dw level_name_charmeleon
+    dw level_name_psyduck
+    dw level_name_oddish
+    dw level_name_tentacool
+    dw level_name_pidgey
+    dw level_name_geodude
+    dw level_name_zapdos
+    dw level_name_mew
+    dw level_name_safari_togepi
+    dw level_name_safari_haunter
+    dw level_name_mew_and_mewtwo
+    dw level_name_staring_contest
+    dw level_name_lapras_and_pikachu
+    dw level_name_surfing_pikachu
+    dw level_name_starmie_and_staryu
+    dw level_name_seel_show
+    dw level_name_balancing_pikachu
+    dw level_name_blocks_and_porygon
+    dw level_name_carp_streamer
+    dw level_name_crab_and_riceball
+    dw level_name_safari_magnemite
+    dw level_name_transforming_ditto
+    dw level_name_firefighter_squirtle
+    dw level_name_pidgeot_parent
+    dw level_name_juggling_mr_mime
+    dw level_name_charmander_and_squirtle
+    dw level_name_heracross_and_metapod
+    dw level_name_napping
+    dw level_name_regular_psyduck
+    dw level_name_happy_moment
+    dw level_name_eating_together
+    dw level_name_clefairy_and_clefable
+    dw level_name_drawing_pikachu
+    dw level_name_rainfall
+    dw level_name_arm_wrestling
+    dw level_name_horsea_and_shellder
+    dw level_name_double_slap
+    dw level_name_singing_jigglypuff
+    dw level_name_memorial_photo
+    dw level_name_match
+    dw level_name_sea_bathing
+    dw level_name_safari_butterfree
+    dw level_name_thunder_shock
+    dw level_name_eating_contest
+    dw level_name_playing_in_snow
+    dw level_name_fossil_pokemon
+    dw level_name_whack_a_mole
+    dw level_name_legendary_pokemon
+    dw level_name_exeggcute_and_togepi
+    dw level_name_cubone_and_butterfree
+    dw level_name_race
+    dw level_name_slowbro_and_psyduck
+    dw level_name_slowpoke_and_slowbro
+    dw level_name_monkey_and_crab
+    dw level_name_three_pokemon
+    dw level_name_safari_gloom
+    dw level_name_team_rocket
+    dw level_name_pikachu_and_togepi
+    dw level_name_hidden_village
+    dw level_name_snowman
+    dw level_name_pikachu_forest
+    dw level_name_pokeball
+    dw level_name_safari_pikachu
+    dw level_name_old_amber
+    dw level_name_missingno_de
+    dw level_name_missingno_df
+    dw level_name_missingno_e0
+    dw level_name_missingno_e1
+    dw level_name_missingno_e2
+    dw level_name_missingno_e3
+    dw level_name_missingno_e4
+    dw level_name_missingno_e5
+    dw level_name_missingno_e6
+    dw level_name_missingno_e7
+    dw level_name_missingno_e8
+    dw level_name_missingno_e9
+    dw level_name_missingno_ea
+    dw level_name_missingno_eb
+    dw level_name_missingno_ec
+    dw level_name_missingno_ed
+    dw level_name_missingno_ee
+    dw level_name_missingno_ef
 
-string_09_41e0:
+level_name_pokedex:
     dw 99
     text "ポケモンずかん"
     done
     db 0
 
-string_09_41f3:
+level_name_town_map:
     dw 105
     text "タウンマップ"
     done
     db 0
 
-string_09_4204:
+level_name_slot_machine:
     dw 99
     text "スロットマシーン"
     done
     db 0
 
-string_09_4219:
+level_name_rare_candy:
     dw 104
     text "ふしぎなあめ"
     done
     db 0
 
-string_09_422a:
+level_name_pc:
     dw 111
     text "パソコン"
     done
     db 0
 
-string_09_4237:
+level_name_repel:
     dw 98
     text "むしよけスプレー"
     done
     db 0
 
-string_09_424c:
+level_name_sylph_scope:
     dw 101
     text "シルフスコープ"
     done
     db 0
 
-string_09_425f:
+level_name_clefairy_doll:
     dw 98
     text "ピッピにんぎょう"
     done
     db 0
 
-string_09_4274:
+level_name_gold_teeth:
     dw 103
     text "きんのいれば"
     done
     db 0
 
-string_09_4285:
+level_name_jigglypuffs_microphone:
     dw 100
     text "プリンのマイク"
     done
     db 0
 
-string_09_4298:
+level_name_super_rod:
     dw 99
     text "すごいつりざお"
     done
     db 0
 
-string_09_42ab:
+level_name_pokemon_flute:
     dw 100
     text "ポケモンのふえ"
     done
     db 0
 
-string_09_42be:
+level_name_balloon:
     dw 112
     text "ふうせん"
     done
     db 0
 
-string_09_42cb:
+level_name_bicycle:
     dw 110
     text "じてんしゃ"
     done
     db 0
 
-string_09_42da:
+level_name_hat:
     dw 116
     text "ぼうし"
     done
     db 0
 
-string_09_42e5:
+level_name_diglett:
     dw 111
     text "ディグダ"
     done
     db 0
 
-string_09_42f2:
+level_name_gastly:
     dw 116
     text "ゴース"
     done
     db 0
 
-string_09_42fd:
+level_name_omanyte:
     dw 109
     text "オムナイト"
     done
     db 0
 
-string_09_430c:
+level_name_muk:
     dw 109
     text "ベトベトン"
     done
     db 0
 
-string_09_431b:
+level_name_kabuto:
     dw 116
     text "カブト"
     done
     db 0
 
-string_09_4326:
+level_name_rattata:
     dw 113
     text "コラッタ"
     done
     db 0
 
-string_09_4333:
+level_name_jigglypuff:
     dw 116
     text "プリン"
     done
     db 0
 
-string_09_433e:
+level_name_mankey:
     dw 113
     text "マンキー"
     done
     db 0
 
-string_09_434b:
+level_name_slowpoke:
     dw 117
     text "ヤドン"
     done
     db 0
 
-string_09_4356:
+level_name_poliwag:
     dw 114
     text "ニョロモ"
     done
     db 0
 
-string_09_4363:
+level_name_parasect:
     dw 108
     text "パラセクト"
     done
     db 0
 
-string_09_4372:
+level_name_venonat:
     dw 111
     text "コンパン"
     done
     db 0
 
-string_09_437f:
+level_name_poliwhirl:
     dw 113
     text "ニョロゾ"
     done
     db 0
 
-string_09_438c:
+level_name_dragonair:
     dw 111
     text "ハクリュー"
     done
     db 0
 
-string_09_439b:
+level_name_charizard:
     dw 110
     text "リザードン"
     done
     db 0
 
-string_09_43aa:
+level_name_chansey:
     dw 114
     text "ラッキー"
     done
     db 0
 
-string_09_43b7:
+level_name_porygon:
     dw 111
     text "ポリゴン"
     done
     db 0
 
-string_09_43c4:
+level_name_gengar:
     dw 111
     text "ゲンガー"
     done
     db 0
 
-string_09_43d1:
+level_name_ditto:
     dw 112
     text "メタモン"
     done
     db 0
 
-string_09_43de:
+level_name_bellsprout:
     dw 107
     text "マダツボミ"
     done
     db 0
 
-string_09_43ed:
+level_name_haunter:
     dw 113
     text "ゴースト"
     done
     db 0
 
-string_09_43fa:
+level_name_koffing:
     dw 113
     text "ドガース"
     done
     db 0
 
-string_09_4407:
+level_name_pinsir:
     dw 112
     text "カイロス"
     done
     db 0
 
-string_09_4414:
+level_name_horsea:
     dw 114
     text "タッツー"
     done
     db 0
 
-string_09_4421:
+level_name_nidoran_f:
     dw 110
     text "ニドラン♀"
     done
     db 0
 
-string_09_4430:
+level_name_dratini:
     dw 110
     text "ミニリュウ"
     done
     db 0
 
-string_09_443f:
+level_name_weepinbell:
     dw 113
     text "ウツドン"
     done
     db 0
 
-string_09_444c:
+level_name_staryu:
     dw 108
     text "ヒトデマン"
     done
     db 0
 
-string_09_445b:
+level_name_dugtrio:
     dw 108
     text "ダグトリオ"
     done
     db 0
 
-string_09_446a:
+level_name_venusaur:
     dw 107
     text "フシギバナ"
     done
     db 0
 
-string_09_4479:
+level_name_drowzee:
     dw 113
     text "スリープ"
     done
     db 0
 
-string_09_4486:
+level_name_seadra:
     dw 114
     text "シードラ"
     done
     db 0
 
-string_09_4493:
+level_name_nidoran_m:
     dw 108
     text "ニドラン♂"
     done
     db 0
 
-string_09_44a2:
+level_name_wigglytuff:
     dw 112
     text "プクリン"
     done
     db 0
 
-string_09_44af:
+level_name_magmar:
     dw 113
     text "ブーバー"
     done
     db 0
 
-string_09_44bc:
+level_name_ivysaur:
     dw 108
     text "フシギソウ"
     done
     db 0
 
-string_09_44cb:
+level_name_kakuna:
     dw 113
     text "コクーン"
     done
     db 0
 
-string_09_44d8:
+level_name_clefairy:
     dw 117
     text "ピッピ"
     done
     db 0
 
-string_09_44e3:
+level_name_spearow:
     dw 107
     text "オニスズメ"
     done
     db 0
 
-string_09_44f2:
+level_name_starmie:
     dw 111
     text "スターミー"
     done
     db 0
 
-string_09_4501:
+level_name_zubat:
     dw 113
     text "ズバット"
     done
     db 0
 
-string_09_450e:
+level_name_voltorb:
     dw 108
     text "ビリリダマ"
     done
     db 0
 
-string_09_451d:
+level_name_cloyster:
     dw 108
     text "パルシェン"
     done
     db 0
 
-string_09_452c:
+level_name_exeggutor:
     dw 114
     text "ナッシー"
     done
     db 0
 
-string_09_4539:
+level_name_magikarp:
     dw 107
     text "コイキング"
     done
     db 0
 
-string_09_4548:
+level_name_seel:
     dw 111
     text "パウワウ"
     done
     db 0
 
-string_09_4555:
+level_name_shellder:
     dw 109
     text "シェルダー"
     done
     db 0
 
-string_09_4564:
+level_name_meowth:
     dw 114
     text "ニャース"
     done
     db 0
 
-string_09_4571:
+level_name_fearow:
     dw 109
     text "オニドリル"
     done
     db 0
 
-string_09_4580:
+level_name_weedle:
     dw 113
     text "ビードル"
     done
     db 0
 
-string_09_458d:
+level_name_magnemite:
     dw 116
     text "コイル"
     done
     db 0
 
-string_09_4598:
+level_name_scyther:
     dw 109
     text "ストライク"
     done
     db 0
 
-string_09_45a7:
+level_name_vulpix:
     dw 116
     text "ロコン"
     done
     db 0
 
-string_09_45b2:
+level_name_metapod:
     dw 109
     text "トランセル"
     done
     db 0
 
-string_09_45c1:
+level_name_venomoth:
     dw 109
     text "モルフォン"
     done
     db 0
 
-string_09_45d0:
+level_name_electabuzz:
     dw 113
     text "エレブー"
     done
     db 0
 
-string_09_45dd:
+level_name_tangela:
     dw 109
     text "モンジャラ"
     done
     db 0
 
-string_09_45ec:
+level_name_goldeen:
     dw 110
     text "トサキント"
     done
     db 0
 
-string_09_45fb:
+level_name_nidoqueen:
     dw 109
     text "ニドクイン"
     done
     db 0
 
-string_09_460a:
+level_name_gyarados:
     dw 109
     text "ギャラドス"
     done
     db 0
 
-string_09_4619:
+level_name_persian:
     dw 108
     text "ペルシアン"
     done
     db 0
 
-string_09_4628:
+level_name_dodrio:
     dw 111
     text "ドードリオ"
     done
     db 0
 
-string_09_4637:
+level_name_jolteon:
     dw 108
     text "サンダース"
     done
     db 0
 
-string_09_4646:
+level_name_golduck:
     dw 107
     text "ゴルダック"
     done
     db 0
 
-string_09_4655:
+level_name_mr_mime:
     dw 110
     text "バリヤード"
     done
     db 0
 
-string_09_4664:
+level_name_butterfree:
     dw 109
     text "バタフリー"
     done
     db 0
 
-string_09_4673:
+level_name_graveler:
     dw 112
     text "ゴローン"
     done
     db 0
 
-string_09_4680:
+level_name_raticate:
     dw 117
     text "ラッタ"
     done
     db 0
 
-string_09_468b:
+level_name_alakazam:
     dw 110
     text "フーディン"
     done
     db 0
 
-string_09_469a:
+level_name_gangaskhan:
     dw 112
     text "ガルーラ"
     done
     db 0
 
-string_09_46a7:
+level_name_gloom:
     dw 108
     text "クサイハナ"
     done
     db 0
 
-string_09_46b6:
+level_name_ponyta:
     dw 113
     text "ポニータ"
     done
     db 0
 
-string_09_46c3:
+level_name_nidorino:
     dw 111
     text "ニドリーノ"
     done
     db 0
 
-string_09_46d2:
+level_name_nidoking:
     dw 108
     text "ニドキング"
     done
     db 0
 
-string_09_46e1:
+level_name_blastoise:
     dw 109
     text "カメックス"
     done
     db 0
 
-string_09_46f0:
+level_name_primeape:
     dw 108
     text "オコリザル"
     done
     db 0
 
-string_09_46ff:
+level_name_machoke:
     dw 110
     text "ゴーリキー"
     done
     db 0
 
-string_09_470e:
+level_name_rapidash:
     dw 109
     text "ギャロップ"
     done
     db 0
 
-string_09_471d:
+level_name_grimer:
     dw 109
     text "ベトベター"
     done
     db 0
 
-string_09_472c:
+level_name_onix:
     dw 113
     text "イワーク"
     done
     db 0
 
-string_09_4739:
+level_name_machamp:
     dw 110
     text "カイリキー"
     done
     db 0
 
-string_09_4748:
+level_name_vileplume:
     dw 109
     text "ラフレシア"
     done
     db 0
 
-string_09_4757:
+level_name_paras:
     dw 115
     text "パラス"
     done
     db 0
 
-string_09_4762:
+level_name_lapras:
     dw 112
     text "ラプラス"
     done
     db 0
 
-string_09_476f:
+level_name_bulbasaur:
     dw 107
     text "フシギダネ"
     done
     db 0
 
-string_09_477e:
+level_name_machop:
     dw 110
     text "ワンリキー"
     done
     db 0
 
-string_09_478d:
+level_name_magneton:
     dw 109
     text "レアコイル"
     done
     db 0
 
-string_09_479c:
+level_name_seaking:
     dw 107
     text "アズマオウ"
     done
     db 0
 
-string_09_47ab:
+level_name_squirtle:
     dw 110
     text "ゼニガメ"
     done
     db 0
 
-string_09_47b8:
+level_name_dragonite:
     dw 111
     text "カイリュー"
     done
     db 0
 
-string_09_47c7:
+level_name_omastar:
     dw 109
     text "オムスター"
     done
     db 0
 
-string_09_47d6:
+level_name_growlithe:
     dw 113
     text "ガーディ"
     done
     db 0
 
-string_09_47e3:
+level_name_vaporeon:
     dw 109
     text "シャワーズ"
     done
     db 0
 
-string_09_47f2:
+level_name_farfetchd:
     dw 112
     text "カモネギ"
     done
     db 0
 
-string_09_47ff:
+level_name_beedrill:
     dw 113
     text "スピアー"
     done
     db 0
 
-string_09_480c:
+level_name_golem:
     dw 109
     text "ゴローニャ"
     done
     db 0
 
-string_09_481b:
+level_name_flareon:
     dw 109
     text "ブースター"
     done
     db 0
 
-string_09_482a:
+level_name_charmander:
     dw 112
     text "ヒトカゲ"
     done
     db 0
 
-string_09_4837:
+level_name_krabby:
     dw 115
     text "クラブ"
     done
     db 0
 
-string_09_4842:
+level_name_cubone:
     dw 112
     text "カラカラ"
     done
     db 0
 
-string_09_484f:
+level_name_arbok:
     dw 110
     text "アーボック"
     done
     db 0
 
-string_09_485e:
+level_name_rhyhorn:
     dw 109
     text "サイホーン"
     done
     db 0
 
-string_09_486d:
+level_name_ninetales:
     dw 109
     text "キュウコン"
     done
     db 0
 
-string_09_487c:
+level_name_abra:
     dw 115
     text "ケーシィ"
     done
     db 0
 
-string_09_4889:
+level_name_mewtwo:
     dw 111
     text "ミュウツー"
     done
     db 0
 
-string_09_4898:
+level_name_rhyperior:
     dw 113
     text "サイドン"
     done
     db 0
 
-string_09_48a5:
+level_name_raichu:
     dw 109
     text "ライチュウ"
     done
     db 0
 
-string_09_48b4:
+level_name_tauros:
     dw 108
     text "ケンタロス"
     done
     db 0
 
-string_09_48c3:
+level_name_hitmonlee:
     dw 109
     text "サワムラー"
     done
     db 0
 
-string_09_48d2:
+level_name_clefable:
     dw 113
     text "ピクシー"
     done
     db 0
 
-string_09_48df:
+level_name_lickitung:
     dw 107
     text "ベロリンガ"
     done
     db 0
 
-string_09_48ee:
+level_name_eevee:
     dw 112
     text "イーブイ"
     done
     db 0
 
-string_09_48fb:
+level_name_pikachu:
     dw 109
     text "ピカチュウ"
     done
     db 0
 
-string_09_490a:
+level_name_caterpie:
     dw 110
     text "キャタピー"
     done
     db 0
 
-string_09_4919:
+level_name_nidorina:
     dw 110
     text "ニドリーナ"
     done
     db 0
 
-string_09_4928:
+level_name_marowak:
     dw 110
     text "ガラガラ"
     done
     db 0
 
-string_09_4935:
+level_name_arcanine:
     dw 109
     text "ウインディ"
     done
     db 0
 
-string_09_4944:
+level_name_kadabra:
     dw 108
     text "ユンゲラー"
     done
     db 0
 
-string_09_4953:
+level_name_victreebel:
     dw 110
     text "ウツボット"
     done
     db 0
 
-string_09_4962:
+level_name_moltres:
     dw 110
     text "ファイヤー"
     done
     db 0
 
-string_09_4971:
+level_name_doduo:
     dw 115
     text "ドードー"
     done
     db 0
 
-string_09_497e:
+level_name_jynx:
     dw 110
     text "ルージュラ"
     done
     db 0
 
-string_09_498d:
+level_name_golbat:
     dw 109
     text "ゴルバット"
     done
     db 0
 
-string_09_499c:
+level_name_sandslash:
     dw 108
     text "サンドパン"
     done
     db 0
 
-string_09_49ab:
+level_name_tentacruel:
     dw 108
     text "ドククラゲ"
     done
     db 0
 
-string_09_49ba:
+level_name_pidgeot:
     dw 111
     text "ピジョット"
     done
     db 0
 
-string_09_49c9:
+level_name_dewgong:
     dw 112
     text "ジュゴン"
     done
     db 0
 
-string_09_49d6:
+level_name_kingler:
     dw 108
     text "キングラー"
     done
     db 0
 
-string_09_49e5:
+level_name_snorlax:
     dw 111
     text "カビゴン"
     done
     db 0
 
-string_09_49f2:
+level_name_exeggcute:
     dw 112
     text "タマタマ"
     done
     db 0
 
-string_09_49ff:
+level_name_weezing:
     dw 108
     text "マタドガス"
     done
     db 0
 
-string_09_4a0e:
+level_name_electrode:
     dw 108
     text "マルマイン"
     done
     db 0
 
-string_09_4a1d:
+level_name_aerodactyl:
     dw 116
     text "プテラ"
     done
     db 0
 
-string_09_4a28:
+level_name_wartortle:
     dw 113
     text "カメール"
     done
     db 0
 
-string_09_4a35:
+level_name_articuno:
     dw 110
     text "フリーザー"
     done
     db 0
 
-string_09_4a44:
+level_name_hitmonchan:
     dw 109
     text "エビワラー"
     done
     db 0
 
-string_09_4a53:
+level_name_slowbro:
     dw 113
     text "ヤドラン"
     done
     db 0
 
-string_09_4a60:
+level_name_pidgeotto:
     dw 113
     text "ピジョン"
     done
     db 0
 
-string_09_4a6d:
+level_name_hypno:
     dw 110
     text "スリーパー"
     done
     db 0
 
-string_09_4a7c:
+level_name_kaputops:
     dw 108
     text "カブトプス"
     done
     db 0
 
-string_09_4a8b:
+level_name_sandshrew:
     dw 117
     text "サンド"
     done
     db 0
 
-string_09_4a96:
+level_name_ekans:
     dw 117
     text "アーボ"
     done
     db 0
 
-string_09_4aa1:
+level_name_poliwrath:
     dw 109
     text "ニョロボン"
     done
     db 0
 
-string_09_4ab0:
+level_name_charmeleon:
     dw 114
     text "リザード"
     done
     db 0
 
-string_09_4abd:
+level_name_psyduck:
     dw 112
     text "コダック"
     done
     db 0
 
-string_09_4aca:
+level_name_oddish:
     dw 108
     text "ナゾノクサ"
     done
     db 0
 
-string_09_4ad9:
+level_name_tentacool:
     dw 108
     text "メノクラゲ"
     done
     db 0
 
-string_09_4ae8:
+level_name_pidgey:
     dw 116
     text "ポッポ"
     done
     db 0
 
-string_09_4af3:
+level_name_geodude:
     dw 107
     text "イシツブテ"
     done
     db 0
 
-string_09_4b02:
+level_name_zapdos:
     dw 112
     text "サンダー"
     done
     db 0
 
-string_09_4b0f:
+level_name_mew:
     dw 118
     text "ミュウ"
     done
     db 0
 
-string_09_4b1a:
+level_name_safari_togepi:
     dw 113
     text "トゲピー"
     done
     db 0
 
-string_09_4b27:
+level_name_safari_haunter:
     dw 113
     text "ゴースト"
     done
     db 0
 
-string_09_4b34:
+level_name_mew_and_mewtwo:
     dw 96
     text "ミュウとミュウツー"
     done
     db 0
 
-string_09_4b4b:
+level_name_staring_contest:
     dw 110
     text "にらめっこ"
     done
     db 0
 
-string_09_4b5a:
+level_name_lapras_and_pikachu:
     dw 89
     text "ラプラスとピカチュウ"
     done
     db 0
 
-string_09_4b73:
+level_name_surfing_pikachu:
     dw 94
     text "なみのりピカチュウ"
     done
     db 0
 
-string_09_4b8a:
+level_name_starmie_and_staryu:
     dw 87
     text "スターミーとヒトデマン"
     done
     db 0
 
-string_09_4ba5:
+level_name_seel_show:
     dw 102
     text "パウワウショー"
     done
     db 0
 
-string_09_4bb8:
+level_name_balancing_pikachu:
     dw 94
     text "たまのりピカチュウ"
     done
     db 0
 
-string_09_4bcf:
+level_name_blocks_and_porygon:
     dw 95
     text "つみきとポリゴン"
     done
     db 0
 
-string_09_4be4:
+level_name_carp_streamer:
     dw 108
     text "こいのぼり"
     done
     db 0
 
-string_09_4bf3:
+level_name_crab_and_riceball:
     dw 95
     text "クラブとおにぎり"
     done
     db 0
 
-string_09_4c08:
+level_name_safari_magnemite:
     dw 116
     text "コイル"
     done
     db 0
 
-string_09_4c13:
+level_name_transforming_ditto:
     dw 96
     text "へんしんメタモン"
     done
     db 0
 
-string_09_4c28:
+level_name_firefighter_squirtle:
     dw 86
     text "ひけしのゼニガメだん"
     done
     db 0
 
-string_09_4c41:
+level_name_pidgeot_parent:
     dw 99
     text "ピジョットおやこ"
     done
     db 0
 
-string_09_4c56:
+level_name_juggling_mr_mime:
     dw 94
     text "おてだまバリヤード"
     done
     db 0
 
-string_09_4c6d:
+level_name_charmander_and_squirtle:
     dw 90
     text "ヒトカゲとゼニガメ"
     done
     db 0
 
-string_09_4c84:
+level_name_heracross_and_metapod:
     dw 89
     text "カイロスとトランセル"
     done
     db 0
 
-string_09_4c9d:
+level_name_napping:
     dw 113
     text "おひるね"
     done
     db 0
 
-string_09_4caa:
+level_name_regular_psyduck:
     dw 96
     text "いつものコダック"
     done
     db 0
 
-string_09_4cbf:
+level_name_happy_moment:
     dw 93
     text "しあわせのひととき"
     done
     db 0
 
-string_09_4cd6:
+level_name_eating_together:
     dw 95
     text "いっしょにたべよう"
     done
     db 0
 
-string_09_4ced:
+level_name_clefairy_and_clefable:
     dw 98
     text "ピッピとピクシー"
     done
     db 0
 
-string_09_4d02:
+level_name_drawing_pikachu:
     dw 93
     text "おえかきピカチュウ"
     done
     db 0
 
-string_09_4d19:
+level_name_rainfall:
     dw 113
     text "あめふり"
     done
     db 0
 
-string_09_4d26:
+level_name_arm_wrestling:
     dw 107
     text "うでずもう"
     done
     db 0
 
-string_09_4d35:
+level_name_horsea_and_shellder:
     dw 91
     text "タッツーとシェルダー"
     done
     db 0
 
-string_09_4d4e:
+level_name_double_slap:
     dw 101
     text "おうふくビンタ"
     done
     db 0
 
-string_09_4d61:
+level_name_singing_jigglypuff:
     dw 101
     text "うたってプリン"
     done
     db 0
 
-string_09_4d74:
+level_name_memorial_photo:
     dw 102
     text "きねんしゃしん"
     done
     db 0
 
-string_09_4d87:
+level_name_match:
     dw 113
     text "しょうぶ"
     done
     db 0
 
-string_09_4d94:
+level_name_sea_bathing:
     dw 106
     text "かいすいよく"
     done
     db 0
 
-string_09_4da5:
+level_name_safari_butterfree:
     dw 109
     text "バタフリー"
     done
     db 0
 
-string_09_4db4:
+level_name_thunder_shock:
     dw 102
     text "でんきショック"
     done
     db 0
 
-string_09_4dc7:
+level_name_eating_contest:
     dw 96
     text "おおぐいたいけつ"
     done
     db 0
 
-string_09_4ddc:
+level_name_playing_in_snow:
     dw 107
     text "ゆきあそび"
     done
     db 0
 
-string_09_4deb:
+level_name_fossil_pokemon:
     dw 100
     text "かせきポケモン"
     done
     db 0
 
-string_09_4dfe:
+level_name_whack_a_mole:
     dw 105
     text "もぐらたたき"
     done
     db 0
 
-string_09_4e0f:
+level_name_legendary_pokemon:
     dw 95
     text "でんせつポケモン"
     done
     db 0
 
-string_09_4e24:
+level_name_exeggcute_and_togepi:
     dw 93
     text "タマタマとトゲピー"
     done
     db 0
 
-string_09_4e3b:
+level_name_cubone_and_butterfree:
     dw 89
     text "カラカラとバタフリー"
     done
     db 0
 
-string_09_4e54:
+level_name_race:
     dw 110
     text "きょうそう"
     done
     db 0
 
-string_09_4e63:
+level_name_slowbro_and_psyduck:
     dw 93
     text "ヤドランとコダック"
     done
     db 0
 
-string_09_4e7a:
+level_name_slowpoke_and_slowbro:
     dw 97
     text "ヤドンとヤドラン"
     done
     db 0
 
-string_09_4e8f:
+level_name_monkey_and_crab:
     dw 97
     text "さるかにがっせん"
     done
     db 0
 
-string_09_4ea4:
+level_name_three_pokemon:
     dw 100
     text "３だいポケモン"
     done
     db 0
 
-string_09_4eb7:
+level_name_safari_gloom:
     dw 98
     text "くさいクサイハナ"
     done
     db 0
 
-string_09_4ecc:
+level_name_team_rocket:
     dw 106
     text "ロケットだん"
     done
     db 0
 
-string_09_4edd:
+level_name_pikachu_and_togepi:
     dw 90
     text "ピカチュウとトゲピー"
     done
     db 0
 
-string_09_4ef6:
+level_name_hidden_village:
     dw 88
     text "かくれざとのポケモン"
     done
     db 0
 
-string_09_4f0f:
+level_name_snowman:
     dw 109
     text "ゆきだるま"
     done
     db 0
 
-string_09_4f1e:
+level_name_pikachu_forest:
     dw 98
     text "ピカチュウのもり"
     done
     db 0
 
-string_09_4f33:
+level_name_pokeball:
     dw 98
     text "モンスターボール"
     done
     db 0
 
-string_09_4f48:
+level_name_safari_pikachu:
     dw 109
     text "ピカチュウ"
     done
     db 0
 
-string_09_4f57:
+level_name_old_amber:
     dw 100
     text "ひみつのコハク"
     done
     db 0
 
-string_09_4f6a:
+level_name_missingno_de:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_4f77:
+level_name_missingno_df:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_4f84:
+level_name_missingno_e0:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_4f91:
+level_name_missingno_e1:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_4f9e:
+level_name_missingno_e2:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_4fab:
+level_name_missingno_e3:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_4fb8:
+level_name_missingno_e4:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_4fc5:
+level_name_missingno_e5:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_4fd2:
+level_name_missingno_e6:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_4fdf:
+level_name_missingno_e7:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_4fec:
+level_name_missingno_e8:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_4ff9:
+level_name_missingno_e9:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_5006:
+level_name_missingno_ea:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_5013:
+level_name_missingno_eb:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_5020:
+level_name_missingno_ec:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_502d:
+level_name_missingno_ed:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_503a:
+level_name_missingno_ee:
     dw 111
     text "けつばん"
     done
     db 0
 
-string_09_5047:
+level_name_missingno_ef:
     dw 111
     text "けつばん"
     done
