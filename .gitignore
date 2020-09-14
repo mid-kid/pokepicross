@@ -8,6 +8,7 @@
 !shim.sym
 __pycache__
 *.pyc
+*.exe
 /coverage.png
 /picross.png
 tools/scan_includes

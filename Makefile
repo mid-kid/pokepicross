@@ -37,6 +37,11 @@ tools: $(tools)
 clean:
 	rm -rf $(name).gbc $(name).sym $(name).map $(dir_build) $(tools)
 
+.PHONY: tidy
+tidy:
+	rm -rf $(name).gbc $(name).sym $(name).map
+	find $(dir_build) \( -name "*.o" \) -delete
+
 $(name).gbc: layout.link $(objects) | $(baserom)
 	$(RGBLINK) $(RGBLINKFLAGS) -O $(baserom) -l $< -n $(@:.gbc=.sym) -m $(@:.gbc=.map) -o $@ $(filter-out $<, $^)
 	$(RGBFIX) $(RGBFIXFLAGS) -v $@
