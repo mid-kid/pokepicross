@@ -23,3 +23,8 @@ INCBIN "gfx/levels/lv_5_pokemon_tower_sgb.bin"
 gfx_lv_5_pokemon_tower_duplicate::
 INCBIN "gfx/levels/lv_5_pokemon_tower.bin"
 .end::
+
+SECTION "compressed_gfx_copyright", ROMX[$7d35], BANK[$75]
+compressed_gfx_copyright::
+INCBIN "gfx/copyright/copyright.bin.xor"
+.end::
