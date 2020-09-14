@@ -123,7 +123,7 @@ strings_pointers::
     dw level_name_ninetales
     dw level_name_abra
     dw level_name_mewtwo
-    dw level_name_rhyperior
+    dw level_name_rhydon
     dw level_name_raichu
     dw level_name_tauros
     dw level_name_hitmonlee
@@ -310,7 +310,7 @@ level_name_super_rod:
     done
     db 0
 
-level_name_pokemon_flute:
+level_name_poke_flute:
     dw 100
     text "ポケモンのふえ"
     done
@@ -964,7 +964,7 @@ level_name_mewtwo:
     done
     db 0
 
-level_name_rhyperior:
+level_name_rhydon:
     dw 113
     text "サイドン"
     done
