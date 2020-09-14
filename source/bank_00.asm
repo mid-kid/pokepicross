@@ -1376,9 +1376,8 @@ level_name_print::
 .string_loop
     ld a, [hl+]
     ld e, a
-    ld a, [hl+]
-    ld d, a
-    and e
+    ld d, 0
+    nop
     cp TX_END
     jr z, .loop
 
