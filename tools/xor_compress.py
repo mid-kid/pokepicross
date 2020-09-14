@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 
-# Usage: ./xor_compress.py [source.bin] [dest.bin.xor]
+# Usage: ./xor_compress.py sources.bin... > dest.bin.xor
 
 import sys
 
-with (open(sys.argv[1], 'rb') if len(sys.argv) > 1 else sys.stdin) as f:
-    data = f.read()
+data = bytearray()
+for filename in sys.argv[1:]:
+    with open(filename, 'rb') as f:
+        data.extend(f.read())
 
 n = len(data) 
-output = []
+output = bytearray()
 v = 0x00
 i = 0
 
@@ -42,5 +44,4 @@ while i < n:
         output.append(len(buffer) - 1)
         output.extend(buffer)
 
-with (open(sys.argv[2], 'wb') if len(sys.argv) > 2 else sys.stdout) as f:
-    f.write(bytes(output))
+sys.stdout.buffer.write(output)
