@@ -10,12 +10,12 @@ level_names::
     dw level_name_pc
     dw level_name_repel
     dw level_name_sylph_scope
-    dw level_name_clefairy_doll
+    dw level_name_poke_doll
     dw level_name_gold_teeth
     dw level_name_jigglypuffs_microphone
     dw level_name_super_rod
     dw level_name_poke_flute
-    dw level_name_balloon
+    dw level_name_balloons
     dw level_name_bicycle
     dw level_name_hat
     dw level_name_diglett
@@ -87,7 +87,7 @@ level_names::
     dw level_name_graveler
     dw level_name_raticate
     dw level_name_alakazam
-    dw level_name_gangaskhan
+    dw level_name_kangaskhan
     dw level_name_gloom
     dw level_name_ponyta
     dw level_name_nidorino
@@ -245,998 +245,1164 @@ level_names::
     dw level_name_missingno_ef
 
 level_name_pokedex:
+; ポケモンずかん
     dw 99
-    db "ポケモンずかん"
+    db "Pokédex"
     db TX_END
     db 0
 
 level_name_town_map:
+; タウンマップ
     dw 105
-    db "タウンマップ"
+    db "Town Map"
     db TX_END
     db 0
 
 level_name_slot_machine:
+; スロットマシーン
     dw 99
-    db "スロットマシーン"
+    db "Slot Machine"
     db TX_END
     db 0
 
 level_name_rare_candy:
+; ふしぎなあめ
     dw 104
-    db "ふしぎなあめ"
+    db "Rare Candy"
     db TX_END
     db 0
 
 level_name_pc:
+; パソコン
     dw 111
-    db "パソコン"
+    db "PC"
     db TX_END
     db 0
 
 level_name_repel:
+; むしよけスプレー
     dw 98
-    db "むしよけスプレー"
+    db "Repel"
     db TX_END
     db 0
 
 level_name_sylph_scope:
+; シルフスコープ
     dw 101
-    db "シルフスコープ"
+    db "Sylph Scope"
     db TX_END
     db 0
 
-level_name_clefairy_doll:
+level_name_poke_doll:
+; ピッピにんぎょう
     dw 98
-    db "ピッピにんぎょう"
+    db "Poké Doll"
     db TX_END
     db 0
 
 level_name_gold_teeth:
+; きんのいれば
     dw 103
-    db "きんのいれば"
+    db "Gold Teeth"
     db TX_END
     db 0
 
 level_name_jigglypuffs_microphone:
+; プリンのマイク
     dw 100
-    db "プリンのマイク"
+    db "Jigglypuff's Mic"
     db TX_END
     db 0
 
 level_name_super_rod:
+; すごいつりざお
     dw 99
-    db "すごいつりざお"
+    db "Super Rod"
     db TX_END
     db 0
 
 level_name_poke_flute:
+; ポケモンのふえ
     dw 100
-    db "ポケモンのふえ"
+    db "Poké Flute"
     db TX_END
     db 0
 
-level_name_balloon:
+level_name_balloons:
+; ふうせん
     dw 112
-    db "ふうせん"
+    db "Balloons"
     db TX_END
     db 0
 
 level_name_bicycle:
+; じてんしゃ
     dw 110
-    db "じてんしゃ"
+    db "Bicycle"
     db TX_END
     db 0
 
 level_name_hat:
+; ぼうし
     dw 116
-    db "ぼうし"
+    db "Trainer's Cap"
     db TX_END
     db 0
 
 level_name_diglett:
+; ディグダ
     dw 111
-    db "ディグダ"
+    db "Diglett"
     db TX_END
     db 0
 
 level_name_gastly:
+; ゴース
     dw 116
-    db "ゴース"
+    db "Gastly"
     db TX_END
     db 0
 
 level_name_omanyte:
+; オムナイト
     dw 109
-    db "オムナイト"
+    db "Omanyte"
     db TX_END
     db 0
 
 level_name_muk:
+; ベトベトン
     dw 109
-    db "ベトベトン"
+    db "Muk"
     db TX_END
     db 0
 
 level_name_kabuto:
+; カブト
     dw 116
-    db "カブト"
+    db "Kabuto"
     db TX_END
     db 0
 
 level_name_rattata:
+; コラッタ
     dw 113
-    db "コラッタ"
+    db "Rattata"
     db TX_END
     db 0
 
 level_name_jigglypuff:
+; プリン
     dw 116
-    db "プリン"
+    db "Jigglypuff"
     db TX_END
     db 0
 
 level_name_mankey:
+; マンキー
     dw 113
-    db "マンキー"
+    db "Mankey"
     db TX_END
     db 0
 
 level_name_slowpoke:
+; ヤドン
     dw 117
-    db "ヤドン"
+    db "Slowpoke"
     db TX_END
     db 0
 
 level_name_poliwag:
+; ニョロモ
     dw 114
-    db "ニョロモ"
+    db "Poliwag"
     db TX_END
     db 0
 
 level_name_parasect:
+; パラセクト
     dw 108
-    db "パラセクト"
+    db "Parasect"
     db TX_END
     db 0
 
 level_name_venonat:
+; コンパン
     dw 111
-    db "コンパン"
+    db "Venonat"
     db TX_END
     db 0
 
 level_name_poliwhirl:
+; ニョロゾ
     dw 113
-    db "ニョロゾ"
+    db "Poliwhirl"
     db TX_END
     db 0
 
 level_name_dragonair:
+; ハクリュー
     dw 111
-    db "ハクリュー"
+    db "Dragonair"
     db TX_END
     db 0
 
 level_name_charizard:
+; リザードン
     dw 110
-    db "リザードン"
+    db "Charizard"
     db TX_END
     db 0
 
 level_name_chansey:
+; ラッキー
     dw 114
-    db "ラッキー"
+    db "Chansey"
     db TX_END
     db 0
 
 level_name_porygon:
+; ポリゴン
     dw 111
-    db "ポリゴン"
+    db "Porygon"
     db TX_END
     db 0
 
 level_name_gengar:
+; ゲンガー
     dw 111
-    db "ゲンガー"
+    db "Gengar"
     db TX_END
     db 0
 
 level_name_ditto:
+; メタモン
     dw 112
-    db "メタモン"
+    db "Ditto"
     db TX_END
     db 0
 
 level_name_bellsprout:
+; マダツボミ
     dw 107
-    db "マダツボミ"
+    db "Bellsprout"
     db TX_END
     db 0
 
 level_name_haunter:
+; ゴースト
     dw 113
-    db "ゴースト"
+    db "Haunter"
     db TX_END
     db 0
 
 level_name_koffing:
+; ドガース
     dw 113
-    db "ドガース"
+    db "Koffing"
     db TX_END
     db 0
 
 level_name_pinsir:
+; カイロス
     dw 112
-    db "カイロス"
+    db "Pinsir"
     db TX_END
     db 0
 
 level_name_horsea:
+; タッツー
     dw 114
-    db "タッツー"
+    db "Horsea"
     db TX_END
     db 0
 
 level_name_nidoran_f:
+; ニドラン♀
     dw 110
-    db "ニドラン♀"
+    db "Nidoran♀"
     db TX_END
     db 0
 
 level_name_dratini:
+; ミニリュウ
     dw 110
-    db "ミニリュウ"
+    db "Dratini"
     db TX_END
     db 0
 
 level_name_weepinbell:
+; ウツドン
     dw 113
-    db "ウツドン"
+    db "Weepinbell"
     db TX_END
     db 0
 
 level_name_staryu:
+; ヒトデマン
     dw 108
-    db "ヒトデマン"
+    db "Staryu"
     db TX_END
     db 0
 
 level_name_dugtrio:
+; ダグトリオ
     dw 108
-    db "ダグトリオ"
+    db "Dugtrio"
     db TX_END
     db 0
 
 level_name_venusaur:
+; フシギバナ
     dw 107
-    db "フシギバナ"
+    db "Venusaur"
     db TX_END
     db 0
 
 level_name_drowzee:
+; スリープ
     dw 113
-    db "スリープ"
+    db "Drowzee"
     db TX_END
     db 0
 
 level_name_seadra:
+; シードラ
     dw 114
-    db "シードラ"
+    db "Seadra"
     db TX_END
     db 0
 
 level_name_nidoran_m:
+; ニドラン♂
     dw 108
-    db "ニドラン♂"
+    db "Nidoran♂"
     db TX_END
     db 0
 
 level_name_wigglytuff:
+; プクリン
     dw 112
-    db "プクリン"
+    db "Wigglytuff"
     db TX_END
     db 0
 
 level_name_magmar:
+; ブーバー
     dw 113
-    db "ブーバー"
+    db "Magmar"
     db TX_END
     db 0
 
 level_name_ivysaur:
+; フシギソウ
     dw 108
-    db "フシギソウ"
+    db "Ivysaur"
     db TX_END
     db 0
 
 level_name_kakuna:
+; コクーン
     dw 113
-    db "コクーン"
+    db "Kakuna"
     db TX_END
     db 0
 
 level_name_clefairy:
+; ピッピ
     dw 117
-    db "ピッピ"
+    db "Clefairy"
     db TX_END
     db 0
 
 level_name_spearow:
+; オニスズメ
     dw 107
-    db "オニスズメ"
+    db "Spearow"
     db TX_END
     db 0
 
 level_name_starmie:
+; スターミー
     dw 111
-    db "スターミー"
+    db "Starmie"
     db TX_END
     db 0
 
 level_name_zubat:
+; ズバット
     dw 113
-    db "ズバット"
+    db "Zubat"
     db TX_END
     db 0
 
 level_name_voltorb:
+; ビリリダマ
     dw 108
-    db "ビリリダマ"
+    db "Voltorb"
     db TX_END
     db 0
 
 level_name_cloyster:
+; パルシェン
     dw 108
-    db "パルシェン"
+    db "Cloyster"
     db TX_END
     db 0
 
 level_name_exeggutor:
+; ナッシー
     dw 114
-    db "ナッシー"
+    db "Exeggutor"
     db TX_END
     db 0
 
 level_name_magikarp:
+; コイキング
     dw 107
-    db "コイキング"
+    db "Magikarp"
     db TX_END
     db 0
 
 level_name_seel:
+; パウワウ
     dw 111
-    db "パウワウ"
+    db "Seel"
     db TX_END
     db 0
 
 level_name_shellder:
+; シェルダー
     dw 109
-    db "シェルダー"
+    db "Shellder"
     db TX_END
     db 0
 
 level_name_meowth:
+; ニャース
     dw 114
-    db "ニャース"
+    db "Meowth"
     db TX_END
     db 0
 
 level_name_fearow:
+; オニドリル
     dw 109
-    db "オニドリル"
+    db "Fearow"
     db TX_END
     db 0
 
 level_name_weedle:
+; ビードル
     dw 113
-    db "ビードル"
+    db "Weedle"
     db TX_END
     db 0
 
 level_name_magnemite:
+; コイル
     dw 116
-    db "コイル"
+    db "Magnemite"
     db TX_END
     db 0
 
 level_name_scyther:
+; ストライク
     dw 109
-    db "ストライク"
+    db "Scyther"
     db TX_END
     db 0
 
 level_name_vulpix:
+; ロコン
     dw 116
-    db "ロコン"
+    db "Vulpix"
     db TX_END
     db 0
 
 level_name_metapod:
+; トランセル
     dw 109
-    db "トランセル"
+    db "Metapod"
     db TX_END
     db 0
 
 level_name_venomoth:
+; モルフォン
     dw 109
-    db "モルフォン"
+    db "Venomoth"
     db TX_END
     db 0
 
 level_name_electabuzz:
+; エレブー
     dw 113
-    db "エレブー"
+    db "Electabuzz"
     db TX_END
     db 0
 
 level_name_tangela:
+; モンジャラ
     dw 109
-    db "モンジャラ"
+    db "Tangela"
     db TX_END
     db 0
 
 level_name_goldeen:
+; トサキント
     dw 110
-    db "トサキント"
+    db "Goldeen"
     db TX_END
     db 0
 
 level_name_nidoqueen:
+; ニドクイン
     dw 109
-    db "ニドクイン"
+    db "Nidoqueen"
     db TX_END
     db 0
 
 level_name_gyarados:
+; ギャラドス
     dw 109
-    db "ギャラドス"
+    db "Gyarados"
     db TX_END
     db 0
 
 level_name_persian:
+; ペルシアン
     dw 108
-    db "ペルシアン"
+    db "Persian"
     db TX_END
     db 0
 
 level_name_dodrio:
+; ドードリオ
     dw 111
-    db "ドードリオ"
+    db "Dodrio"
     db TX_END
     db 0
 
 level_name_jolteon:
+; サンダース
     dw 108
-    db "サンダース"
+    db "Jolteon"
     db TX_END
     db 0
 
 level_name_golduck:
+; ゴルダック
     dw 107
-    db "ゴルダック"
+    db "Golduck"
     db TX_END
     db 0
 
 level_name_mr_mime:
+; バリヤード
     dw 110
-    db "バリヤード"
+    db "Mr. Mime"
     db TX_END
     db 0
 
 level_name_butterfree:
+; バタフリー
     dw 109
-    db "バタフリー"
+    db "Butterfree"
     db TX_END
     db 0
 
 level_name_graveler:
+; ゴローン
     dw 112
-    db "ゴローン"
+    db "Graveler"
     db TX_END
     db 0
 
 level_name_raticate:
+; ラッタ
     dw 117
-    db "ラッタ"
+    db "Raticate"
     db TX_END
     db 0
 
 level_name_alakazam:
+; フーディン
     dw 110
-    db "フーディン"
+    db "Alakazam"
     db TX_END
     db 0
 
-level_name_gangaskhan:
+level_name_kangaskhan:
+; ガルーラ
     dw 112
-    db "ガルーラ"
+    db "Kangaskhan"
     db TX_END
     db 0
 
 level_name_gloom:
+; クサイハナ
     dw 108
-    db "クサイハナ"
+    db "Gloom"
     db TX_END
     db 0
 
 level_name_ponyta:
+; ポニータ
     dw 113
-    db "ポニータ"
+    db "Ponyta"
     db TX_END
     db 0
 
 level_name_nidorino:
+; ニドリーノ
     dw 111
-    db "ニドリーノ"
+    db "Nidorino"
     db TX_END
     db 0
 
 level_name_nidoking:
+; ニドキング
     dw 108
-    db "ニドキング"
+    db "Nidoking"
     db TX_END
     db 0
 
 level_name_blastoise:
+; カメックス
     dw 109
-    db "カメックス"
+    db "Blastoise"
     db TX_END
     db 0
 
 level_name_primeape:
+; オコリザル
     dw 108
-    db "オコリザル"
+    db "Primeape"
     db TX_END
     db 0
 
 level_name_machoke:
+; ゴーリキー
     dw 110
-    db "ゴーリキー"
+    db "Machoke"
     db TX_END
     db 0
 
 level_name_rapidash:
+; ギャロップ
     dw 109
-    db "ギャロップ"
+    db "Rapidash"
     db TX_END
     db 0
 
 level_name_grimer:
+; ベトベター
     dw 109
-    db "ベトベター"
+    db "Grimer"
     db TX_END
     db 0
 
 level_name_onix:
+; イワーク
     dw 113
-    db "イワーク"
+    db "Onix"
     db TX_END
     db 0
 
 level_name_machamp:
+; カイリキー
     dw 110
-    db "カイリキー"
+    db "Machamp"
     db TX_END
     db 0
 
 level_name_vileplume:
+; ラフレシア
     dw 109
-    db "ラフレシア"
+    db "Vileplume"
     db TX_END
     db 0
 
 level_name_paras:
+; パラス
     dw 115
-    db "パラス"
+    db "Paras"
     db TX_END
     db 0
 
 level_name_lapras:
+; ラプラス
     dw 112
-    db "ラプラス"
+    db "Lapras"
     db TX_END
     db 0
 
 level_name_bulbasaur:
+; フシギダネ
     dw 107
-    db "フシギダネ"
+    db "Bulbasaur"
     db TX_END
     db 0
 
 level_name_machop:
+; ワンリキー
     dw 110
-    db "ワンリキー"
+    db "Machop"
     db TX_END
     db 0
 
 level_name_magneton:
+; レアコイル
     dw 109
-    db "レアコイル"
+    db "Magneton"
     db TX_END
     db 0
 
 level_name_seaking:
+; アズマオウ
     dw 107
-    db "アズマオウ"
+    db "Seaking"
     db TX_END
     db 0
 
 level_name_squirtle:
+; ゼニガメ
     dw 110
-    db "ゼニガメ"
+    db "Squirtle"
     db TX_END
     db 0
 
 level_name_dragonite:
+; カイリュー
     dw 111
-    db "カイリュー"
+    db "Dragonite"
     db TX_END
     db 0
 
 level_name_omastar:
+; オムスター
     dw 109
-    db "オムスター"
+    db "Omastar"
     db TX_END
     db 0
 
 level_name_growlithe:
+; ガーディ
     dw 113
-    db "ガーディ"
+    db "Growlithe"
     db TX_END
     db 0
 
 level_name_vaporeon:
+; シャワーズ
     dw 109
-    db "シャワーズ"
+    db "Vaporeon"
     db TX_END
     db 0
 
 level_name_farfetchd:
+; カモネギ
     dw 112
-    db "カモネギ"
+    db "Farfetchd"
     db TX_END
     db 0
 
 level_name_beedrill:
+; スピアー
     dw 113
-    db "スピアー"
+    db "Beedrill"
     db TX_END
     db 0
 
 level_name_golem:
+; ゴローニャ
     dw 109
-    db "ゴローニャ"
+    db "Golem"
     db TX_END
     db 0
 
 level_name_flareon:
+; ブースター
     dw 109
-    db "ブースター"
+    db "Flareon"
     db TX_END
     db 0
 
 level_name_charmander:
+; ヒトカゲ
     dw 112
-    db "ヒトカゲ"
+    db "Charmander"
     db TX_END
     db 0
 
 level_name_krabby:
+; クラブ
     dw 115
-    db "クラブ"
+    db "Krabby"
     db TX_END
     db 0
 
 level_name_cubone:
+; カラカラ
     dw 112
-    db "カラカラ"
+    db "Cubone"
     db TX_END
     db 0
 
 level_name_arbok:
+; アーボック
     dw 110
-    db "アーボック"
+    db "Arbok"
     db TX_END
     db 0
 
 level_name_rhyhorn:
+; サイホーン
     dw 109
-    db "サイホーン"
+    db "Rhyhorn"
     db TX_END
     db 0
 
 level_name_ninetales:
+; キュウコン
     dw 109
-    db "キュウコン"
+    db "Ninetales"
     db TX_END
     db 0
 
 level_name_abra:
+; ケーシィ
     dw 115
-    db "ケーシィ"
+    db "Abra"
     db TX_END
     db 0
 
 level_name_mewtwo:
+; ミュウツー
     dw 111
-    db "ミュウツー"
+    db "Mewtwo"
     db TX_END
     db 0
 
 level_name_rhydon:
+; サイドン
     dw 113
-    db "サイドン"
+    db "Rhydon"
     db TX_END
     db 0
 
 level_name_raichu:
+; ライチュウ
     dw 109
-    db "ライチュウ"
+    db "Raichu"
     db TX_END
     db 0
 
 level_name_tauros:
+; ケンタロス
     dw 108
-    db "ケンタロス"
+    db "Tauros"
     db TX_END
     db 0
 
 level_name_hitmonlee:
+; サワムラー
     dw 109
-    db "サワムラー"
+    db "Hitmonlee"
     db TX_END
     db 0
 
 level_name_clefable:
+; ピクシー
     dw 113
-    db "ピクシー"
+    db "Clefable"
     db TX_END
     db 0
 
 level_name_lickitung:
+; ベロリンガ
     dw 107
-    db "ベロリンガ"
+    db "Lickitung"
     db TX_END
     db 0
 
 level_name_eevee:
+; イーブイ
     dw 112
-    db "イーブイ"
+    db "Eevee"
     db TX_END
     db 0
 
 level_name_pikachu:
+; ピカチュウ
     dw 109
-    db "ピカチュウ"
+    db "Pikachu"
     db TX_END
     db 0
 
 level_name_caterpie:
+; キャタピー
     dw 110
-    db "キャタピー"
+    db "Caterpie"
     db TX_END
     db 0
 
 level_name_nidorina:
+; ニドリーナ
     dw 110
-    db "ニドリーナ"
+    db "Nidorina"
     db TX_END
     db 0
 
 level_name_marowak:
+; ガラガラ
     dw 110
-    db "ガラガラ"
+    db "Marowak"
     db TX_END
     db 0
 
 level_name_arcanine:
+; ウインディ
     dw 109
-    db "ウインディ"
+    db "Arcanine"
     db TX_END
     db 0
 
 level_name_kadabra:
+; ユンゲラー
     dw 108
-    db "ユンゲラー"
+    db "Kadabra"
     db TX_END
     db 0
 
 level_name_victreebel:
+; ウツボット
     dw 110
-    db "ウツボット"
+    db "Victreebel"
     db TX_END
     db 0
 
 level_name_moltres:
+; ファイヤー
     dw 110
-    db "ファイヤー"
+    db "Moltres"
     db TX_END
     db 0
 
 level_name_doduo:
+; ドードー
     dw 115
-    db "ドードー"
+    db "Doduo"
     db TX_END
     db 0
 
 level_name_jynx:
+; ルージュラ
     dw 110
-    db "ルージュラ"
+    db "Jynx"
     db TX_END
     db 0
 
 level_name_golbat:
+; ゴルバット
     dw 109
-    db "ゴルバット"
+    db "Golbat"
     db TX_END
     db 0
 
 level_name_sandslash:
+; サンドパン
     dw 108
-    db "サンドパン"
+    db "Sandslash"
     db TX_END
     db 0
 
 level_name_tentacruel:
+; ドククラゲ
     dw 108
-    db "ドククラゲ"
+    db "Tentacruel"
     db TX_END
     db 0
 
 level_name_pidgeot:
+; ピジョット
     dw 111
-    db "ピジョット"
+    db "Pidgeot"
     db TX_END
     db 0
 
 level_name_dewgong:
+; ジュゴン
     dw 112
-    db "ジュゴン"
+    db "Dewgong"
     db TX_END
     db 0
 
 level_name_kingler:
+; キングラー
     dw 108
-    db "キングラー"
+    db "Kingler"
     db TX_END
     db 0
 
 level_name_snorlax:
+; カビゴン
     dw 111
-    db "カビゴン"
+    db "Snorlax"
     db TX_END
     db 0
 
 level_name_exeggcute:
+; タマタマ
     dw 112
-    db "タマタマ"
+    db "Exeggcute"
     db TX_END
     db 0
 
 level_name_weezing:
+; マタドガス
     dw 108
-    db "マタドガス"
+    db "Weezing"
     db TX_END
     db 0
 
 level_name_electrode:
+; マルマイン
     dw 108
-    db "マルマイン"
+    db "Electrode"
     db TX_END
     db 0
 
 level_name_aerodactyl:
+; プテラ
     dw 116
-    db "プテラ"
+    db "Aerodactyl"
     db TX_END
     db 0
 
 level_name_wartortle:
+; カメール
     dw 113
-    db "カメール"
+    db "Wartortle"
     db TX_END
     db 0
 
 level_name_articuno:
+; フリーザー
     dw 110
-    db "フリーザー"
+    db "Articuno"
     db TX_END
     db 0
 
 level_name_hitmonchan:
+; エビワラー
     dw 109
-    db "エビワラー"
+    db "Hitmonchan"
     db TX_END
     db 0
 
 level_name_slowbro:
+; ヤドラン
     dw 113
-    db "ヤドラン"
+    db "Slowbro"
     db TX_END
     db 0
 
 level_name_pidgeotto:
+; ピジョン
     dw 113
-    db "ピジョン"
+    db "Pidgeotto"
     db TX_END
     db 0
 
 level_name_hypno:
+; スリーパー
     dw 110
-    db "スリーパー"
+    db "Hypno"
     db TX_END
     db 0
 
 level_name_kaputops:
+; カブトプス
     dw 108
-    db "カブトプス"
+    db "Kabutops"
     db TX_END
     db 0
 
 level_name_sandshrew:
+; サンド
     dw 117
-    db "サンド"
+    db "Sandshrew"
     db TX_END
     db 0
 
 level_name_ekans:
+; アーボ
     dw 117
-    db "アーボ"
+    db "Ekans"
     db TX_END
     db 0
 
 level_name_poliwrath:
+; ニョロボン
     dw 109
-    db "ニョロボン"
+    db "Poliwrath"
     db TX_END
     db 0
 
 level_name_charmeleon:
+; リザード
     dw 114
-    db "リザード"
+    db "Charmeleon"
     db TX_END
     db 0
 
 level_name_psyduck:
+; コダック
     dw 112
-    db "コダック"
+    db "Psyduck"
     db TX_END
     db 0
 
 level_name_oddish:
+; ナゾノクサ
     dw 108
-    db "ナゾノクサ"
+    db "Oddish"
     db TX_END
     db 0
 
 level_name_tentacool:
+; メノクラゲ
     dw 108
-    db "メノクラゲ"
+    db "Tentacool"
     db TX_END
     db 0
 
 level_name_pidgey:
+; ポッポ
     dw 116
-    db "ポッポ"
+    db "Pidgey"
     db TX_END
     db 0
 
 level_name_geodude:
+; イシツブテ
     dw 107
-    db "イシツブテ"
+    db "Geodude"
     db TX_END
     db 0
 
 level_name_zapdos:
+; サンダー
     dw 112
-    db "サンダー"
+    db "Zapdos"
     db TX_END
     db 0
 
 level_name_mew:
+; ミュウ
     dw 118
-    db "ミュウ"
+    db "Mew"
     db TX_END
     db 0
 
