@@ -1,4 +1,5 @@
-SECTION "gfx_lv_10_hanada_cave", ROMX[$4000], BANK[$78]
+SECTION "bank78", ROMX[$4000], BANK[$78]
+
 gfx_lv_10_hanada_cave::
 INCBIN "gfx/town_map/lv_10_hanada_cave.bin"
 .end::
@@ -9,4 +10,8 @@ INCBIN "gfx/town_map/lv_10_hanada_cave_sgb.bin"
 ; like the rest of the water, not white.
 gfx_lv_10_hanada_cave_duplicate::
 INCBIN "gfx/town_map/lv_10_hanada_cave_unused.bin"
+.end::
+
+gfx_how_to_play_safari::
+INCBIN "gfx/how_to_play/how_to_play_safari.bin"
 .end::

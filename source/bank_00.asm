@@ -146,7 +146,7 @@ _start::
     push af
     ld hl, _RAM
     ld bc, $2000 - 1
-    call clear_mem
+    call mem_clear
     pop af
     ld [w_c358], a
     pop af
@@ -276,7 +276,7 @@ function_00_0295::
     push af
     ld hl, _RAM
     ld bc, $2000
-    call clear_mem
+    call mem_clear
     pop af
     ld [w_c344], a
     pop af
@@ -1174,21 +1174,93 @@ function_00_0d91::
     pop af
     ret
 
-SECTION "clear_mem", ROM0[$0f38]
+SECTION "mem_clear", ROM0[$0f38]
 ; Zeroes out RAM
 ; Parameters:
 ; hl - dest
 ; bc - length
-clear_mem::
+mem_clear::
     xor a
     ld [hl+], a
     dec bc
     ld a, c
     or b
-    jr nz, clear_mem
+    jr nz, mem_clear
     ret
 
-SECTION "vram_copy", ROM0[$0fbd]
+SECTION "copy functions", ROM0[$0f69]
+
+; Parameters:
+; a - bank
+; hl - source
+; de - dest
+; bc - length
+mem_copy::
+    ld [w_bank_temp], a
+    ld a, [w_bank_rom]
+    push af
+    ld a, [w_bank_temp]
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+
+.loop
+    ld a, [hl+]
+    ld [de], a
+    inc de
+    dec bc
+    ld a, c
+    or b
+    jr nz, .loop
+
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    ret
+
+; Parameters:
+; a - bank
+; hl - source
+; de - dest
+; bc - length
+mem_mask::
+    ld [w_bank_temp], a
+    ld a, [w_bank_rom]
+    push af
+    ld a, [w_bank_temp]
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+
+    srl b
+    rr c
+.loop
+    push bc
+    ld a, [hl+]
+    ld b, a
+    or [hl]
+    xor $ff
+    ld c, a
+    ld a, [de]
+    and c
+    or b
+    ld [de], a
+    inc de
+    ld a, [de]
+    and c
+    or [hl]
+    ld [de], a
+    inc de
+    inc hl
+    pop bc
+    dec bc
+    ld a, c
+    or b
+    jr nz, .loop
+
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    ret
+
 ; Parameters:
 ; a - bank
 ; hl - source

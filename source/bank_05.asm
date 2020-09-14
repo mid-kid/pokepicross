@@ -38,7 +38,7 @@ function_05_4028:
     call function_00_1bd5
     ld hl, _VRAM
     ld bc, $1000
-    call clear_mem
+    call mem_clear
     ld a, $00
     call function_00_1bd5
 .jr_005_4048
