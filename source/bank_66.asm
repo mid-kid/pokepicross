@@ -119,3 +119,8 @@ gfx_bgm_jigglypuff_4::
 INCBIN "gfx/bgm/no_blink.bin"
 INCBIN "gfx/bgm/jigglypuff_4.bin"
 .end::
+
+SECTION "compressed_gfx_title_2", ROMX[$7ebf], BANK[$66]
+compressed_gfx_title_2::
+INCBIN "gfx/title/title_2.bin.xor"
+.end::
