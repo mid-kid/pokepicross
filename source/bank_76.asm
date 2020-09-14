@@ -26,6 +26,11 @@ gfx_lv_7_cycling_road_duplicate::
 INCBIN "gfx/levels/lv_7_cycling_road_unused.bin"
 .end::
 
+SECTION "compressed_tilemap_attrmap_safari_map", ROMX[$7000], BANK[$76]
+compressed_tilemap_attrmap_safari_map::
+INCBIN "gfx/safari_map/safari_map.tilemap_attrmap.xor"
+.end::
+
 SECTION "compressed_tilemap_attrmap_safari_picross", ROMX[$7c35], BANK[$76]
 compressed_tilemap_attrmap_safari_picross::
 INCBIN "gfx/game_select/safari_picross.tilemap_attrmap.xor"

@@ -26,3 +26,8 @@ INCBIN "gfx/levels/lv_3_sea_cottage_sgb.bin"
 gfx_lv_3_sea_cottage_duplicate::
 INCBIN "gfx/levels/lv_3_sea_cottage_unused.bin"
 .end::
+
+SECTION "compressed_tilemap_attrmap_easy_picross", ROMX[$7ddc], BANK[$74]
+compressed_tilemap_attrmap_easy_picross::
+INCBIN "gfx/easy_picross/easy_picross.tilemap_attrmap.xor"
+.end::
