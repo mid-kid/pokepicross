@@ -484,6 +484,79 @@ function_00_0458::
     pop af
     ret
 
+unknown_00_0475:: ; ???
+    db 8,8,8,8, 8,8,8,8, 8,8,8,8, 8,8,8,8
+    db 8,8,8,0, 8,8,8,0, 8,8,8,0, 8,8,8,0
+    db 8,0,8,0, 8,0,8,0, 8,0,8,0, 8,0,8,0
+    db 8,0,0,8, 0,0,8,0, 0,8,0,0, 8,0,0,8
+    db 0,8,0,0, 0,8,0,0, 0,8,0,0, 0,8,0,0
+
+lcd::
+    push af
+    push bc
+    push de
+    push hl
+
+    ld hl, .return
+    push hl
+
+    ld a, [w_c340]
+    sla a
+    ld c, a
+    ld b, 0
+    ld hl, .pointers
+    add hl, bc
+    ld c, [hl]
+    inc hl
+    ld b, [hl]
+    push bc
+    pop hl
+    jp hl
+
+.return:
+    ld hl, w_c343
+    inc [hl]
+    ld hl, rSTAT
+.hblank_enter
+    ld a, STATF_LCD
+    and [hl]
+    jr nz, .hblank_enter
+
+    pop hl
+    pop de
+    pop bc
+    pop af
+rept 40
+    nop
+endr
+    reti
+
+.pointers:
+    const_def
+    const_dw LCD_FUNCTION_0, lcd_function_0
+    const_dw LCD_FUNCTION_1, lcd_function_1
+    const_dw LCD_FUNCTION_2, lcd_function_2
+    const_dw LCD_FUNCTION_3, lcd_function_3
+    const_dw LCD_FUNCTION_4, lcd_function_4
+    const_dw LCD_FUNCTION_5, lcd_function_5
+    const_dw LCD_FUNCTION_6, lcd_function_6
+    const_dw LCD_FUNCTION_7, lcd_function_7
+    const_dw LCD_FUNCTION_8, lcd_function_8
+    const_dw LCD_FUNCTION_9, lcd_function_9
+    const_dw LCD_FUNCTION_A, lcd_function_a
+    const_dw LCD_FUNCTION_B, lcd_function_b
+
+lcd_function_0::
+    ret ; unused
+
+timer::
+    reti
+
+    reti ; unused
+
+joypad::
+    reti
+
 SECTION "vwf_draw_char", ROM0[$0723]
 vwf_char_draw::
     ld a, [w_vwf_char_start_x]

@@ -13,5 +13,5 @@ INCBIN "gfx/town_map/lv_10_hanada_cave_unused.bin"
 .end::
 
 gfx_how_to_play_safari::
-INCBIN "gfx/how_to_play/how_to_play_safari.bin"
+INCBIN "gfx/how_to_play/safari.bin"
 .end::

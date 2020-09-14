@@ -10,7 +10,7 @@ bank_addr = argv[1].split(':')
 bank = int(bank_addr[0], 16)
 addr = int(bank_addr[1], 16)
 length = int(argv[2], 16)
-offset = bank * 0x4000 + addr - (0x4000 if bank else 0)
+offset = bank * 0x4000 + (addr & 0x3fff)
 
 output = []
 i = offset

@@ -1,6 +1,14 @@
-00:04c5 lcd
-00:0531 timer
-00:0533 joypad
+00:13f0 lcd_function_1
+00:142e lcd_function_2
+00:144b lcd_function_3
+00:1466 lcd_function_4
+00:1481 lcd_function_5
+00:1496 lcd_function_6
+00:1545 lcd_function_7
+00:1719 lcd_function_8
+00:173c lcd_function_9
+00:162f lcd_function_a
+00:1776 lcd_function_b
 
 00:0df5 function_00_0df5
 00:0ecf function_00_0ecf
