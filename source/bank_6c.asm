@@ -1,6 +1,6 @@
 SECTION "gfx_unknown_6c_4000", ROMX[$4000], BANK[$6c]
 gfx_unknown_6c_4000::
-INCBIN "gfx/unknown/unknown_6c_4000.bin"
+INCBIN "gfx/unknown/unknown_6c_4000.2bpp"
 .end::
 
 SECTION "compressed_tilemap_attrmap_pokedex_pic", ROMX[$7c00], BANK[$6c]

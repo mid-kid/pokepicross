@@ -1,11 +1,11 @@
 RGBGFXFLAGS :=
-$(dir_build)/%.bin: %.png | $$(dir $$@)
+$(dir_build)/%.2bpp: %.png | $$(dir $$@)
 	$(RGBGFX) $(RGBGFXFLAGS) -o $@ $<
 
-$(dir_build)/gfx/sprites/%.bin: RGBGFXFLAGS = -h
+$(dir_build)/gfx/sprites/%.2bpp: RGBGFXFLAGS = -h
 
-# data_select.bin.xor decompresses to 2bpp-encoded data_select.png with an extra byte $33 (ASCII "3") appended
-$(dir_build)/gfx/data_select/data_select.bin: gfx/data_select/data_select.png | $$(dir $$@)
+# data_select.2bpp.xor decompresses to 2bpp-encoded data_select.png with an extra byte $33 (ASCII "3") appended
+$(dir_build)/gfx/data_select/data_select.2bpp: gfx/data_select/data_select.png | $$(dir $$@)
 	$(RGBGFX) $(RGBGFXFLAGS) -o $@ $<
 	printf 3 >> $@
 

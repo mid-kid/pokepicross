@@ -1,6 +1,6 @@
 SECTION "gfx_text_chars_light", ROMX[$4000], BANK[$57]
 gfx_text_chars_light::
-INCBIN "gfx/fonts/text_chars_light.bin"
+INCBIN "gfx/fonts/text_chars_light.2bpp"
 .end::
 
 SECTION "tilemap_how_to_play", ROMX[$7c00], BANK[$57]

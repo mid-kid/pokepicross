@@ -1,6 +1,6 @@
 SECTION "gfx_alphabets", ROMX[$4000], BANK[$7c]
 gfx_alphabets::
-INCBIN "gfx/fonts/alphabets.bin"
+INCBIN "gfx/fonts/alphabets.2bpp"
 .end::
 
 SECTION "attrmap_how_to_play", ROMX[$5c00], BANK[$7c]
