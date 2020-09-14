@@ -105,7 +105,7 @@ message_02_5fe2::
     done
 
 message_02_6004::
-    text "GAME　SELECTがめんで"
+    text "ＧＡＭＥ　ＳＥＬＥＣＴがめんで"
     line "みぎを　おしましょう"
     done
 
@@ -229,19 +229,19 @@ message_02_644a::
 message_02_645a::
     text "もんだいを　といている"
     line "さいちゅうに"
-    line "STARTボタンを　おすと"
+    line "ＳＴＡＲＴボタンを　おすと"
     line "メニューが　ひらきますが"
     done
 
 message_02_64b6::
     text "サファリピクロスでは"
     line "ポケモンピクロスの"
-    line "『HINT』がないかわりに"
-    line "『？START』があります"
+    line "『ＨＩＮＴ』がないかわりに"
+    line "『？ＳＴＡＲＴ』があります"
     done
 
 message_02_6518::
-    text "『？START』をつかうと"
+    text "『？ＳＴＡＲＴ』をつかうと"
     line "ためしにマスを"
     line "けずることができます"
     done
@@ -275,14 +275,14 @@ message_02_6612::
 message_02_6654::
     text "けずりおわったら"
     line "メニューをだして"
-    line "『？END』を"
+    line "『？ＥＮＤ』を"
     line "えらびましょう"
     done
 
 message_02_6698::
     text "けずったマスが"
     line "あっているとおもったら"
-    line "『OK』をえらびましょう"
+    line "『ＯＫ』をえらびましょう"
     done
 
 message_02_66da::
@@ -300,7 +300,7 @@ message_02_672c::
     done
 
 message_02_6780::
-    text "GAMEOVERになるかも"
+    text "ＧＡＭＥＯＶＥＲになるかも"
     line "しれないから"
     line "ちゅういしましょう"
     done
@@ -312,7 +312,7 @@ message_02_67be::
     done
 
 message_02_6802::
-    text "『CANCEL』を"
+    text "『ＣＡＮＣＥＬ』を"
     line "えらびましょう"
     done
 
@@ -376,11 +376,11 @@ tutorial_message_08::
     done
 
 tutorial_message_09::
-    text "たとえば　この『5』は　"
+    text "たとえば　この『５』は　"
     done
 
 tutorial_message_10::
-    line "たてに　れんぞくして　5マス"
+    line "たてに　れんぞくして　５マス"
     line "けずることを　あらわして"
     line "おるんじゃ"
     done
@@ -395,12 +395,12 @@ tutorial_message_12::
     done
 
 tutorial_message_13::
-    text "たとえば　この『3』と『1』は"
+    text "たとえば　この『３』と『１』は"
     done
 
 tutorial_message_14::
-    line "ひだりから3マスけずり　さらに　"
-    line "はなれた　ところを1マスけずる"
+    line "ひだりから３マスけずり　さらに　"
+    line "はなれた　ところを１マスけずる"
     line "ことを　あらわして　おるぞ！"
     done
 
@@ -438,7 +438,7 @@ tutorial_message_20::
     done
 
 tutorial_message_21::
-    text "タイミングよく　Aボタンを"
+    text "タイミングよく　Ａボタンを"
     line "おすんじゃ！"
     line "さいしょは　うえのカーソル"
     done
@@ -469,11 +469,11 @@ tutorial_message_25::
     done
 
 tutorial_message_26::
-    line "SELECTボタンをおすと"
+    line "ＳＥＬＥＣＴボタンをおすと"
     done
 
 tutorial_message_27::
-    text "SELECTボタンを　おしている"
+    text "ＳＥＬＥＣＴボタンを　おしている"
     line "あいだだけ　このように"
     line "どんなもんだいを　といているか"
     line "わかりやすくなるぞ！"
@@ -585,12 +585,12 @@ message_02_72da::
     done
 
 message_02_7310::
-    text "STARTボタンを　おして"
+    text "ＳＴＡＲＴボタンを　おして"
     line "メニューをだすんだ"
     done
 
 message_02_7340::
-    text "そこで『BGM』を　えらんで"
+    text "そこで『ＢＧＭ』を　えらんで"
     line "ポケモンの　エネルギーマークを"
     done
 
@@ -755,11 +755,11 @@ message_02_77d6::
 
 message_02_7806::
     text "ふつうに８もんとけば"
-    line "つぎのMAPにすすめるから"
+    line "つぎのＭＡＰにすすめるから"
     done
 
 message_02_7838::
-    text "とりあえずは　さいごのMAPまで"
+    text "とりあえずは　さいごのＭＡＰまで"
     line "すすんでから　あとで　ゆっくりと"
     done
 

@@ -23,6 +23,9 @@ farjp: macro
 endm
 
 
+tiles EQUS "* $10"
+
+
 lb: macro
     ld \1, ((\2) & $ff) << 8 | ((\3) & $ff)
 endm
