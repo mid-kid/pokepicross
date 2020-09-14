@@ -241,6 +241,8 @@ charmap "）", 239
 charmap "～", 240
 charmap "♂", 241
 charmap "♀", 242
+charmap "é", 243
+charmap "'", 244
 
 ; ASCII alternatives to fullwidth characters
 charmap "0", 160

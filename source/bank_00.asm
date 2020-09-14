@@ -1444,9 +1444,9 @@ text_draw_char:
     add b
     ld [w_vwf_char_end_x], a
 
-    ; Draw ピ one pixel higher
+    ; Draw é one pixel higher
     ld a, e
-    cp "ピ"
+    cp "é"
     jr nz, .not_pi
     ld a, d
     and a

@@ -223,7 +223,7 @@ text_chars_widths::
     db 6  ; x
     db 6  ; y
     db 5  ; z
-    db 0 
+    db 4
     db 4  ; 、
     db 4  ; 。
     db 5  ; 『
@@ -243,8 +243,8 @@ text_chars_widths::
     db 7  ; ~
     db 8  ; ♂
     db 5  ; ♀
-    db 0
-    db 0
+    db 5  ; é
+    db 1  ; '
     db 0
     db 0
     db 0
