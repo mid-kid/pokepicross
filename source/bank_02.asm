@@ -72,10 +72,7 @@ textbox_print_char::
 .done
     ; Back up string pointer
     pop hl
-    ld a, l
-    ld [w_textbox_cur_string + 0], a
-    ld a, h
-    ld [w_textbox_cur_string + 1], a
+    ld16 w_textbox_cur_string, hl
 
     ; Check if the next character is a terminator
     ld a, [hl+]
@@ -102,10 +99,7 @@ textbox_draw_char::
     ld d, [hl]
     ld hl, gfx_text_chars_dark
     add hl, de
-    ld a, l
-    ld [w_vwf_char_addr + 0], a
-    ld a, h
-    ld [w_vwf_char_addr + 1], a
+    ld16 w_vwf_char_addr, hl
     ld a, BANK(gfx_text_chars_dark)
     ld [w_vwf_char_bank], a
 

@@ -1424,10 +1424,7 @@ text_draw_char:
     ld d, [hl]
     ld hl, gfx_text_chars_bw
     add hl, de
-    ld a, l
-    ld [w_vwf_char_addr + 0], a
-    ld a, h
-    ld [w_vwf_char_addr + 1], a
+    ld16 w_vwf_char_addr, hl
     ld a, BANK(gfx_text_chars_bw)
     ld [w_vwf_char_bank], a
 
