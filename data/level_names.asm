@@ -10,12 +10,12 @@ level_names::
     dw level_name_pc
     dw level_name_repel
     dw level_name_sylph_scope
-    dw level_name_clefairy_doll
+    dw level_name_poke_doll
     dw level_name_gold_teeth
     dw level_name_jigglypuffs_microphone
     dw level_name_super_rod
     dw level_name_poke_flute
-    dw level_name_balloon
+    dw level_name_balloons
     dw level_name_bicycle
     dw level_name_hat
     dw level_name_diglett
@@ -87,7 +87,7 @@ level_names::
     dw level_name_graveler
     dw level_name_raticate
     dw level_name_alakazam
-    dw level_name_gangaskhan
+    dw level_name_kangaskhan
     dw level_name_gloom
     dw level_name_ponyta
     dw level_name_nidorino
@@ -286,7 +286,7 @@ level_name_sylph_scope:
     done
     db 0
 
-level_name_clefairy_doll:
+level_name_poke_doll:
     dw 98
     text "ピッピにんぎょう"
     done
@@ -316,7 +316,7 @@ level_name_poke_flute:
     done
     db 0
 
-level_name_balloon:
+level_name_balloons:
     dw 112
     text "ふうせん"
     done
@@ -748,7 +748,7 @@ level_name_alakazam:
     done
     db 0
 
-level_name_gangaskhan:
+level_name_kangaskhan:
     dw 112
     text "ガルーラ"
     done
