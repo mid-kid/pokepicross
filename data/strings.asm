@@ -14,7 +14,7 @@ strings_pointers::
     dw level_name_gold_teeth
     dw level_name_jigglypuffs_microphone
     dw level_name_super_rod
-    dw level_name_pokemon_flute
+    dw level_name_poke_flute
     dw level_name_balloon
     dw level_name_bicycle
     dw level_name_hat
