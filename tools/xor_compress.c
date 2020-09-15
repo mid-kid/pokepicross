@@ -64,15 +64,7 @@ failure:
     return buffer;
 }
 
-int compress_files(char *filenames[], int num_files) {
-    int err = 0;
-    size_t n = 0;
-    unsigned char *data = read_files(filenames, num_files, &n, &err);
-    if (err > 0) {
-        if (data) free(data);
-        return err;
-    }
-
+void compress_data(unsigned char *data, size_t n) {
     unsigned char v = 0x00;
     for (size_t i = 0; i < n;) {
         unsigned char byte = data[i++];
@@ -99,10 +91,7 @@ int compress_files(char *filenames[], int num_files) {
             fwrite(buffer, 1, size, stdout);
         }
     }
-
     fflush(stdout);
-    free(data);
-    return 0;
 }
 
 int main(int argc, char *argv[]) {
@@ -112,5 +101,16 @@ int main(int argc, char *argv[]) {
     }
     argv++;
     argc--;
-    return compress_files(argv, argc);
+
+    int err = 0;
+    size_t data_size = 0;
+    unsigned char *data = read_files(argv, argc, &data_size, &err);
+    if (err > 0) {
+        if (data) free(data);
+        return err;
+    }
+
+    compress_data(data, data_size);
+    free(data);
+    return 0;
 }
