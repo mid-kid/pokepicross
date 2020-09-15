@@ -38,7 +38,7 @@ unsigned char *read_files(char *filenames[], int num_files, size_t *buf_size, in
 
         size_t f_size = file_size(f, err);
         if (*err > 0) goto failure;
-        if (f_size == 0) continue;
+        if (!f_size) continue;
 
         *buf_size += f_size;
         buffer = realloc(buffer, *buf_size);
@@ -105,12 +105,7 @@ int main(int argc, char *argv[]) {
     int err = 0;
     size_t data_size = 0;
     unsigned char *data = read_files(argv, argc, &data_size, &err);
-    if (err > 0) {
-        if (data) free(data);
-        return err;
-    }
-
-    compress_data(data, data_size);
+    if (!err) compress_data(data, data_size);
     free(data);
-    return 0;
+    return err;
 }
