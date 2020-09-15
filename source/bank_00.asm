@@ -1247,7 +1247,7 @@ function_00_0d91::
     pop af
     ret
 
-SECTION "mem_clear", ROM0[$0f38]
+SECTION "mem functions", ROM0[$0f38]
 ; Zeroes out RAM
 ; Parameters:
 ; hl - dest
@@ -1261,14 +1261,54 @@ mem_clear::
     jr nz, mem_clear
     ret
 
-SECTION "copy functions", ROM0[$0f69]
+; Zeroes out RAM
+; Parameters:
+; hl - dest
+; bc - length
+function_00_0f40::
+    ldh a, [rLCDC]
+    bit LCDCF_ON_F, a
+    jr z, .hblank_enter
+.hblank_finish
+    ldh a, [rSTAT]
+    and STATF_LCD
+    jr z, .hblank_finish
+.hblank_enter
+    ldh a, [rSTAT]
+    and STATF_LCD
+    jr nz, .hblank_enter
+    xor a
+rept 4
+    ld [hl+], a
+endr
+rept 4
+    dec bc
+endr
+    ld a, b
+    or c
+    jr nz, function_00_0f40
+    ret
+
+; Parameters:
+; hl - source
+; de - dest
+; bc - length
+mem_copy::
+    ld a, [hl+]
+    ld [de], a
+    inc de
+    dec bc
+    ld a, c
+    or b
+    jr nz, mem_copy
+    ret
 
 ; Parameters:
 ; a - bank
 ; hl - source
 ; de - dest
 ; bc - length
-mem_copy::
+far_mem_copy::
     ld [w_bank_temp], a
     ld a, [w_bank_rom]
     push af
@@ -1295,7 +1335,7 @@ mem_copy::
 ; hl - source
 ; de - dest
 ; bc - length
-mem_mask::
+far_mem_mask::
     ld [w_bank_temp], a
     ld a, [w_bank_rom]
     push af
