@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 #include <errno.h>
 
@@ -54,15 +55,16 @@ failure:
     return buffer;
 }
 
-int write_compressed(const char *filename, unsigned char *data, size_t n) {
+int write_compressed(const char *filename, unsigned char *data, size_t n, bool verbose) {
     FILE *f = fopen(filename, "wb");
     if (!f) {
         fprintf(stderr, PROGRAM_NAME ": %s: %s\n", filename, strerror(errno));
         return errno;
     }
 
+    int runs = 0;
     unsigned char v = 0x00;
-    for (size_t i = 0; i < n;) {
+    for (size_t i = 0; i < n; runs++) {
         unsigned char byte = data[i++];
         unsigned char size = 0;
         if (data[i] == v) {
@@ -88,14 +90,23 @@ int write_compressed(const char *filename, unsigned char *data, size_t n) {
         }
     }
 
+    if (verbose) fprintf(stderr, PROGRAM_NAME ": %s: ld bc, $%x\n", filename, runs);
+
     fflush(f);
     fclose(f);
     return 0;
 }
 
 int main(int argc, char *argv[]) {
+    bool verbose = false;
+    if (argc > 1 && !strcmp(argv[1], "-v")) {
+        verbose = true;
+        argv++;
+        argc--;
+    }
+
     if (argc < 3) {
-        fputs("Usage: " PROGRAM_NAME " file... files.xor\n", stderr);
+        fputs("Usage: " PROGRAM_NAME " [-v] file... files.xor\n", stderr);
         exit(1);
     }
     argv++;
@@ -104,7 +115,7 @@ int main(int argc, char *argv[]) {
     int err = 0;
     size_t data_size = 0;
     unsigned char *data = read_files(argv, argc, &data_size, &err);
-    if (!err) err = write_compressed(argv[argc], data, data_size);
+    if (!err) err = write_compressed(argv[argc], data, data_size, verbose);
     free(data);
     return err;
 }
