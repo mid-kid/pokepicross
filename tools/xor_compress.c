@@ -7,22 +7,12 @@
 
 extern int errno;
 
-size_t file_size(FILE *f, int *err) {
-    int check = fseek(f, 0, SEEK_END);
-    if (check == -1) goto failure;
-
+size_t file_size(FILE *f) {
+    if (fseek(f, 0, SEEK_END) == -1) return 0;
     long f_size = ftell(f);
-    if (f_size == -1) goto failure;
-
-    check = fseek(f, 0, SEEK_SET);
-    if (check == -1) goto failure;
-
-    *err = 0;
+    if (f_size == -1) return 0;
+    if (fseek(f, 0, SEEK_SET) == -1) return 0;
     return (size_t)f_size;
-
-failure:
-    *err = errno;
-    return 0;
 }
 
 unsigned char *read_files(char *filenames[], int num_files, size_t *buf_size, int *err) {
@@ -36,8 +26,8 @@ unsigned char *read_files(char *filenames[], int num_files, size_t *buf_size, in
         FILE *f = fopen(filename, "rb");
         if (!f) goto failure;
 
-        size_t f_size = file_size(f, err);
-        if (*err > 0) goto failure;
+        size_t f_size = file_size(f);
+        if (errno) goto failure;
         if (!f_size) continue;
 
         *buf_size += f_size;
@@ -64,7 +54,13 @@ failure:
     return buffer;
 }
 
-void compress_data(unsigned char *data, size_t n) {
+int write_compressed(const char *filename, unsigned char *data, size_t n) {
+    FILE *f = fopen(filename, "wb");
+    if (!f) {
+        fprintf(stderr, PROGRAM_NAME ": %s: %s\n", filename, strerror(errno));
+        return errno;
+    }
+
     unsigned char v = 0x00;
     for (size_t i = 0; i < n;) {
         unsigned char byte = data[i++];
@@ -73,13 +69,13 @@ void compress_data(unsigned char *data, size_t n) {
             // Alternating (>= 0x80)
             // Run stops at 0x80 bytes or when the values stop alternating
             for (; i < n && size < 0x80 && data[i] == ((size % 2) ? byte : v); size++, i++);
-            putchar(size + 0x7f);
-            putchar(v ^ byte);
+            fputc(size + 0x7f, f);
+            fputc(v ^ byte, f);
             if (size % 2 == 0) v = byte;
         } else {
             // Sequential (< 0x80)
             // Run stops at 0x80 bytes or when the value two ahead is equal to v
-            unsigned char buffer[256] = {0};
+            unsigned char buffer[256];
             buffer[size++] = v ^ byte;
             for (; i < n; i++) {
                 v = byte;
@@ -87,25 +83,28 @@ void compress_data(unsigned char *data, size_t n) {
                 byte = data[i];
                 buffer[size++] = v ^ byte;
             }
-            putchar(size - 1);
-            fwrite(buffer, 1, size, stdout);
+            fputc(size - 1, f);
+            fwrite(buffer, 1, size, f);
         }
     }
-    fflush(stdout);
+
+    fflush(f);
+    fclose(f);
+    return 0;
 }
 
 int main(int argc, char *argv[]) {
-    if (argc < 2) {
-        fputs("Usage: " PROGRAM_NAME " file... > files.xor\n", stderr);
+    if (argc < 3) {
+        fputs("Usage: " PROGRAM_NAME " file... files.xor\n", stderr);
         exit(1);
     }
     argv++;
-    argc--;
+    argc -= 2;
 
     int err = 0;
     size_t data_size = 0;
     unsigned char *data = read_files(argv, argc, &data_size, &err);
-    if (!err) compress_data(data, data_size);
+    if (!err) err = write_compressed(argv[argc], data, data_size);
     free(data);
     return err;
 }

@@ -10,9 +10,9 @@ $(dir_build)/gfx/data_select/data_select.2bpp: gfx/data_select/data_select.png |
 	printf 3 >> $@
 
 $(dir_build)/%.xor: $(dir_build)/% | $$(dir $$@) tools/xor_compress
-	tools/xor_compress $< > $@
+	tools/xor_compress $< $@
 $(dir_build)/%.xor: % | $$(dir $$@) tools/xor_compress
-	tools/xor_compress $< > $@
+	tools/xor_compress $< $@
 
 $(dir_build)/%.tilemap_attrmap.xor: %.tilemap %.attrmap | $$(dir $$@) tools/xor_compress
-	tools/xor_compress $^ > $@
+	tools/xor_compress $^ $@
