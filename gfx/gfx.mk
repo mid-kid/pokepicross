@@ -9,10 +9,12 @@ $(dir_build)/gfx/data_select/data_select.2bpp: gfx/data_select/data_select.png |
 	$(RGBGFX) $(RGBGFXFLAGS) -o $@ $<
 	printf 3 >> $@
 
-$(dir_build)/%.xor: $(dir_build)/% | $$(dir $$@) tools/xor_compress
-	tools/xor_compress $< $@
-$(dir_build)/%.xor: % | $$(dir $$@) tools/xor_compress
-	tools/xor_compress $< $@
+XOR_COMPRESS := tools/xor_compress
 
-$(dir_build)/%.tilemap_attrmap.xor: %.tilemap %.attrmap | $$(dir $$@) tools/xor_compress
-	tools/xor_compress $^ $@
+$(dir_build)/%.xor: $(dir_build)/% | $$(dir $$@) $(XOR_COMPRESS)
+	$(XOR_COMPRESS) $< $@
+$(dir_build)/%.xor: % | $$(dir $$@) $(XOR_COMPRESS)
+	$(XOR_COMPRESS) $< $@
+
+$(dir_build)/%.tilemap_attrmap.xor: %.tilemap %.attrmap | $$(dir $$@) $(XOR_COMPRESS)
+	$(XOR_COMPRESS) $^ $@
