@@ -12,3 +12,4 @@ __pycache__
 /coverage.png
 /picross.png
 tools/scan_includes
+tools/xor_compress

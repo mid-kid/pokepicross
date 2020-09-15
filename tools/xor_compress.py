@@ -9,7 +9,7 @@ for filename in sys.argv[1:]:
     with open(filename, 'rb') as f:
         data.extend(f.read())
 
-n = len(data) 
+n = len(data)
 output = bytearray()
 v = 0x00
 i = 0
@@ -20,14 +20,14 @@ while i < n:
 
     if data[i] == v:
         # Alternating (>= 0x80)
-        # Run stops at 0x81 bytes or when the values stop alternating
-        size = 1
-        while i < n and size < 0x81 and data[i] == (v if size % 2 else byte):
+        # Run stops at 0x80 bytes or when the values stop alternating
+        size = 0
+        while i < n and size < 0x80 and data[i] == (byte if size % 2 else v):
             size += 1
             i += 1
-        output.append(size + 0x7e)
+        output.append(size + 0x7f)
         output.append(v ^ byte)
-        if size % 2:
+        if not size % 2:
             v = byte
 
     else:

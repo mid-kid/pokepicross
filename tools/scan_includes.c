@@ -260,7 +260,7 @@ int main(int argc, char* argv[]) {
     }
 
     if (Options.target) {
-        fprintf(f, "%s:", Options.target, includes, incbins);
+        fprintf(f, "%s:", Options.target);
     }
     if (includes) fprintf(f, " %s", includes);
     if (incbins) fprintf(f, " %s", incbins);
