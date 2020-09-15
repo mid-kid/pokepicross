@@ -1466,6 +1466,255 @@ vwf_pixel_masks_left:
 vwf_data_00_0a35: ; ???
     db $00, $00, $68, $01, $d0, $02, $38, $04, $a0, $05, $08, $07, $70, $08, $d8, $09, $40, $0b, $a8, $0c, $fa, $57, $c3, $a7, $c8, $f0, $00, $f6, $30, $e0, $00, $f0, $4d, $3e, $01, $e0, $4d, $10, $6f
 
+function_00_0a5c::
+    ret
+
+function_00_0a5d::
+    push af
+    push hl
+    ld hl, sp + 4
+    ld a, [hl]
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    pop hl
+    pop af
+    inc sp
+    inc sp
+    ret
+
+function_00_0a6d::
+    ld [w_bank_temp], a
+    ld16 w_farcall_target, hl
+    pop hl
+    ld16 w_c319, hl
+    pop hl
+    pop af
+    ld [w_c31b], a
+    ld a, l
+    ld [w_c31c + 0], a
+    ld a, h
+    ld [w_c31c + 1], a
+    ld hl, w_c319
+    ld a, [hl+]
+    ld h, [hl]
+    ld l, a
+    push hl
+    ld hl, w_c31c
+    ld a, [hl+]
+    ld h, [hl]
+    ld l, a
+    ld a, [w_c31b]
+    push af
+    push af
+    push af
+    push af
+    push hl
+    ld hl, sp + 4
+    ld a, [w_farcall_target + 0]
+    ld [hl+], a
+    ld a, [w_farcall_target + 1]
+    ld [hl+], a
+    ld a, LOW(function_00_0a5d)
+    ld [hl+], a
+    ld a, HIGH(function_00_0a5d)
+    ld [hl+], a
+    ld a, [w_bank_rom]
+    ld [hl], a
+    ld a, [w_bank_temp]
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    pop hl
+    pop af
+    ret
+
+string_print_dark_function_00_0ac3::
+    ld a, [w_bank_rom]
+    push af
+    ld a, $02 ; BANK(???)
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+
+    ; Get text coordinates
+    ld a, [w_text_pos_x]
+    ld b, a
+    ld a, [w_text_pos_y]
+    ld c, a
+
+.string_loop
+    ld a, [hl+]
+    ld e, a
+    ld a, [hl+]
+    ld d, a
+    and e
+    cp TX_END
+    jr z, .done
+
+    push bc
+    push hl
+    call text_draw_char_dark
+    pop hl
+    pop bc
+
+    ; Leave one pixel between each character
+    add b
+    inc a
+    ld b, a
+    jr .string_loop
+
+.done
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    ret
+
+function_00_0af4::
+    push de
+    ld b, 0
+    ld a, d
+    cpl
+    ld d, a
+    ld a, e
+    cpl
+    ld e, a
+    inc de
+.loop
+    add hl, de
+    inc b
+    bit 7, h
+    jr z, .loop
+    dec b
+    pop de
+    add hl, de
+    ld a, l
+    ret
+
+function_00_0b09:
+    push af
+    ld a, b
+    cp $01
+    jr c, .done
+    jr nz, .continue
+    ld a, c
+    and a
+    jr nz, .continue
+.done
+    pop af
+    call function_00_0b2e
+    ret
+
+.continue
+    pop af
+    push af
+    push bc
+    push hl
+    ld bc, $0100
+    call function_00_0b2e
+    pop hl
+    ld bc, $0100
+    add hl, bc
+    pop bc
+    dec b
+    pop af
+    jr function_00_0b09
+
+function_00_0b2e::
+    push af
+    push bc
+    push de
+    ld de, w_c100
+    call mem_copy
+    pop de
+    pop bc
+    pop af
+    ld l, a
+    ld a, [w_c316]
+    push af
+    ld a, l
+    ld [w_c316], a
+    ld [rRAMB], a
+    ld hl, w_c100
+    call mem_copy
+    pop af
+    ld [w_c316], a
+    ld [rRAMB], a
+    ret
+
+function_00_0b54::
+    ld [w_bank_temp], a
+    ld a, [w_bank_rom]
+    push af
+    ld a, [w_bank_temp]
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+
+    ld a, [w_c357]
+    and a
+    jp nz, .jump_000_0b84
+    ld bc, $800
+.loop
+    inc hl
+    ld a, [hl+]
+    ld [de], a
+    inc de
+    ld a, [hl+]
+    ld [de], a
+    inc de
+    dec bc
+    dec bc
+    ld a, c
+    or b
+    jp nz, .loop
+
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    ret
+
+.jump_000_0b84
+    push hl
+    ld hl, w_dbee
+    ld a, e
+    ld [hl+], a
+    ld [hl], d
+    pop hl
+    push hl
+    ld hl, w_dbf0
+    ld a, e
+    ld [hl+], a
+    ld [hl], d
+    pop hl
+    push hl
+    ld hl, w_dbe4
+    ld a, c
+    ld [hl+], a
+    ld [hl], b
+    pop hl
+.loop_000_0b9c
+    call function_00_0bc0
+    ld de, 3
+    add hl, de
+    push hl
+    ld hl, w_dbe4
+    ld a, [hl+]
+    ld e, a
+    ld d, [hl]
+    pop hl
+    dec de
+    push hl
+    ld hl, w_dbe4
+    ld a, e
+    ld [hl+], a
+    ld [hl], d
+    pop hl
+    ld a, d
+    or e
+    jr nz, .loop_000_0b9c
+
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    ret
+
 SECTION "farcall_a_hl", ROM0[$0d36]
 farcall_a_hl::
     ld [w_bank_temp], a
@@ -1910,7 +2159,7 @@ level_name_print::
     and a
     jr z, .done
 
-    ; Get text cooredinates
+    ; Get text coordinates
     ld a, [w_text_pos_x]
     ld b, a
     inc hl

@@ -10,6 +10,7 @@
 00:162f lcd_function_a
 00:1776 lcd_function_b
 
+00:0bc0 function_00_0bc0
 00:0df5 function_00_0df5
 00:0ecf function_00_0ecf
 00:0f20 function_00_0f20
@@ -94,8 +95,12 @@
 00:c317 w_farcall_target ; dw
 00:c317 w_farcall_target_low
 00:c318 w_farcall_target_high
+00:c319 w_c319 ; dw
+00:c31b w_c31b ; db
+00:c31c w_c31c ; dw
 00:c31e w_bank_temp ; db
 
+00:c100 w_c100
 00:c300 w_c300
 00:c301 w_c301
 00:c314 w_c314
@@ -210,6 +215,8 @@
 01:d6c9 w_d6c9
 01:d6ca w_d6ca
 01:dbe4 w_dbe4 ; db
+01:dbee w_dbee ; dw
+01:dbf0 w_dbf0 ; db/dw
 01:df3f w_df3f ; ds 3
 01:df47 w_df47
 01:df62 w_df62
