@@ -61,7 +61,7 @@ start::
     nop
     jp _start
 
-SECTION "_start, etc", ROM0[$0150]
+SECTION "bank0", ROM0[$0150]
 _start::
     ld c, a
     xor a
@@ -557,13 +557,374 @@ timer::
 joypad::
     reti
 
-SECTION "vwf_draw_char", ROM0[$0723]
+; Returns:
+; a - character width
+; Parameters:
+; de - character to print
+; b - x position
+; c - y position
+text_draw_char_dark::
+    ld a, [w_bank_rom]
+    push af
+    ld a, BANK(text_chars_offsets)
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+
+    ; Get char address
+    push de
+    sla e
+    rl d
+    ld hl, text_chars_offsets
+    add hl, de
+    ld e, [hl]
+    inc hl
+    ld d, [hl]
+    ld hl, gfx_text_chars_dark
+    add hl, de
+    ld16 w_vwf_char_addr, hl
+    ld a, BANK(gfx_text_chars_dark)
+    ld [w_vwf_char_bank], a
+    ld a, b
+    ld [w_vwf_char_start_x], a
+    pop de
+
+    ; Get character width
+    ld hl, text_chars_widths
+    add hl, de
+    ld a, [hl]
+    and a
+    jr z, .done
+    push af
+    add b
+    ld [w_vwf_char_end_x], a
+
+    ; Draw ピ one pixel higher
+    ld a, e
+    cp "ピ"
+    jr nz, .not_pi
+    ld a, d
+    and a
+    jr nz, .not_pi
+    dec c
+.not_pi
+
+    ; Set y coordinates for the character
+    ld a, c
+    ld [w_vwf_char_start_y], a
+    add 9
+    ld [w_vwf_char_end_y], a
+
+    call vwf_char_draw
+    pop af
+.done
+
+    ld e, a
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    ld a, e
+    ret
+
+vwf_char_draw_dark::
+    ld a, [w_vwf_char_start_x]
+    and %00000111
+    ld c, a
+    ld b, 0
+    ld hl, vwf_pixel_masks_right
+    add hl, bc
+    ld a, [hl]
+    ld [w_c363], a
+    ld hl, vwf_pixel_masks_left
+    add hl, bc
+    ld a, [hl]
+    ld [w_c364], a
+    xor a
+    ld [w_c365], a
+    inc a
+    ld [w_c366], a
+    ld a, [w_vwf_char_start_x]
+    and %00000111
+    ld c, a
+    add $38
+    ld [w_c368], a
+    ld b, 0
+    ld hl, vwf_pixel_masks_right
+    add hl, bc
+    ld a, [hl]
+    ld [w_c369], a
+    ld hl, vwf_data_00_0a2c
+    add hl, bc
+    ld a, [hl]
+    ld [w_c36a], a
+    ld a, [w_vwf_char_addr + 0]
+    ld c, a
+    ld a, [w_vwf_char_addr + 1]
+    ld b, a
+    ld a, [w_bank_rom]
+    push af
+    ld a, [w_vwf_char_bank]
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+
+    ld de, w_vwf_char_buffer
+    ld a, [w_vwf_char_start_y]
+    ld l, a
+    ld a, [w_vwf_char_start_x]
+    and %11111000
+    ld h, a
+
+.jump_000_05ef
+    xor a
+    ld [w_c36b], a
+    ld [w_c36c], a
+    ld a, [w_c366]
+    ld [w_c367], a
+    ld a, [w_c363]
+    ld [w_c362], a
+    push bc
+    push hl
+    push hl
+    ld a, [w_c364]
+    ld hl, w_c363
+    and [hl]
+    ld [w_c362], a
+    pop hl
+    ld a, [w_bank_rom]
+    push af
+    ld a, $23 ; BANK(???)
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    push bc
+    push de
+    ld b, h
+    ld c, l
+    ld a, l
+    and %11111000
+    srl a
+    srl a
+    ld e, a
+    ld d, 0
+    ld a, [w_cd6d]
+    ld l, a
+    ld a, [w_cd6e]
+    ld h, a
+    add hl, de
+    ld a, [hl+]
+    ld h, [hl]
+    ld l, a
+    ld a, b
+    and %11111000
+    srl a
+    srl a
+    ld e, a
+    ld d, 0
+    add hl, de
+    ld a, [hl+]
+    ld h, [hl]
+    ld l, a
+    ld a, c
+    and %00000111
+    sla a
+    add l
+    ld l, a
+    pop de
+    pop bc
+    ld a, l
+    ld [de], a
+    inc de
+    ld a, h
+    ld [de], a
+    inc de
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    ld a, [w_c362]
+    ld [de], a
+    inc de
+    ld a, [w_c367]
+    and a
+    jr z, .jump_000_0667
+
+    ld a, [bc]
+    inc bc
+
+.jump_000_0667
+    ld l, a
+    ld a, [w_c368]
+    ld h, a
+    ld a, [hl]
+    push af
+    ld hl, w_c369
+    and [hl]
+    ld hl, w_c36b
+    or [hl]
+    ld [de], a
+    pop af
+    ld hl, w_c36a
+    and [hl]
+    ld [w_c36b], a
+    inc de
+    ld a, [w_c367]
+    and a
+    jr z, .jump_000_0691
+
+    ld a, [bc]
+    push af
+    ld a, c
+    add $0f
+    ld c, a
+    ld a, b
+    adc 0
+    ld b, a
+    pop af
+
+.jump_000_0691
+    ld l, a
+    ld a, [w_c368]
+    ld h, a
+    ld a, [hl]
+    push af
+    ld hl, w_c369
+    and [hl]
+    ld hl, w_c36c
+    or [hl]
+    ld [de], a
+    pop af
+    ld hl, w_c36a
+    and [hl]
+    ld [w_c36c], a
+    inc de
+    pop hl
+    pop bc
+    inc bc
+    inc bc
+    ld a, c
+    and %00001111
+    jr nz, .jump_000_06bb
+
+    ld a, c
+    add $f0
+    ld c, a
+    ld a, b
+    adc 0
+    ld b, a
+
+.jump_000_06bb
+    inc l
+    ld a, [w_vwf_char_start_y]
+    cp l
+    jp nc, .jump_000_05ef
+
+    xor a
+    ld [de], a
+    inc de
+    ld [de], a
+
+    ; Write tiles stored in the buffer
+    ld bc, w_vwf_char_buffer
+
+    ; Ignore hblank (update during vblank?)
+    ld a, [w_LCDC]
+    bit LCDCF_ON_F, a
+    jr z, .write_tile_ignore_hblank_loop
+
+.write_tile_loop
+    ; Get location to write to
+    ld a, [bc]
+    ld l, a
+    inc bc
+    ld a, [bc]
+    ld h, a
+    or l
+    jr z, .write_tile_done
+
+    ; Get mask in e, and pixels in d
+    inc bc
+    ld a, [bc]
+    ld e, a
+    inc bc
+    ld a, [bc]
+    ld d, a
+    inc bc
+
+.hblank_finish
+    ldh a, [rSTAT]
+    and STATF_LCD
+    jr z, .hblank_finish
+
+.hblank_enter
+    ldh a, [rSTAT]
+    and STATF_LCD
+    jr nz, .hblank_enter
+
+    ; Write pixels high bit, preserving background
+    ld a, d
+    xor [hl]
+    and e
+    xor [hl]
+    ld [hl+], a
+    ld a, [bc]
+    ld d, a
+    inc bc
+
+.hblank_next
+    ldh a, [rSTAT]
+    and STATF_LCD
+    jr nz, .hblank_next
+
+    ; Write 8 pixels low bit, preserving background
+    ld a, d
+    xor [hl]
+    and e
+    xor [hl]
+    ld [hl], a
+    jr .write_tile_loop
+
+.write_tile_done
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    ret
+
+.write_tile_ignore_hblank_loop:
+    ; Get location to write to
+    ld a, [bc]
+    ld l, a
+    inc bc
+    ld a, [bc]
+    ld h, a
+    or l
+    jr z, .write_tile_done
+
+    ; Get mask in e, and pixels in d
+    inc bc
+    ld a, [bc]
+    ld e, a
+    inc bc
+    ld a, [bc]
+    inc bc
+
+    ; Write pixels high bit, preserving background
+    xor [hl]
+    and e
+    xor [hl]
+    ld [hl+], a
+    ld a, [bc]
+    inc bc
+
+    ; Write 8 pixels low bit, preserving background
+    xor [hl]
+    and e
+    xor [hl]
+    ld [hl], a
+    jr .write_tile_ignore_hblank_loop
+
 vwf_char_draw::
     ld a, [w_vwf_char_start_x]
     and %00000111
     ld c, a
     ld b, 0
-    ld hl, .pixel_masks_right
+    ld hl, vwf_pixel_masks_right
     add hl, bc
     ld a, [hl]
     ld [w_c363], a
@@ -571,7 +932,7 @@ vwf_char_draw::
     and %00000111
     ld c, a
     ld b, 0
-    ld hl, .pixel_masks_left
+    ld hl, vwf_pixel_masks_left
     add hl, bc
     ld a, [hl]
     ld [w_c364], a
@@ -600,11 +961,11 @@ vwf_char_draw::
     add $38
     ld [w_c368], a
     ld b, 0
-    ld hl, .pixel_masks_right
+    ld hl, vwf_pixel_masks_right
     add hl, bc
     ld a, [hl]
     ld [w_c369], a
-    ld hl, .data_00_0a2c
+    ld hl, vwf_data_00_0a2c
     add hl, bc
     ld a, [hl]
     ld [w_c36a], a
@@ -1060,7 +1421,7 @@ vwf_char_draw::
     ld [rROMB0], a
     ret
 
-.write_tile_ignore_hblank_loop
+.write_tile_ignore_hblank_loop:
     ; Get location to write to
     ld a, [bc]
     ld l, a
@@ -1093,15 +1454,16 @@ vwf_char_draw::
     ld [hl], a
     jr .write_tile_ignore_hblank_loop
 
-.pixel_masks_right:
+vwf_pixel_masks_right:
     db $ff, $7f, $3f, $1f, $0f, $07, $03, $01
 
-.data_00_0a2c:
+vwf_data_00_0a2c:
     db $00
 
-.pixel_masks_left:
+vwf_pixel_masks_left:
     db $80, $c0, $e0, $f0, $f8, $fc, $fe, $ff
 
+vwf_data_00_0a35: ; ???
     db $00, $00, $68, $01, $d0, $02, $38, $04, $a0, $05, $08, $07, $70, $08, $d8, $09, $40, $0b, $a8, $0c, $fa, $57, $c3, $a7, $c8, $f0, $00, $f6, $30, $e0, $00, $f0, $4d, $3e, $01, $e0, $4d, $10, $6f
 
 SECTION "farcall_a_hl", ROM0[$0d36]
@@ -1597,9 +1959,9 @@ text_draw_char:
     ld a, BANK(text_chars_offsets)
     ld [w_bank_rom], a
     ld [rROMB0], a
-    push de
 
     ; Get char address
+    push de
     sla e
     rl d
     ld hl, text_chars_offsets
@@ -1612,12 +1974,11 @@ text_draw_char:
     ld16 w_vwf_char_addr, hl
     ld a, BANK(gfx_text_chars_bw)
     ld [w_vwf_char_bank], a
-
     ld a, b
     ld [w_vwf_char_start_x], a
+    pop de
 
     ; Get character width
-    pop de
     ld hl, text_chars_widths
     add hl, de
     ld a, [hl]
@@ -1645,8 +2006,8 @@ text_draw_char:
 
     call vwf_char_draw
     pop af
-
 .done
+
     ld e, a
     pop af
     ld [w_bank_rom], a
