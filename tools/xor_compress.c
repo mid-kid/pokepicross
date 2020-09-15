@@ -46,6 +46,7 @@ unsigned char *read_files(char *filenames[], int num_files, size_t *buf_size, in
 
         unsigned char *buf_end = buffer + (*buf_size - f_size);
         size_t read_size = fread(buf_end, 1, f_size, f);
+        fclose(f);
         if (read_size != f_size) {
             // fread does not set errno
             fprintf(stderr, PROGRAM_NAME ": %s: Read error\n", filename);
@@ -79,7 +80,7 @@ int compress_files(char *filenames[], int num_files) {
         if (data[i] == v) {
             // Alternating (>= 0x80)
             // Run stops at 0x80 bytes or when the values stop alternating
-            for (; i < n && size < 0x80 && data[i] == (size % 2 ? byte : v); size++, i++);
+            for (; i < n && size < 0x80 && data[i] == ((size % 2) ? byte : v); size++, i++);
             putchar(size + 0x7f);
             putchar(v ^ byte);
             if (size % 2 == 0) v = byte;
