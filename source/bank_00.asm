@@ -878,7 +878,7 @@ vwf_char_draw_dark::
     or l
     jr z, .write_tile_done
 
-    ; Get mask in e, and pixels in d
+    ; Get mask in e, and pixels in a
     inc bc
     ld a, [bc]
     ld e, a
@@ -1388,7 +1388,7 @@ vwf_char_draw::
     or l
     jr z, .write_tile_done
 
-    ; Get mask in e, and pixels in d
+    ; Get mask in e, and pixels in a
     inc bc
     ld a, [bc]
     ld e, a
