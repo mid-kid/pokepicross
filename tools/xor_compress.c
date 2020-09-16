@@ -90,7 +90,7 @@ int write_compressed(const char *filename, unsigned char *data, size_t n, bool v
         }
     }
 
-    if (verbose) fprintf(stderr, PROGRAM_NAME ": %s: ld bc, $%x\n", filename, runs);
+    if (verbose) printf(PROGRAM_NAME ": %s: ld bc, $%x\n", filename, runs);
 
     fflush(f);
     fclose(f);

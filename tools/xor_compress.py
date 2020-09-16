@@ -1,11 +1,22 @@
 #!/usr/bin/env python3
 
-# Usage: ./xor_compress.py sources.bin... > dest.bin.xor
-
 import sys
 
+sys.argv.pop(0)
+
+verbose = False
+if sys.argv and sys.argv[0] == '-v':
+    verbose = True
+    sys.argv.pop(0)
+
+if len(sys.argv) < 2:
+    print('Usage: xor_compress.py [-v] file... files.xor', file=sys.stderr)
+    exit(1)
+
+out_filename = sys.argv.pop()
+
 data = bytearray()
-for filename in sys.argv[1:]:
+for filename in sys.argv:
     with open(filename, 'rb') as f:
         data.extend(f.read())
 
@@ -13,10 +24,12 @@ n = len(data)
 output = bytearray()
 v = 0x00
 i = 0
+runs = 0
 
 while i < n:
     byte = data[i]
     i += 1
+    runs += 1
 
     if data[i] == v:
         # Alternating (>= 0x80)
@@ -44,4 +57,8 @@ while i < n:
         output.append(len(buffer) - 1)
         output.extend(buffer)
 
-sys.stdout.buffer.write(output)
+with open(out_filename, 'wb') as f:
+    f.write(output)
+
+if verbose:
+    print('%s: ld bc, $%x' % (out_filename, runs))
