@@ -1447,10 +1447,7 @@ function_00_0a6d::
     pop hl
     pop af
     ld [w_c31b], a
-    ld a, l
-    ld [w_c31c + 0], a
-    ld a, h
-    ld [w_c31c + 1], a
+    ld16 w_c31c, hl
     ld hl, w_c319
     ld a, [hl+]
     ld h, [hl]
