@@ -131,11 +131,11 @@ _start::
     call function_00_0ecf
     ld a, CART_SRAM_ENABLE
     ld [rRAMG], a
-    ld a, $01
+    ld a, $01 ; BANK(???)
     ld [rROMB0], a
     ld a, $00
     ld [rRAMB], a
-    ld a, $01
+    ld a, $01 ; BANK(???)
     ld [w_bank_rom], a
 
     ld a, [w_c344]
@@ -259,11 +259,11 @@ function_00_0295::
     call function_00_0ecf
     ld a, CART_SRAM_ENABLE
     ld [rRAMG], a
-    ld a, $01
+    ld a, $01 ; BANK(???)
     ld [rROMB0], a
     ld a, $00
     ld [rRAMB], a
-    ld a, $01
+    ld a, $01 ; BANK(???)
     ld [w_bank_rom], a
 
     ld a, [w_d6b5]
@@ -565,11 +565,7 @@ joypad::
 ; b - x position
 ; c - y position
 text_draw_char_dark::
-    ld a, [w_bank_rom]
-    push af
-    ld a, BANK(text_chars_offsets)
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom BANK(text_chars_offsets)
 
     ; Get char address
     push de
@@ -620,9 +616,7 @@ text_draw_char_dark::
 .done
 
     ld e, a
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ld a, e
     ret
 
@@ -661,11 +655,7 @@ vwf_char_draw_dark::
     ld c, a
     ld a, [w_vwf_char_addr + 1]
     ld b, a
-    ld a, [w_bank_rom]
-    push af
-    ld a, [w_vwf_char_bank]
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom [w_vwf_char_bank]
 
     ld de, w_vwf_char_buffer
     ld a, [w_vwf_char_start_y]
@@ -690,11 +680,7 @@ vwf_char_draw_dark::
     and [hl]
     ld [w_c362], a
     pop hl
-    ld a, [w_bank_rom]
-    push af
-    ld a, $23 ; BANK(???)
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom $23 ; BANK(???)
     push bc
     push de
     ld b, h
@@ -736,9 +722,7 @@ vwf_char_draw_dark::
     ld a, h
     ld [de], a
     inc de
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ld a, [w_c362]
     ld [de], a
     inc de
@@ -881,9 +865,7 @@ vwf_char_draw_dark::
     jr .write_tile_loop
 
 .write_tile_done
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ret
 
 .write_tile_ignore_hblank_loop:
@@ -973,11 +955,7 @@ vwf_char_draw::
     ld c, a
     ld a, [w_vwf_char_addr + 1]
     ld b, a
-    ld a, [w_bank_rom]
-    push af
-    ld a, [w_vwf_char_bank]
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom [w_vwf_char_bank]
 
     ld de, w_vwf_char_buffer
     ld a, [w_vwf_char_start_y]
@@ -1010,11 +988,7 @@ vwf_char_draw::
 
 .jr_000_07d3
     push hl
-    ld a, [w_bank_rom]
-    push af
-    ld a, $23 ; BANK(???)
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom $23 ; BANK(???)
     push bc
     push de
     ld b, h
@@ -1056,9 +1030,7 @@ vwf_char_draw::
     ld a, h
     ld [de], a
     inc de
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ld a, [w_c362]
     ld [de], a
     inc de
@@ -1103,11 +1075,7 @@ vwf_char_draw::
 .jump_000_085f
     push af
     push hl
-    ld a, [w_bank_rom]
-    push af
-    ld a, $23 ; BANK(???)
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom $23 ; BANK(???)
     push bc
     push de
     ld b, h
@@ -1149,9 +1117,7 @@ vwf_char_draw::
     ld a, h
     ld [de], a
     inc de
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ld a, $ff
     ld [de], a
     inc de
@@ -1224,11 +1190,7 @@ vwf_char_draw::
     ld [w_c362], a
 
 .jump_000_0911
-    ld a, [w_bank_rom]
-    push af
-    ld a, $23 ; BANK(???)
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom $23 ; BANK(???)
     push bc
     push de
     ld b, h
@@ -1270,9 +1232,7 @@ vwf_char_draw::
     ld a, h
     ld [de], a
     inc de
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ld a, [w_c362]
     ld [de], a
     inc de
@@ -1415,9 +1375,7 @@ vwf_char_draw::
     jr .write_tile_loop
 
 .write_tile_done
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ret
 
 .write_tile_ignore_hblank_loop:
@@ -1527,11 +1485,7 @@ function_00_0a6d::
     ret
 
 string_print_dark_function_00_0ac3::
-    ld a, [w_bank_rom]
-    push af
-    ld a, $02 ; BANK(???)
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom $02 ; BANK(???)
 
     ; Get text coordinates
     ld a, [w_text_pos_x]
@@ -1561,9 +1515,7 @@ string_print_dark_function_00_0ac3::
     jr .string_loop
 
 .done
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ret
 
 function_00_0af4::
@@ -1640,11 +1592,7 @@ function_00_0b2e::
 
 function_00_0b54::
     ld [w_bank_temp], a
-    ld a, [w_bank_rom]
-    push af
-    ld a, [w_bank_temp]
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom [w_bank_temp]
 
     ld a, [w_c357]
     and a
@@ -1664,9 +1612,7 @@ function_00_0b54::
     or b
     jp nz, .loop
 
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ret
 
 .jump_000_0b84
@@ -1709,9 +1655,7 @@ function_00_0b54::
     or e
     jr nz, .loop_000_0b9c
 
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ret
 
 function_00_0bc0::
@@ -1815,11 +1759,7 @@ function_00_0c70::
     and a
     ret nz
 
-    ld a, [w_bank_rom]
-    push af
-    ld a, $09 ; BANK(???)
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom $09 ; BANK(???)
 
     ld hl, $4000 ; ???
     ld a, [w_level_index + 0]
@@ -1872,9 +1812,7 @@ function_00_0c70::
     jr .string_loop
 
 .done
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ret
 
 function_00_0cc3::
@@ -1919,12 +1857,7 @@ farcall_table_entry::
     inc hl
     ld d, [hl]
     inc hl
-
-    ld a, [w_bank_rom]
-    push af
-    ld a, [hl]
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom [hl]
 
     ld l, e
     ld h, d
@@ -1936,18 +1869,13 @@ farcall_table_entry::
     jp hl
 
 .return
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     jp farcall_ret
 
 farcall_a_hl::
     ld [w_bank_temp], a
-    ld a, [w_bank_rom]
-    push af
-    ld a, [w_bank_temp]
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom [w_bank_temp]
+
     ld de, .return
     push de
     ld a, [w_bank_rom]
@@ -1956,9 +1884,7 @@ farcall_a_hl::
     jp hl
 
 .return
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ret
 
 SECTION "function_00_0d58, etc", ROM0[$0d58]
@@ -2146,11 +2072,7 @@ mem_copy::
 ; bc - length
 far_mem_copy::
     ld [w_bank_temp], a
-    ld a, [w_bank_rom]
-    push af
-    ld a, [w_bank_temp]
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom [w_bank_temp]
 
 .loop
     ld a, [hl+]
@@ -2161,9 +2083,7 @@ far_mem_copy::
     or b
     jr nz, .loop
 
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ret
 
 ; Parameters:
@@ -2173,11 +2093,7 @@ far_mem_copy::
 ; bc - length
 far_mem_mask::
     ld [w_bank_temp], a
-    ld a, [w_bank_rom]
-    push af
-    ld a, [w_bank_temp]
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom [w_bank_temp]
 
     srl b
     rr c
@@ -2205,9 +2121,7 @@ far_mem_mask::
     or b
     jr nz, .loop
 
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ret
 
 ; Parameters:
@@ -2217,11 +2131,7 @@ far_mem_mask::
 ; bc - length
 vram_copy::
     ld [w_bank_temp], a
-    ld a, [w_bank_rom]
-    push af
-    ld a, [w_bank_temp]
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom [w_bank_temp]
 
 .loop
     ldh a, [rLCDC]
@@ -2258,9 +2168,7 @@ vram_copy::
     or c
     jr nz, .loop
 
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ret
 
 SECTION "function_00_1085", ROM0[$1085]
@@ -2360,11 +2268,7 @@ function_00_1120::
 
 SECTION "home_text", ROM0[$1883]
 level_name_print::
-    ld a, [w_bank_rom]
-    push af
-    ld a, BANK(level_names)
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom BANK(level_names)
 
     ; Get string address
     ld hl, level_names
@@ -2416,9 +2320,7 @@ level_name_print::
     jr .string_loop
 
 .done
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ret
 
 ; Returns:
@@ -2428,11 +2330,7 @@ level_name_print::
 ; b - x position
 ; c - y position
 text_draw_char:
-    ld a, [w_bank_rom]
-    push af
-    ld a, BANK(text_chars_offsets)
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom BANK(text_chars_offsets)
 
     ; Get char address
     push de
@@ -2483,9 +2381,7 @@ text_draw_char:
 .done
 
     ld e, a
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ld a, e
     ret
 
@@ -2496,11 +2392,7 @@ decompress::
 ; de - dest
 ; bc - length (not the actual source or dest length)
     ld [w_bank_temp], a
-    ld a, [w_bank_rom]
-    push af
-    ld a, [w_bank_temp]
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    push_bank_rom [w_bank_temp]
 
     xor a
     ld [w_c300], a
@@ -2549,9 +2441,7 @@ decompress::
     or b
     jr nz, .main_loop
 
-    pop af
-    ld [w_bank_rom], a
-    ld [rROMB0], a
+    pop_bank_rom
     ret
 
 SECTION "function_00_24b7", ROM0[$24b7]

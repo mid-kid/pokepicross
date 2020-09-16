@@ -23,6 +23,21 @@ farjp: macro
 endm
 
 
+push_bank_rom: macro
+    ld a, [w_bank_rom]
+    push af
+    ld a, \1
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+endm
+
+pop_bank_rom: macro
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+endm
+
+
 RGB: macro
     rept _NARG / 3
         dw palred (\1) + palgreen (\2) + palblue (\3)
