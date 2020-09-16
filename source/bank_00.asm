@@ -516,6 +516,7 @@ lcd::
 .return:
     ld hl, w_c343
     inc [hl]
+
     ld hl, rSTAT
 .hblank_enter
     ld a, STATF_LCD
@@ -851,7 +852,6 @@ vwf_char_draw_dark::
     ldh a, [rSTAT]
     and STATF_LCD
     jr z, .hblank_finish
-
 .hblank_enter
     ldh a, [rSTAT]
     and STATF_LCD
@@ -1386,7 +1386,6 @@ vwf_char_draw::
     ldh a, [rSTAT]
     and STATF_LCD
     jr z, .hblank_finish
-
 .hblank_enter
     ldh a, [rSTAT]
     and STATF_LCD
@@ -1715,7 +1714,233 @@ function_00_0b54::
     ld [rROMB0], a
     ret
 
-SECTION "farcall_a_hl", ROM0[$0d36]
+function_00_0bc0::
+    push hl
+
+    ld e, 0
+    ld d, 0
+    ld c, 0
+    ld b, 0
+    ld a, $08
+    ld [w_dbe6], a
+    ld a, [hl+]
+    ld [w_dbe8], a
+    ld a, [hl+]
+    ld [w_dbea], a
+    ld a, [hl+]
+    ld [w_dbec], a
+
+.jump_000_0bda
+    ld a, [w_dbe8]
+    bit 7, a
+    jr nz, .jump_000_0c00
+    sla a
+    ld [w_dbe8], a
+    ld a, [w_dbea]
+    sla a
+    ld [w_dbea], a
+    rl e
+    ld a, [w_dbec]
+    sla a
+    ld [w_dbec], a
+    rl d
+    sla c
+    sla b
+    jr .jump_000_0c1d
+.jump_000_0c00
+    sla a
+    ld [w_dbe8], a
+    ld a, [w_dbea]
+    sla a
+    ld [w_dbea], a
+    rl c
+    ld a, [w_dbec]
+    sla a
+    ld [w_dbec], a
+    rl  b
+    sla e
+    sla d
+.jump_000_0c1d
+    ld a, [w_dbe6]
+    dec a
+    ld [w_dbe6], a
+    and a
+    jp nz, .jump_000_0bda
+
+    ld hl, w_dbee
+    ld a, [hl+]
+    ld h, [hl]
+    ld l, a
+    call hblank_wait
+    ld a, e
+    ld [hl+], a
+    ld a, d
+    ld [hl+], a
+    ld16 w_dbee, hl
+    ld a, $01
+    call function_00_1bd5
+
+    ld hl, w_dbf0
+    ld a, [hl+]
+    ld h, [hl]
+    ld l, a
+    call hblank_wait
+    ld a, c
+    ld [hl+], a
+    ld a, b
+    ld [hl+], a
+    ld16 w_dbf0, hl
+    ld a, $00
+    call function_00_1bd5
+
+    pop hl
+    ret
+
+hblank_wait::
+    ldh a, [rLCDC]
+    bit LCDCF_ON_F, a
+    ret z
+.hblank_finish
+    ldh a, [rSTAT]
+    and STATF_LCD
+    jr z, .hblank_finish
+.hblank_enter
+    ldh a, [rSTAT]
+    and STATF_LCD
+    jr nz, .hblank_enter
+    ret
+
+function_00_0c70::
+    ld a, [w_d6c8]
+    and a
+    ret nz
+
+    ld a, [w_bank_rom]
+    push af
+    ld a, $09 ; BANK(???)
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+
+    ld hl, $4000 ; ???
+    ld a, [w_level_index + 0]
+    ld c, a
+    ld a, [w_level_index + 1]
+    ld b, a
+    sla c
+    rl b
+    add hl, bc
+    ld a, [hl+]
+    ld h, [hl]
+    ld l, a
+
+.loop
+    ld a, [hl]
+    and a
+    jr z, .done
+
+    ; Get text coordinates
+    call function_00_0cc3
+    ld a, [hl+]
+    add b
+    sub $80
+    ld b, a
+    inc hl
+
+.string_loop
+    ld a, [hl+]
+    ld e, a
+    ld a, [hl+]
+    ld d, a
+    and e
+    cp TX_END
+    jr z, .loop
+
+    ld a, e
+    cp "　"
+    jr z, .done
+
+    push bc
+    push hl
+    call text_draw_char
+    pop hl
+    pop bc
+
+    ; Leave one pixel between each character
+    add b
+    inc a
+    ld b, a
+    jr .string_loop
+
+.done
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    ret
+
+function_00_0cc3::
+    push hl
+    ld a, [w_d628 + 0]
+    add a
+    ld c, a
+    ld a, [w_d628 + 1]
+    add c
+    add a
+    add a
+    ld c, a
+    ld a, [w_d628 + 2]
+    add c
+    add a
+    ld l, a
+    ld h, 0
+    ld de, .data
+    add hl, de
+    ld a, [hl+]
+    ld b, a
+    ld c, [hl]
+    pop hl
+    ret
+
+.data
+    db $68, $1c, $00, $00, $00, $00, $00, $00
+    db $68, $2c, $00, $00, $00, $00, $00, $00
+    db $68, $1c, $38, $1c, $38, $6c, $68, $6c
+    db $50, $34, $48, $34, $48, $54, $50, $54
+    db $50, $1c, $00, $00, $00, $00, $00, $00
+
+farcall_table_entry::
+    ld e, a
+    add a
+    add e
+    pop hl
+    ld e, a
+    ld d, 0
+    add hl, de
+    ld e, [hl]
+    inc hl
+    ld d, [hl]
+    inc hl
+
+    ld a, [w_bank_rom]
+    push af
+    ld a, [hl]
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+
+    ld l, e
+    ld h, d
+    ld de, .return
+    push de
+    ld a, [w_bank_rom]
+    ld e, a
+    push de
+    jp hl
+
+.return
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+    jp farcall_ret
+
 farcall_a_hl::
     ld [w_bank_temp], a
     ld a, [w_bank_rom]

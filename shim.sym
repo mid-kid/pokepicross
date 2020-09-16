@@ -10,7 +10,6 @@
 00:162f lcd_function_a
 00:1776 lcd_function_b
 
-00:0bc0 function_00_0bc0
 00:0df5 function_00_0df5
 00:0ecf function_00_0ecf
 00:0f20 function_00_0f20
@@ -206,15 +205,21 @@
 01:d60f w_d60f
 01:d61b w_d61b
 01:d625 w_level_index ; dw
+01:d628 w_d628 ; ds 3
 01:d62d w_d62d
 01:d630 w_d630
 01:d641 w_tutorial_scene ; db
 01:d642 w_d642
 01:d647 w_d647
 01:d6b5 w_d6b5
+01:d6c8 w_d6c8
 01:d6c9 w_d6c9
 01:d6ca w_d6ca
 01:dbe4 w_dbe4 ; db
+01:dbe6 w_dbe6
+01:dbe8 w_dbe8
+01:dbea w_dbea
+01:dbec w_dbec
 01:dbee w_dbee ; dw
 01:dbf0 w_dbf0 ; db/dw
 01:df3f w_df3f ; ds 3
