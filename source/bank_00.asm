@@ -10,7 +10,7 @@ reset::
 SECTION "vblank_wait", ROM0[$0008]
 vblank_wait::
     ldh a, [rLCDC]
-    bit LCDCF_ON_F, a
+    bit LCDCF_ON_BIT, a
     ret z
     ld hl, w_vblank_ran
     xor a
@@ -74,7 +74,7 @@ _start::
     ld [w_c357], a
     ld [w_c358], a
     ld hl, rSPD
-    bit KEY1F_DBLSPEED_F, [hl]
+    bit KEY1F_DBLSPEED_BIT, [hl]
     jr nz, .no_speed_switch
     xor a
     ldh [rIF], a
@@ -108,9 +108,9 @@ _start::
     ldh [rIF], a
 
     ldh a, [rLCDC]
-    bit LCDCF_ON_F, a
+    bit LCDCF_ON_BIT, a
     jr nz, .lcd_on
-    set LCDCF_ON_F, a
+    set LCDCF_ON_BIT, a
     ldh [rLCDC], a
 .lcd_on
     ld bc, 2
@@ -387,7 +387,7 @@ vblank::
     jr .lcdc_done
 .set_bg_8000
     ld a, [w_LCDC]
-    set 4, a ; LCDCF_BG8000
+    set LCDCF_BG8000_BIT, a
     ldh [rLCDC], a
 .lcdc_done
 
@@ -469,7 +469,7 @@ function_00_0458::
     and a
     jr nz, .skip_hblank_wait
     ldh a, [rLCDC]
-    bit LCDCF_ON_F, a
+    bit LCDCF_ON_BIT, a
     jr z, .hblank_enter
 .hblank_finish
     ldh a, [rSTAT]
@@ -810,7 +810,7 @@ vwf_char_draw_dark::
 
     ; Ignore hblank (update during vblank?)
     ld a, [w_LCDC]
-    bit LCDCF_ON_F, a
+    bit LCDCF_ON_BIT, a
     jr z, .write_tile_ignore_hblank_loop
 
 .write_tile_loop
@@ -1320,7 +1320,7 @@ vwf_char_draw::
 
     ; Ignore hblank (update during vblank?)
     ld a, [w_LCDC]
-    bit LCDCF_ON_F, a
+    bit LCDCF_ON_BIT, a
     jr z, .write_tile_ignore_hblank_loop
 
 .write_tile_loop
@@ -1742,7 +1742,7 @@ function_00_0bc0::
 
 hblank_wait::
     ldh a, [rLCDC]
-    bit LCDCF_ON_F, a
+    bit LCDCF_ON_BIT, a
     ret z
 .hblank_finish
     ldh a, [rSTAT]
@@ -1891,7 +1891,7 @@ SECTION "function_00_0d58, etc", ROM0[$0d58]
 function_00_0d58::
     push hl
     ldh a, [rLCDC]
-    bit LCDCF_ON_F, a
+    bit LCDCF_ON_BIT, a
     jr nz, .lcd_on
 
 ; Wait for 70,000 clock cycles (17,500 machine cycles)
@@ -1959,7 +1959,7 @@ function_00_0d91::
 
     ldh a, [rIE]
     push af
-    res 0, a ; IEF_VBLANK
+    res IEF_VBLANK_BIT, a
     ldh [rIE], a
     di
     ld a, [w_c35a]
@@ -2029,7 +2029,7 @@ mem_clear::
 ; bc - length
 function_00_0f40::
     ldh a, [rLCDC]
-    bit LCDCF_ON_F, a
+    bit LCDCF_ON_BIT, a
     jr z, .hblank_enter
 .hblank_finish
     ldh a, [rSTAT]
@@ -2479,7 +2479,7 @@ SECTION "serial, etc", ROM0[$2836]
 serial::
     push af
     ldh a, [rSC]
-    bit 7, a ; transfer start flag
+    bit SC_TRANSFER_START_FLAG_BIT, a
     jr nz, .skip
     push bc
     push de
