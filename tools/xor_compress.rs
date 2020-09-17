@@ -1,18 +1,15 @@
 use std::env::args;
 use std::process::exit;
-use std::fs::write;
-use std::io::{Read, Error};
+use std::fs::{read, write};
+use std::io::Error;
 
 const PROGRAM_NAME: &str = "xor-compress";
 
 fn read_files(filenames: &[String]) -> Result<Vec<u8>, (&String, Error)> {
     let mut data = Vec::new();
     for filename in filenames {
-        match std::fs::File::open(filename) {
-            Ok(mut f) => match f.read_to_end(&mut data) {
-                Ok(_) => (),
-                Err(err) => return Err((filename, err)),
-            },
+        match read(filename) {
+            Ok(bytes) => data.extend(&bytes),
             Err(err) => return Err((filename, err)),
         }
     }
