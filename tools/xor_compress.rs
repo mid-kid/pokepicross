@@ -19,7 +19,7 @@ fn read_files(filenames: &[String]) -> Result<Vec<u8>, (&String, Error)> {
     Ok(data)
 }
 
-fn write_compressed(filename: &String, data: &[u8]) -> Result<u32, Error> {
+fn write_compressed(filename: &str, data: &[u8]) -> Result<u32, Error> {
     let n = data.len();
 
     let mut output = Vec::new();
