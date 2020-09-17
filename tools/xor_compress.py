@@ -2,15 +2,16 @@
 
 import sys
 
+PROGRAM_NAME = "xor_compress.py"
+
 sys.argv.pop(0)
 
-verbose = False
-if sys.argv and sys.argv[0] == '-v':
-    verbose = True
+verbose = sys.argv and sys.argv[0] == '-v'
+if verbose:
     sys.argv.pop(0)
 
 if len(sys.argv) < 2:
-    print('Usage: xor_compress.py [-v] file... files.xor', file=sys.stderr)
+    print('Usage: %s [-v] file... files.xor' % PROGRAM_NAME, file=sys.stderr)
     exit(1)
 
 out_filename = sys.argv.pop()
@@ -61,4 +62,4 @@ with open(out_filename, 'wb') as f:
     f.write(output)
 
 if verbose:
-    print('%s: ld bc, $%x' % (out_filename, runs))
+    print('%s: %s: ld bc, $%x' % (PROGRAM_NAME, out_filename, runs))

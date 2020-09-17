@@ -9,7 +9,9 @@
 __pycache__
 *.pyc
 *.exe
+*.pdb
 /coverage.png
 /picross.png
 tools/scan_includes
 tools/xor_compress
+tools/xor-compress

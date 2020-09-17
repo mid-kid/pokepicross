@@ -98,9 +98,8 @@ int write_compressed(const char *filename, unsigned char *data, size_t n, bool v
 }
 
 int main(int argc, char *argv[]) {
-    bool verbose = false;
-    if (argc > 1 && !strcmp(argv[1], "-v")) {
-        verbose = true;
+    bool verbose = argc > 1 && !strcmp(argv[1], "-v");
+    if (verbose) {
         argv++;
         argc--;
     }

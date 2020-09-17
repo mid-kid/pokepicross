@@ -1,17 +1,25 @@
-const PROGRAM_NAME: &str = "xor_compress";
+use std::env::args;
+use std::process::exit;
+use std::fs::write;
+use std::io::{Read, Error};
 
-fn read_files(filenames: &[String]) -> Result<Vec<u8>, (&String, std::io::Error)> {
+const PROGRAM_NAME: &str = "xor-compress";
+
+fn read_files(filenames: &[String]) -> Result<Vec<u8>, (&String, Error)> {
     let mut data = Vec::new();
-    for filename in filenames.iter() {
-        match std::fs::read(filename) {
-            Ok(bytes) => data.extend(&bytes),
-            Err(err)  => return Err((filename, err)),
+    for filename in filenames {
+        match std::fs::File::open(filename) {
+            Ok(mut f) => match f.read_to_end(&mut data) {
+                Ok(_) => (),
+                Err(err) => return Err((filename, err)),
+            },
+            Err(err) => return Err((filename, err)),
         }
     }
     Ok(data)
 }
 
-fn write_compressed(filename: &String, data: Vec<u8>) -> Result<u32, std::io::Error> {
+fn write_compressed(filename: &String, data: &[u8]) -> Result<u32, Error> {
     let n = data.len();
 
     let mut output = Vec::new();
@@ -55,42 +63,41 @@ fn write_compressed(filename: &String, data: Vec<u8>) -> Result<u32, std::io::Er
         }
     }
 
-    match std::fs::write(filename, &output[..]) {
+    match write(filename, &output[..]) {
         Ok(()) => Ok(runs),
         Err(err) => Err(err),
     }
 }
 
 fn main() {
-    let mut args: Vec<String> = std::env::args().skip(1).collect();
+    let mut argv: Vec<String> = args().skip(1).collect();
 
-    let mut verbose = false;
-    if !args.is_empty() && args[0] == "-v" {
-        verbose = true;
-        args.remove(0);
+    let verbose = !argv.is_empty() && argv[0] == "-v";
+    if verbose {
+        argv.remove(0);
     }
 
-    if args.len() < 2 {
+    if argv.len() < 2 {
         eprintln!("Usage: {} [-v] file... files.xor", PROGRAM_NAME);
-        std::process::exit(1);
+        exit(1);
     }
 
-    let out_filename = args.pop().unwrap();
-    let data = match read_files(&args[..]) {
+    let out_filename = argv.pop().unwrap();
+    let data = match read_files(&argv[..]) {
         Ok(data) => data,
         Err((filename, err)) => {
             eprintln!("{}: {}: {}", PROGRAM_NAME, filename, err);
-            std::process::exit(err.raw_os_error().unwrap_or(1));
+            exit(err.raw_os_error().unwrap_or(1));
         }
     };
     if !data.is_empty() {
-        match write_compressed(&out_filename, data) {
+        match write_compressed(&out_filename, &data[..]) {
             Ok(runs) => if verbose {
                 println!("{}: {}: ld bc, ${:x}", PROGRAM_NAME, out_filename, runs);
             },
             Err(err) => {
                 eprintln!("{}: {}: {}", PROGRAM_NAME, out_filename, err);
-                std::process::exit(err.raw_os_error().unwrap_or(1));
+                exit(err.raw_os_error().unwrap_or(1));
             },
         }
     }
