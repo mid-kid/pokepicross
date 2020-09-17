@@ -114,7 +114,7 @@ _start::
     ldh [rLCDC], a
 .lcd_on
     ld bc, 2
-    call function_00_1120
+    call busy_wait
 .wait_vblank
     ldh a, [rLY]
     cp SCRN_Y + 1
@@ -126,7 +126,7 @@ _start::
     ldh [rOBP0], a
     ldh [rOBP1], a
     ld bc, 2
-    call function_00_1120
+    call busy_wait
 
     call function_00_0ecf
     ld a, CART_SRAM_ENABLE
@@ -249,7 +249,7 @@ function_00_0295::
     ld [w_OBP0], a
     ld [w_OBP1], a
     ld bc, 2
-    call function_00_1120
+    call busy_wait
 
     di
     xor a
@@ -2245,9 +2245,10 @@ farcall_ret::
     inc sp
     ret
 
-SECTION "function_00_1120", ROM0[$1120]
-; Wait for 70,000 * bc clock cycles (17,500 * bc machine cycles)
-function_00_1120::
+SECTION "busy_wait", ROM0[$1120]
+; Wait for 70,000 * bc clock cycles (17,500 * bc machine cycles).
+; This is approximately bc / 60 seconds.
+busy_wait::
     ld de, 1750
 .wait_loop
     nop
@@ -2260,7 +2261,7 @@ function_00_1120::
     dec bc
     ld a, b
     or c
-    jr nz, function_00_1120
+    jr nz, busy_wait
     ret
 
 SECTION "home_text", ROM0[$1883]
