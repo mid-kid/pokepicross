@@ -87,7 +87,7 @@ _start::
     ldh [rSPD], a
     ei
     di
-    db $10, $6f ; corrupted stop
+    stop $6f
 .no_speed_switch
 
     ld a, $1
