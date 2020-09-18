@@ -10,7 +10,6 @@
 00:162f lcd_function_a
 00:1776 lcd_function_b
 
-00:0df5 function_00_0df5
 00:0ecf function_00_0ecf
 00:0f20 function_00_0f20
 00:103c function_00_103c
@@ -52,6 +51,10 @@
 08:42b8 function_08_42b8
 
 09:5a50 function_09_5a50
+
+19:4000 function_19_4000
+19:40f0 function_19_40f0
+19:4180 function_19_4180
 
 22:47e2 function_22_47e2
 22:61e8 function_22_61e8
@@ -102,6 +105,7 @@
 00:c100 w_c100
 00:c300 w_c300
 00:c301 w_c301
+00:c302 w_c302
 00:c314 w_c314
 00:c316 w_c316
 00:c320 w_c320

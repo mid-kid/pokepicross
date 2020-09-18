@@ -1884,7 +1884,6 @@ farcall_a_hl::
     pop_bank_rom
     ret
 
-SECTION "function_00_0d58, etc", ROM0[$0d58]
 function_00_0d58::
     push hl
     ldh a, [rLCDC]
@@ -2004,6 +2003,65 @@ function_00_0d91::
     pop de
     pop bc
     pop af
+    ret
+
+function_00_0df5::
+    push af
+    push bc
+    push de
+    push hl
+
+    ld a, [w_c301]
+    and a
+    jr nz, .skip
+    ld a, [w_c302]
+    and a
+    jr nz, .skip
+
+    ld a, [w_c35a]
+    ld [rROMB0], a
+    cp BANK(function_19_4180)
+    jr nz, .not_function_19_4180
+    call function_19_4180
+    jr .done
+.not_function_19_4180
+    call $4003 ; ???
+.done
+    ld a, [w_bank_rom]
+    ld [rROMB0], a
+
+.skip
+    pop hl
+    pop de
+    pop bc
+    pop af
+    ret
+
+function_00_0e22::
+    ld a, [w_c35a]
+    cp BANK(function_19_4000)
+    jr z, .not_bank_19
+    ld a, BANK(function_19_4000)
+    ld [w_c35a], a
+    ld [rROMB0], a
+    call function_19_4000
+    ld a, [w_bank_rom]
+    ld [rROMB0], a
+    ret
+
+.not_bank_19
+    ld a, $7e ; BANK(???)
+    ld [w_c35a], a
+    ld a, $0
+    call function_00_0d91
+    ret
+
+function_00_0e46::
+    ld a, BANK(function_19_40f0)
+    ld [rROMB0], a
+    call function_19_40f0
+    ld a, [w_bank_rom]
+    ld [rROMB0], a
     ret
 
 SECTION "mem functions", ROM0[$0f38]
