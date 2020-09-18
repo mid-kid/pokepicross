@@ -5,17 +5,14 @@ use std::io::{Read, Error};
 
 const PROGRAM_NAME: &str = "xor-compress";
 
-fn read_files(filenames: &[String]) -> Result<Vec<u8>, (&String, Error)> {
+fn compress_files<'a>(in_filenames: &'a [String], out_filename: &'a String) -> Result<u32, (&'a String, Error)> {
     let mut data = Vec::new();
-    for filename in filenames {
+    for filename in in_filenames {
         (|| {
             Ok(File::open(filename)?.read_to_end(&mut data)?)
         })().map_err(|err| (filename, err))?;
     }
-    Ok(data)
-}
 
-fn write_compressed(filename: &str, data: &[u8]) -> Result<u32, Error> {
     let n = data.len();
 
     let mut output = Vec::new();
@@ -59,9 +56,9 @@ fn write_compressed(filename: &str, data: &[u8]) -> Result<u32, Error> {
         }
     }
 
-    match write(filename, &output[..]) {
+    match write(out_filename, &output[..]) {
         Ok(()) => Ok(runs),
-        Err(err) => Err(err),
+        Err(err) => Err((out_filename, err)),
     }
 }
 
@@ -79,22 +76,13 @@ fn main() {
     }
 
     let out_filename = argv.pop().unwrap();
-    let data = match read_files(&argv[..]) {
-        Ok(data) => data,
+    match compress_files(&argv[..], &out_filename) {
+        Ok(runs) => if verbose {
+            println!("{}: {}: ld bc, ${:x}", PROGRAM_NAME, out_filename, runs);
+        },
         Err((filename, err)) => {
             eprintln!("{}: {}: {}", PROGRAM_NAME, filename, err);
             exit(err.raw_os_error().unwrap_or(1));
-        }
-    };
-    if !data.is_empty() {
-        match write_compressed(&out_filename, &data[..]) {
-            Ok(runs) => if verbose {
-                println!("{}: {}: ld bc, ${:x}", PROGRAM_NAME, out_filename, runs);
-            },
-            Err(err) => {
-                eprintln!("{}: {}: {}", PROGRAM_NAME, out_filename, err);
-                exit(err.raw_os_error().unwrap_or(1));
-            },
         }
     }
 }

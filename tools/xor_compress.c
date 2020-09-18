@@ -55,11 +55,12 @@ failure:
     return buffer;
 }
 
-int write_compressed(const char *filename, unsigned char *data, size_t n, bool verbose) {
+int write_compressed(const char *filename, unsigned char *data, size_t n, int *err) {
     FILE *f = fopen(filename, "wb");
     if (!f) {
         fprintf(stderr, PROGRAM_NAME ": %s: %s\n", filename, strerror(errno));
-        return errno;
+        *err = errno;
+        return 0;
     }
 
     int runs = 0;
@@ -90,11 +91,10 @@ int write_compressed(const char *filename, unsigned char *data, size_t n, bool v
         }
     }
 
-    if (verbose) printf(PROGRAM_NAME ": %s: ld bc, $%x\n", filename, runs);
-
     fflush(f);
     fclose(f);
-    return 0;
+    *err = 0;
+    return runs;
 }
 
 int main(int argc, char *argv[]) {
@@ -111,10 +111,17 @@ int main(int argc, char *argv[]) {
     argv++;
     argc -= 2;
 
+    const char *out_filename = argv[argc];
+
     int err = 0;
     size_t data_size = 0;
     unsigned char *data = read_files(argv, argc, &data_size, &err);
-    if (!err) err = write_compressed(argv[argc], data, data_size, verbose);
+    if (!err) {
+        int runs = write_compressed(out_filename, data, data_size, &err);
+        if (!err && verbose) {
+            printf(PROGRAM_NAME ": %s: ld bc, $%x\n", out_filename, runs);
+        }
+    }
     free(data);
     return err;
 }
