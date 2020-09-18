@@ -32,19 +32,7 @@ while i < n:
     i += 1
     runs += 1
 
-    if data[i] == v:
-        # Alternating (>= 0x80)
-        # Run stops at 0x80 bytes or when the values stop alternating
-        size = 0
-        while i < n and size < 0x80 and data[i] == (byte if size % 2 else v):
-            size += 1
-            i += 1
-        output.append(size + 0x7f)
-        output.append(v ^ byte)
-        if not size % 2:
-            v = byte
-
-    else:
+    if i == n or data[i] != v:
         # Sequential (< 0x80)
         # Run stops at 0x80 bytes or when the value two ahead is equal to v
         buffer = [v ^ byte]
@@ -57,6 +45,17 @@ while i < n:
             i += 1
         output.append(len(buffer) - 1)
         output.extend(buffer)
+    else:
+        # Alternating (>= 0x80)
+        # Run stops at 0x80 bytes or when the values stop alternating
+        size = 0
+        while i < n and size < 0x80 and data[i] == (byte if size % 2 else v):
+            size += 1
+            i += 1
+        output.append(size + 0x7f)
+        output.append(v ^ byte)
+        if not size % 2:
+            v = byte
 
 with open(out_filename, 'wb') as f:
     f.write(output)

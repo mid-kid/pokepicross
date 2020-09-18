@@ -1,17 +1,16 @@
 use std::env::args;
 use std::process::exit;
-use std::fs::{read, write};
-use std::io::Error;
+use std::fs::{File, write};
+use std::io::{Read, Error};
 
 const PROGRAM_NAME: &str = "xor-compress";
 
 fn read_files(filenames: &[String]) -> Result<Vec<u8>, (&String, Error)> {
     let mut data = Vec::new();
     for filename in filenames {
-        match read(filename) {
-            Ok(bytes) => data.extend(&bytes),
-            Err(err) => return Err((filename, err)),
-        }
+        (|| {
+            Ok(File::open(filename)?.read_to_end(&mut data)?)
+        })().map_err(|err| (filename, err))?;
     }
     Ok(data)
 }
@@ -29,20 +28,7 @@ fn write_compressed(filename: &str, data: &[u8]) -> Result<u32, Error> {
         i += 1;
         runs += 1;
 
-        if data[i] == v {
-            // Alternating (>= 0x80)
-            // Run stops at 0x80 bytes or when the values stop alternating
-            let mut size = 0;
-            while i < n && size < 0x80 && data[i] == (if size % 2 == 0 { v } else { byte }) {
-                size += 1;
-                i += 1;
-            }
-            output.push(size + 0x7f);
-            output.push(v ^ byte);
-            if size % 2 == 0 {
-                v = byte;
-            }
-        } else {
+        if i == n || data[i] != v {
             // Sequential (< 0x80)
             // Run stops at 0x80 bytes or when the value two ahead is equal to v
             let mut buffer = vec![v ^ byte];
@@ -57,6 +43,19 @@ fn write_compressed(filename: &str, data: &[u8]) -> Result<u32, Error> {
             }
             output.push((buffer.len() - 1) as u8);
             output.extend(buffer);
+        } else {
+            // Alternating (>= 0x80)
+            // Run stops at 0x80 bytes or when the values stop alternating
+            let mut size = 0;
+            while i < n && size < 0x80 && data[i] == (if size % 2 == 0 { v } else { byte }) {
+                size += 1;
+                i += 1;
+            }
+            output.push(size + 0x7f);
+            output.push(v ^ byte);
+            if size % 2 == 0 {
+                v = byte;
+            }
         }
     }
 

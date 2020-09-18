@@ -67,17 +67,10 @@ int write_compressed(const char *filename, unsigned char *data, size_t n, bool v
     for (size_t i = 0; i < n; runs++) {
         unsigned char byte = data[i++];
         unsigned char size = 0;
-        if (data[i] == v) {
-            // Alternating (>= 0x80)
-            // Run stops at 0x80 bytes or when the values stop alternating
-            for (; i < n && size < 0x80 && data[i] == ((size % 2) ? byte : v); size++, i++);
-            fputc(size + 0x7f, f);
-            fputc(v ^ byte, f);
-            if (size % 2 == 0) v = byte;
-        } else {
+        if (i == n || data[i] != v) {
             // Sequential (< 0x80)
             // Run stops at 0x80 bytes or when the value two ahead is equal to v
-            unsigned char buffer[256];
+            unsigned char buffer[0x80];
             buffer[size++] = v ^ byte;
             for (; i < n; i++) {
                 v = byte;
@@ -87,6 +80,13 @@ int write_compressed(const char *filename, unsigned char *data, size_t n, bool v
             }
             fputc(size - 1, f);
             fwrite(buffer, 1, size, f);
+        } else {
+            // Alternating (>= 0x80)
+            // Run stops at 0x80 bytes or when the values stop alternating
+            for (; i < n && size < 0x80 && data[i] == ((size % 2) ? byte : v); size++, i++);
+            fputc(size + 0x7f, f);
+            fputc(v ^ byte, f);
+            if (size % 2 == 0) v = byte;
         }
     }
 
