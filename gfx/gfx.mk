@@ -15,8 +15,6 @@ $(dir_build)/%.4bpp: %.png | $$(dir $$@)
 
 $(dir_build)/gfx/sprites/%.2bpp: RGBGFXFLAGS = -h
 
-$(dir_build)/gfx/sgb_border/sgb_border.4bpp: SUPERFAMICONVFLAGS = -T 257
-
 # data_select.2bpp.xor decompresses to 2bpp-encoded data_select.png with an extra byte $33 (ASCII "3") appended
 $(dir_build)/gfx/data_select/data_select.2bpp: gfx/data_select/data_select.png | $$(dir $$@)
 	$(RGBGFX) $(RGBGFXFLAGS) -o $@ $<

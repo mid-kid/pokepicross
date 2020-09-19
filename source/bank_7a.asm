@@ -1,6 +1,11 @@
-SECTION "gfx_sgb_border", ROMX[$4000], BANK[$7a]
-gfx_sgb_border::
-INCBIN "gfx/sgb_border/sgb_border.4bpp"
+SECTION "gfx_sgb_border_2", ROMX[$4010], BANK[$7a]
+gfx_sgb_border_2::
+INCBIN "gfx/sgb_border/sgb_border_2.4bpp"
+.end::
+
+SECTION "gfx_sgb_border_1", ROMX[$5020], BANK[$7a]
+gfx_sgb_border_1::
+INCBIN "gfx/sgb_border/sgb_border_1.4bpp"
 .end::
 
 SECTION "tilemap_unknown_7a_6020", ROMX[$6020], BANK[$7a]
