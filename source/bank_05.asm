@@ -33,14 +33,14 @@ function_05_4028:
     ld a, [w_c357]
     and a
     jr z, .jr_005_4048
-    ld a, $01
-    call function_00_1bd5
-    call function_00_1bd5
+    ld a, 1
+    call set_bank_vram
+    call set_bank_vram
     ld hl, _VRAM
     ld bc, $1000
     call mem_clear
-    ld a, $00
-    call function_00_1bd5
+    ld a, 0
+    call set_bank_vram
 .jr_005_4048
 
     ld a, 13

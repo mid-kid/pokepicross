@@ -1718,8 +1718,8 @@ function_00_0bc0::
     ld a, d
     ld [hl+], a
     ld16 w_dbee, hl
-    ld a, $01
-    call function_00_1bd5
+    ld a, 1
+    call set_bank_vram
 
     ld hl, w_dbf0
     ld a, [hl+]
@@ -1731,8 +1731,8 @@ function_00_0bc0::
     ld a, b
     ld [hl+], a
     ld16 w_dbf0, hl
-    ld a, $00
-    call function_00_1bd5
+    ld a, 0
+    call set_bank_vram
 
     pop hl
     ret
@@ -2094,6 +2094,7 @@ function_00_0f40::
     ldh a, [rSTAT]
     and STATF_LCD
     jr nz, .hblank_enter
+
     xor a
 rept 4
     ld [hl+], a
@@ -2439,6 +2440,152 @@ text_draw_char:
     ld e, a
     pop_bank_rom
     ld a, e
+    ret
+
+SECTION "set_bank_vram, etc", ROM0[$1bd5]
+set_bank_vram::
+    push af
+    ldh a, [rLCDC]
+    bit LCDCF_ON_BIT, a
+    jr z, .hblank_enter
+.hblank_finish
+    ldh a, [rSTAT]
+    and STATF_LCD
+    jr z, .hblank_finish
+.hblank_enter
+    ldh a, [rSTAT]
+    and STATF_LCD
+    jr nz, .hblank_enter
+    pop af
+    ldh [rVBK], a
+    ret
+
+function_00_1bec::
+    ld bc, 0
+.loop_c
+    cp $64
+    jr c, .loop_b
+    sub $64
+    inc c
+    jr .loop_c
+.loop_b
+    cp $0a
+    jr c, .next
+    sub $0a
+    inc b
+    jr .loop_b
+.next
+    swap b
+    or b
+    ld b, a
+    ld a, c
+    and a
+    jr nz, .done
+    ld c, $0a
+    ld a, b
+    and $f0
+    jr nz, .done
+    ld a, b
+    and $0f
+    or $a0
+    ld b, a
+.done
+    ld a, b
+    ret
+
+copy_level_name::
+    ld l, a
+    push_bank_rom BANK(level_names)
+
+    ld h, 0
+    add hl, hl
+    ld de, level_names
+    add hl, de
+    ld a, [hl+]
+    ld h, [hl]
+    ld l, a
+
+    inc hl ; skip dw before text
+    inc hl
+    ld e, 6 ; only copies first 6 characters of level name
+.loop
+    ld a, [hl+]
+    ld [bc], a
+    inc hl ; skip character's high byte
+    inc bc
+    dec e
+    jr nz, .loop
+
+    pop_bank_rom
+    ret
+
+send_sgb_packets::
+    ld [w_bank_temp], a
+    push_bank_rom [w_bank_temp]
+    call _send_sgb_packets
+    pop_bank_rom
+    ret
+
+_send_sgb_packets::
+    ld a, [hl] ; number of packets
+    and $7
+    ret z
+
+    ld b, a
+    ld c, LOW(rP1)
+    ld a, $ff
+    ld [w_c345], a
+
+.packet_loop
+    push bc
+    ld a, $00 ; RESET pulse
+    ldh [c], a
+    ld a, P1F_4 | P1F_5
+    ldh [c], a
+    ld b, $10 ; bytes per packet
+.byte_loop
+    ld e, 8 ; bits per byte
+    ld a, [hl+]
+    ld d, a
+.bit_loop
+    bit 0, d
+    ld a, P1F_4
+    jr nz, .got_bit
+    ld a, P1F_5
+.got_bit
+    ldh [c], a
+    ld a, P1F_4 | P1F_5
+    ldh [c], a
+    rr d
+    dec e
+    jr nz, .bit_loop
+    dec b
+    jr nz, .byte_loop
+    ld a, P1F_5 ; stop bit (0)
+    ldh [c], a
+    ld a, P1F_4 | P1F_5
+    ldh [c], a
+    pop bc
+    dec b
+    jr z, .done
+    call sgb_delay_cycles
+    jr .packet_loop
+
+.done
+    xor a
+    ld [w_c345], a
+    ret
+
+sgb_delay_cycles::
+    ld de, 7000
+.loop
+    nop
+    nop
+    nop
+    dec de
+    ld a, d
+    or e
+    jr nz, .loop
     ret
 
 SECTION "decompress", ROM0[$20cf]
