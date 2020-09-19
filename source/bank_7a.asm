@@ -3,6 +3,14 @@ gfx_sgb_border::
 INCBIN "gfx/sgb_border/sgb_border.2bpp"
 .end::
 
+SECTION "tilemap_unknown_7a_6020", ROMX[$6020], BANK[$7a]
+tilemap_unknown_7a_6020::
+INCBIN "gfx/unknown/unknown_7a_6020.tilemap"
+.end::
+attrmap_unknown_7a_6420::
+INCBIN "gfx/unknown/unknown_7a_6420.attrmap"
+.end::
+
 SECTION "tilemap_title", ROMX[$7020], BANK[$7a]
 tilemap_title::
 INCBIN "gfx/title/title.tilemap"
