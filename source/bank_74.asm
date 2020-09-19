@@ -23,6 +23,11 @@ gfx_lv_3_sea_cottage_duplicate::
 INCBIN "gfx/town_map/lv_3_sea_cottage_unused.2bpp"
 .end::
 
+SECTION "tilemap_sgb_border", ROMX[$7010], BANK[$74]
+tilemap_sgb_border::
+INCBIN "gfx/sgb_border/sgb_border.bin"
+.end::
+
 SECTION "compressed_tilemap_attrmap_easy_picross", ROMX[$7ddc], BANK[$74]
 compressed_tilemap_attrmap_easy_picross::
 INCBIN "gfx/easy_picross/easy_picross.tilemap_attrmap.xor"
