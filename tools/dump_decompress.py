@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Usage: ./dump_decompress.py 75:7d35 00b6 >compressed.bin 2>decompressed.bin
+# Usage: ./dump_decompress.py 75:7d35 00b6 >decompressed.bin
 
 from sys import argv, stdout, stderr
 
@@ -29,5 +29,5 @@ for _1 in range(length):
             output.append(v)
         i += 1
 
-stdout.buffer.write(bytes(file[offset:i])) # compressed
-stderr.buffer.write(bytes(output)) # decompressed
+stdout.buffer.write(bytes(output)) # decompressed
+#stderr.buffer.write(bytes(file[offset:i])) # compressed

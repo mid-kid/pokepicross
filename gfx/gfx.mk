@@ -18,3 +18,6 @@ $(dir_build)/%.xor: % | $$(dir $$@) $(XOR_COMPRESS)
 
 $(dir_build)/%.tilemap_attrmap.xor: %.tilemap %.attrmap | $$(dir $$@) $(XOR_COMPRESS)
 	$(XOR_COMPRESS) $^ $@
+
+$(dir_build)/gfx/save/save_sgb.xor: $(dir_build)/gfx/sprites/joy_jenny.2bpp $(dir_build)/gfx/save/save_sgb.2bpp | $$(dir $$@) $(XOR_COMPRESS)
+	$(XOR_COMPRESS) $^ $@
