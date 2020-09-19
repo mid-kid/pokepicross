@@ -1,4 +1,9 @@
-SECTION "bank7a", ROMX[$7020], BANK[$7a]
+SECTION "gfx_sgb_border", ROMX[$4000], BANK[$7a]
+gfx_sgb_border::
+INCBIN "gfx/sgb_border/sgb_border.2bpp"
+.end::
+
+SECTION "tilemap_title", ROMX[$7020], BANK[$7a]
 tilemap_title::
 INCBIN "gfx/title/title.tilemap"
 .end::
