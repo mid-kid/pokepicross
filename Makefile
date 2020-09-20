@@ -14,6 +14,7 @@ RGBLINKFLAGS := -p 0xff -d
 RGBFIXFLAGS := -p 0xff -c -m 0x1b -r 0x03 -k "01" -i "AKVJ" -t "POKEPICROSS"
 
 SCAN_INCLUDES := tools/scan_includes
+MAKE_SHIM := tools/makeshim.py
 
 rwildcard = $(foreach d, $(wildcard $1*), $(filter $(subst *, %, $2), $d) $(call rwildcard, $d/, $2))
 
@@ -41,7 +42,7 @@ clean:
 
 .PHONY: tidy
 tidy:
-	rm -rf $(name).gbc $(name).sym $(name).map $(tools)
+	rm -rf $(name).gbc $(name).sym $(name).map $(tools) $(dir_build)/shim.asm
 	find $(dir_build) \( -name "*.o" \) -delete
 
 $(name).gbc: layout.link $(objects) | $(baserom)
@@ -49,7 +50,7 @@ $(name).gbc: layout.link $(objects) | $(baserom)
 	$(RGBFIX) $(RGBFIXFLAGS) -v $@
 
 $(dir_build)/shim.asm: shim.sym | $$(dir $$@)
-	tools/makeshim.py $< > $@
+	$(MAKE_SHIM) $< > $@
 
 $(dir_build)/%.o: $(dir_build)/%.asm | $$(dir $$@)
 	$(RGBASM) $(RGBASMFLAGS) -i $(dir_build)/ -i include/ -o $@ $<
