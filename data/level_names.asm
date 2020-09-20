@@ -169,7 +169,7 @@ level_names::
     dw level_name_geodude
     dw level_name_zapdos
     dw level_name_mew
-    dw level_name_safari_togepi
+    dw level_name_togepi
     dw level_name_safari_haunter
     dw level_name_mew_and_mewtwo
     dw level_name_staring_contest
@@ -1406,7 +1406,7 @@ level_name_mew:
     db TX_END
     db 0
 
-level_name_safari_togepi:
+level_name_togepi:
     dw 113
     db "トゲピー"
     db TX_END

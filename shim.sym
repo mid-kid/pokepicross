@@ -1,8 +1,15 @@
-00:04c5 lcd
-00:0531 timer
-00:0533 joypad
+00:13f0 lcd_function_1
+00:142e lcd_function_2
+00:144b lcd_function_3
+00:1466 lcd_function_4
+00:1481 lcd_function_5
+00:1496 lcd_function_6
+00:1545 lcd_function_7
+00:1719 lcd_function_8
+00:173c lcd_function_9
+00:162f lcd_function_a
+00:1776 lcd_function_b
 
-00:0df5 function_00_0df5
 00:0ecf function_00_0ecf
 00:0f20 function_00_0f20
 00:103c function_00_103c
@@ -11,7 +18,6 @@
 00:114e function_00_114e
 00:11f1 function_00_11f1
 00:17fb function_00_17fb
-00:1bd5 function_00_1bd5
 00:1caa function_00_1caa
 00:1cfa function_00_1cfa
 00:1d59 function_00_1d59
@@ -44,6 +50,10 @@
 08:42b8 function_08_42b8
 
 09:5a50 function_09_5a50
+
+19:4000 function_19_4000
+19:40f0 function_19_40f0
+19:4180 function_19_4180
 
 22:47e2 function_22_47e2
 22:61e8 function_22_61e8
@@ -86,10 +96,15 @@
 00:c317 w_farcall_target ; dw
 00:c317 w_farcall_target_low
 00:c318 w_farcall_target_high
+00:c319 w_c319 ; dw
+00:c31b w_c31b ; db
+00:c31c w_c31c ; dw
 00:c31e w_bank_temp ; db
 
+00:c100 w_c100
 00:c300 w_c300
 00:c301 w_c301
+00:c302 w_c302
 00:c314 w_c314
 00:c316 w_c316
 00:c320 w_c320
@@ -193,15 +208,23 @@
 01:d60f w_d60f
 01:d61b w_d61b
 01:d625 w_level_index ; dw
+01:d628 w_d628 ; ds 3
 01:d62d w_d62d
 01:d630 w_d630
 01:d641 w_tutorial_scene ; db
 01:d642 w_d642
 01:d647 w_d647
 01:d6b5 w_d6b5
+01:d6c8 w_d6c8
 01:d6c9 w_d6c9
 01:d6ca w_d6ca
 01:dbe4 w_dbe4 ; db
+01:dbe6 w_dbe6
+01:dbe8 w_dbe8
+01:dbea w_dbea
+01:dbec w_dbec
+01:dbee w_dbee ; dw
+01:dbf0 w_dbf0 ; db/dw
 01:df3f w_df3f ; ds 3
 01:df47 w_df47
 01:df62 w_df62

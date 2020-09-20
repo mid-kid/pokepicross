@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Usage: ./dump_decompress.py 75:7d35 00b6 >compressed.bin 2>decompressed.bin
+# Usage: ./dump_decompress.py 75:7d35 00b6 >decompressed.bin
 
 from sys import argv, stdout, stderr
 
@@ -10,7 +10,7 @@ bank_addr = argv[1].split(':')
 bank = int(bank_addr[0], 16)
 addr = int(bank_addr[1], 16)
 length = int(argv[2], 16)
-offset = bank * 0x4000 + addr - (0x4000 if bank else 0)
+offset = bank * 0x4000 + (addr & 0x3fff)
 
 output = []
 i = offset
@@ -29,5 +29,5 @@ for _1 in range(length):
             output.append(v)
         i += 1
 
-stdout.buffer.write(bytes(file[offset:i])) # compressed
-stderr.buffer.write(bytes(output)) # decompressed
+stdout.buffer.write(bytes(output)) # decompressed
+#stderr.buffer.write(bytes(file[offset:i])) # compressed

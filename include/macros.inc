@@ -23,6 +23,36 @@ farjp: macro
 endm
 
 
+push_bank_rom: macro
+    ld a, [w_bank_rom]
+    push af
+    ld a, \1
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+endm
+
+pop_bank_rom: macro
+    pop af
+    ld [w_bank_rom], a
+    ld [rROMB0], a
+endm
+
+
+RGB: macro
+    rept _NARG / 3
+        dw palred (\1) + palgreen (\2) + palblue (\3)
+        shift 3
+    endr
+endm
+
+palred   EQUS "(1 << 0) *"
+palgreen EQUS "(1 << 5) *"
+palblue  EQUS "(1 << 10) *"
+
+palettes EQUS "* PALETTE_SIZE"
+palette  EQUS "+ PALETTE_SIZE *"
+color    EQUS "+ PAL_COLOR_SIZE *"
+
 tiles EQUS "* $10"
 
 

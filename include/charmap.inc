@@ -324,3 +324,7 @@ charmap "~", 240
 
 TX_LF EQU -2 ; Line feed
 TX_END EQU -1 ; End of message
+
+pushc
+newcharmap ascii
+popc

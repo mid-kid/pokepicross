@@ -33,14 +33,14 @@ function_05_4028:
     ld a, [w_c357]
     and a
     jr z, .jr_005_4048
-    ld a, $01
-    call function_00_1bd5
-    call function_00_1bd5
+    ld a, 1
+    call set_bank_vram
+    call set_bank_vram
     ld hl, _VRAM
     ld bc, $1000
-    call clear_mem
-    ld a, $00
-    call function_00_1bd5
+    call mem_clear
+    ld a, 0
+    call set_bank_vram
 .jr_005_4048
 
     ld a, 13
@@ -251,7 +251,7 @@ tutorial_scene_01:
     jp farcall_ret
 
 tutorial_data_42c8:
-    db $08, $00, $00, $e5, $08, $00, $00, $e6, $08, $00, $00, $e7, $08, $00, $00, $e6 , $00
+    db $08, $00, $00, $e5, $08, $00, $00, $e6, $08, $00, $00, $e7, $08, $00, $00, $e6, $00
 
 tutorial_scene_02:
     ld a, $00
