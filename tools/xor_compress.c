@@ -4,9 +4,7 @@
 #include <string.h>
 #include <errno.h>
 
-#define PROGRAM_NAME "xor_compress"
-
-extern int errno;
+char *program_name;
 
 size_t file_size(FILE *f) {
     if (fseek(f, 0, SEEK_END) == -1) return 0;
@@ -40,7 +38,7 @@ unsigned char *read_files(char *filenames[], int num_files, size_t *buf_size, in
         fclose(f);
         if (read_size != f_size) {
             // fread does not set errno
-            fprintf(stderr, PROGRAM_NAME ": %s: Read error\n", filename);
+            fprintf(stderr, "%s: %s: Read error\n", program_name, filename);
             *err = 1;
             return buffer;
         }
@@ -50,7 +48,7 @@ unsigned char *read_files(char *filenames[], int num_files, size_t *buf_size, in
     return buffer;
 
 failure:
-    fprintf(stderr, PROGRAM_NAME ": %s: %s\n", filename, strerror(errno));
+    fprintf(stderr, "%s: %s: %s\n", program_name, filename, strerror(errno));
     *err = errno;
     return buffer;
 }
@@ -58,7 +56,7 @@ failure:
 int write_compressed(const char *filename, unsigned char *data, size_t n, int *err) {
     FILE *f = fopen(filename, "wb");
     if (!f) {
-        fprintf(stderr, PROGRAM_NAME ": %s: %s\n", filename, strerror(errno));
+        fprintf(stderr, "%s: %s: %s\n", program_name, filename, strerror(errno));
         *err = errno;
         return 0;
     }
@@ -98,6 +96,8 @@ int write_compressed(const char *filename, unsigned char *data, size_t n, int *e
 }
 
 int main(int argc, char *argv[]) {
+    program_name = argc ? argv[0] : "xor_compress";
+
     bool verbose = argc > 1 && !strcmp(argv[1], "-v");
     if (verbose) {
         argv++;
@@ -105,7 +105,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (argc < 3) {
-        fputs("Usage: " PROGRAM_NAME " [-v] file... files.xor\n", stderr);
+        fprintf(stderr, "Usage: %s [-v] file... files.xor\n", program_name);
         exit(1);
     }
     argv++;
@@ -119,7 +119,7 @@ int main(int argc, char *argv[]) {
     if (!err) {
         int runs = write_compressed(out_filename, data, data_size, &err);
         if (!err && verbose) {
-            printf(PROGRAM_NAME ": %s: ld bc, $%x\n", out_filename, runs);
+            printf("%s: %s: ld bc, $%x\n", program_name, out_filename, runs);
         }
     }
     free(data);

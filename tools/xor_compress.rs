@@ -3,8 +3,6 @@ use std::process::exit;
 use std::fs::{File, write};
 use std::io::{Read, Error};
 
-const PROGRAM_NAME: &str = "xor-compress";
-
 fn compress_files<'a>(in_filenames: &'a [String], out_filename: &'a String) -> Result<u32, (&'a String, Error)> {
     let mut data = Vec::new();
     for filename in in_filenames {
@@ -63,7 +61,9 @@ fn compress_files<'a>(in_filenames: &'a [String], out_filename: &'a String) -> R
 }
 
 fn main() {
-    let mut argv: Vec<String> = args().skip(1).collect();
+    let mut argv_iter = args();
+    let program_name = argv_iter.next().expect("xor-compress");
+    let mut argv: Vec<String> = argv_iter.collect();
 
     let verbose = !argv.is_empty() && argv[0] == "-v";
     if verbose {
@@ -71,17 +71,17 @@ fn main() {
     }
 
     if argv.len() < 2 {
-        eprintln!("Usage: {} [-v] file... files.xor", PROGRAM_NAME);
+        eprintln!("Usage: {} [-v] file... files.xor", program_name);
         exit(1);
     }
 
     let out_filename = argv.pop().unwrap();
     match compress_files(&argv[..], &out_filename) {
         Ok(runs) => if verbose {
-            println!("{}: {}: ld bc, ${:x}", PROGRAM_NAME, out_filename, runs);
+            println!("{}: {}: ld bc, ${:x}", program_name, out_filename, runs);
         },
         Err((filename, err)) => {
-            eprintln!("{}: {}: {}", PROGRAM_NAME, filename, err);
+            eprintln!("{}: {}: {}", program_name, filename, err);
             exit(err.raw_os_error().unwrap_or(1));
         }
     }
