@@ -62,7 +62,7 @@ calc_town_map_puzzle_index::
     xor $ff
     inc a
     add c
-    add PUZZLE_DIGLETT
+    add TOWN_MAP_PUZZLES
     jp farcall_ret
 
 SECTION "function_01_6306", ROMX[$6306], BANK[$01]

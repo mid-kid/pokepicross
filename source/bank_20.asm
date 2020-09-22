@@ -1,3 +1,4 @@
+INCLUDE "macros.inc"
 INCLUDE "level_constants.inc"
 INCLUDE "puzzle_constants.inc"
 
@@ -26,7 +27,7 @@ calc_safari_map_puzzle_index::
     xor $ff
     inc a
     add c
-    add PUZZLE_SAFARI_HAUNTER
+    add SAFARI_ZONE_PUZZLES
     jp farcall_ret
 
 SECTION "calc_safari_map_level_4_puzzle_index", ROMX[$5258], BANK[$20]
@@ -45,7 +46,7 @@ calc_safari_map_level_4_puzzle_index::
     jp farcall_ret
 
 .level_4_puzzles:
-    db PUZZLE_THREE_POKEMON,  PUZZLE_SAFARI_GLOOM,       00, 00
-    db PUZZLE_TEAM_ROCKET,    PUZZLE_PIKACHU_AND_TOGEPI, 00, 00
-    db PUZZLE_HIDDEN_VILLAGE, PUZZLE_SNOWMAN,            00, 00
-    db 00,                    00,                        00, 00
+    db PUZZLE_THREE_POKEMON,  PUZZLE_SAFARI_GLOOM,       0, 0
+    db PUZZLE_TEAM_ROCKET,    PUZZLE_PIKACHU_AND_TOGEPI, 0, 0
+    db PUZZLE_HIDDEN_VILLAGE, PUZZLE_SNOWMAN,            0, 0
+    db 0,                     0,                         0, 0
