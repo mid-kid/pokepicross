@@ -9,7 +9,7 @@ level_names::
     dw level_name_rare_candy
     dw level_name_pc
     dw level_name_repel
-    dw level_name_sylph_scope
+    dw level_name_silph_scope
     dw level_name_poke_doll
     dw level_name_gold_teeth
     dw level_name_jigglypuffs_microphone
@@ -280,7 +280,7 @@ level_name_repel:
     done
     db 0
 
-level_name_sylph_scope:
+level_name_silph_scope:
     dw 101
     text "シルフスコープ"
     done
