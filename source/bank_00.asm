@@ -1759,9 +1759,9 @@ function_00_0c70::
     push_bank_rom $09 ; BANK(???)
 
     ld hl, $4000 ; ???
-    ld a, [w_level_index + 0]
+    ld a, [w_puzzle_index + 0]
     ld c, a
-    ld a, [w_level_index + 1]
+    ld a, [w_puzzle_index + 1]
     ld b, a
     sla c
     rl b
@@ -2324,14 +2324,14 @@ busy_wait::
     ret
 
 SECTION "home_text", ROM0[$1883]
-level_name_print::
-    push_bank_rom BANK(level_names)
+puzzle_name_print::
+    push_bank_rom BANK(puzzle_names)
 
     ; Get string address
-    ld hl, level_names
-    ld a, [w_level_index + 0]
+    ld hl, puzzle_names
+    ld a, [w_puzzle_index + 0]
     ld c, a
-    ld a, [w_level_index + 1]
+    ld a, [w_puzzle_index + 1]
     ld b, a
     sla c
     rl b
@@ -2493,13 +2493,13 @@ function_00_1bec::
     ld a, b
     ret
 
-copy_level_name::
+copy_puzzle_name::
     ld l, a
-    push_bank_rom BANK(level_names)
+    push_bank_rom BANK(puzzle_names)
 
     ld h, 0
     add hl, hl
-    ld de, level_names
+    ld de, puzzle_names
     add hl, de
     ld a, [hl+]
     ld h, [hl]
@@ -2507,7 +2507,7 @@ copy_level_name::
 
     inc hl ; skip dw before text
     inc hl
-    ld e, 6 ; only copies first 6 characters of level name
+    ld e, 6 ; only copies first 6 characters of puzzle name
 .loop
     ld a, [hl+]
     ld [bc], a

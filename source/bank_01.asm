@@ -2,7 +2,7 @@ INCLUDE "macros.inc"
 
 SECTION "text_2_char_draw", ROMX[$5e3c], BANK[$01]
 
-level_name_textbox_clear:
+puzzle_name_textbox_clear:
     xor a
     ld [w_dbe4], a
 

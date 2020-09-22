@@ -207,7 +207,7 @@
 01:d568 w_d568
 01:d60f w_d60f
 01:d61b w_d61b
-01:d625 w_level_index ; dw
+01:d625 w_puzzle_index ; dw
 01:d628 w_d628 ; ds 3
 01:d62d w_d62d
 01:d630 w_d630
