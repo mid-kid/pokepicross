@@ -1,4 +1,4 @@
-INCLUDE "macros.inc"
+INCLUDE "gfx_macros.inc"
 
 SECTION "gfx_alphabets", ROMX[$4000], BANK[$7c]
 gfx_alphabets::

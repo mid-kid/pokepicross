@@ -1,4 +1,6 @@
-INCLUDE "macros.inc"
+INCLUDE "code_macros.inc"
+INCLUDE "const_macros.inc"
+INCLUDE "gfx_macros.inc"
 INCLUDE "level_constants.inc"
 INCLUDE "puzzle_constants.inc"
 

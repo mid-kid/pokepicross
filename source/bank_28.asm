@@ -1,5 +1,5 @@
 INCLUDE "hardware.inc"
-INCLUDE "macros.inc"
+INCLUDE "code_macros.inc"
 
 SECTION "function_28_426a", ROMX[$426a], BANK[$28]
 

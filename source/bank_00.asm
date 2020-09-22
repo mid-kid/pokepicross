@@ -1,6 +1,7 @@
 INCLUDE "charmap.inc"
 INCLUDE "hardware.inc"
-INCLUDE "macros.inc"
+INCLUDE "code_macros.inc"
+INCLUDE "const_macros.inc"
 
 SECTION "reset", ROM0[$0000]
 reset::

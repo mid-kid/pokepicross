@@ -1,5 +1,5 @@
 INCLUDE "charmap.inc"
-INCLUDE "macros.inc"
+INCLUDE "code_macros.inc"
 
 SECTION "text_char", ROMX[$4bf7], BANK[$02]
 far_textbox_print_char::

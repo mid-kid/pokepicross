@@ -1,5 +1,6 @@
 INCLUDE "hardware.inc"
-INCLUDE "macros.inc"
+INCLUDE "code_macros.inc"
+INCLUDE "const_macros.inc"
 
 SECTION "tutorial", ROMX[$4000], BANK[$05]
 
