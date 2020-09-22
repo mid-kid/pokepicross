@@ -218,6 +218,15 @@
 01:d6c8 w_d6c8
 01:d6c9 w_d6c9
 01:d6ca w_d6ca
+01:d6d4 w_town_map_level ; db
+01:d6e2 w_town_map_x ; db
+01:d6e3 w_town_map_y ; db
+01:db27 w_easy_picross_level ; db
+01:db35 w_easy_picross_x ; db
+01:db36 w_easy_picross_y ; db
+01:db7a w_safari_map_level ; db
+01:db88 w_safari_map_x ; db
+01:db89 w_safari_map_y ; db
 01:dbe4 w_dbe4 ; db
 01:dbe6 w_dbe6
 01:dbe8 w_dbe8

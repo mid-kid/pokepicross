@@ -1,4 +1,6 @@
 INCLUDE "macros.inc"
+INCLUDE "level_constants.inc"
+INCLUDE "puzzle_constants.inc"
 
 SECTION "text_2_char_draw", ROMX[$5e3c], BANK[$01]
 
@@ -30,6 +32,38 @@ puzzle_name_textbox_clear:
     cp 11
     jp nz, .loop
     ret
+
+SECTION "calc_town_map_puzzle_index", ROMX[$61FA], BANK[$01]
+calc_town_map_puzzle_index::
+    ld a, [w_town_map_level]
+    cp LEVEL_MEW
+    jr nz, .not_mew
+    ld a, PUZZLE_MEW
+    jp farcall_ret
+
+.not_mew
+    ld a, [w_town_map_y]
+    ld c, a
+    add a
+    add a
+    add c
+    ld c, a
+    ld a, [w_town_map_x]
+    add c
+    ld c, a
+    ld a, [w_town_map_level]
+    add a
+    add a
+    add a
+    add a
+    add c
+    ld c, a
+    ld a, [w_town_map_level]
+    xor $ff
+    inc a
+    add c
+    add PUZZLE_DIGLETT
+    jp farcall_ret
 
 SECTION "function_01_6306", ROMX[$6306], BANK[$01]
 function_01_6306::
