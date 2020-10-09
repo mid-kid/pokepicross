@@ -119,3 +119,8 @@ gfx_bgm_jigglypuff_4_sgb::
 INCBIN "gfx/bgm/no_blink.2bpp"
 INCBIN "gfx/bgm/jigglypuff_4_sgb.2bpp"
 .end::
+
+SECTION "compressed_tilemap_attrmap_town_map_transition", ROMX[$7000], BANK[$68]
+compressed_tilemap_attrmap_town_map_transition::
+INCBIN "gfx/town_map/town_map_transition.tilemap_attrmap.xor"
+.end::
