@@ -1,3 +1,5 @@
 D6E6-D721: Stage clear flags, set all to FF
 DB19: Mew appear flag, set to 01
 DB1A: Mew Pokédex flag, set to 01
+
+Hold Up+Left+Select on boot to clear all save data.
