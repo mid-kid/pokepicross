@@ -16,10 +16,7 @@ endm
 
 farcall: macro
     push af
-    ld a, LOW(\1)
-    ld [w_farcall_target + 0], a
-    ld a, HIGH(\1)
-    ld [w_farcall_target + 1], a
+    ld16 w_farcall_target, \1
     ld a, BANK(\1)
     ld [w_bank_temp], a
     pop af
@@ -28,10 +25,7 @@ endm
 
 farjp: macro
     push af
-    ld a, LOW(\1)
-    ld [w_farcall_target + 0], a
-    ld a, HIGH(\1)
-    ld [w_farcall_target + 1], a
+    ld16 w_farcall_target, \1
     ld a, BANK(\1)
     ld [w_bank_temp], a
     pop af
