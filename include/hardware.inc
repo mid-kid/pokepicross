@@ -456,7 +456,7 @@ rSCY EQU $FF42
 
 
 ; --
-; -- SCY ($FF43)
+; -- SCX ($FF43)
 ; -- Scroll X (R/W)
 ; --
 rSCX EQU $FF43
@@ -607,8 +607,14 @@ HDMA5F_BUSY EQU %10000000 ; 0=Busy (DMA still in progress), 1=Transfer complete 
 ; --
 ; -- RP ($FF56)
 ; -- Infrared Communications Port (R/W)
+; -- CGB Mode Only
 ; --
 rRP EQU $FF56
+
+RPF_ENREAD   EQU %11000000
+RPF_DATAIN   EQU %00000010 ; 0=Receiving IR Signal, 1=Normal
+RPF_WRITE_HI EQU %00000001
+RPF_WRITE_LO EQU %00000000
 
 
 ; --

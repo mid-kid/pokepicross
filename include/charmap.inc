@@ -320,8 +320,8 @@ charmap "(", 238
 charmap ")", 239
 charmap "~", 240
 
-TX_LF EQU -2 ; Line feed
-TX_END EQU -1 ; End of message
+DEF TX_LF EQU -2 ; Line feed
+DEF TX_END EQU -1 ; End of message
 
 pushc
 newcharmap ascii

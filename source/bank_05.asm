@@ -207,7 +207,7 @@ tutorial_scene::
     const_dw TUTORIAL_SCENE_58, tutorial_scene_58
     const_dw TUTORIAL_SCENE_59, tutorial_scene_59
     const_dw TUTORIAL_SCENE_60, tutorial_scene_60
-NUM_TUTORIAL_SCENES EQU const_value
+DEF NUM_TUTORIAL_SCENES EQU const_value
 
 tutorial_scene_00:
     ld a, [w_cdd2_jumptable_index]

@@ -1,12 +1,12 @@
-lb: macro
+macro lb
     ld \1, ((\2) & $ff) << 8 | ((\3) & $ff)
 endm
 
-ln: macro
+macro ln
     ld \1, ((\2) & $f) << 4 | ((\3) & $f)
 endm
 
-ld16: macro
+macro ld16
     ld a, LOW(\2)
     ld [\1 + 0], a
     ld a, HIGH(\2)
@@ -14,7 +14,7 @@ ld16: macro
 endm
 
 
-farcall: macro
+macro farcall
     push af
     ld16 w_farcall_target, \1
     ld a, BANK(\1)
@@ -23,7 +23,7 @@ farcall: macro
     call _farcall
 endm
 
-farjp: macro
+macro farjp
     push af
     ld16 w_farcall_target, \1
     ld a, BANK(\1)
@@ -33,7 +33,7 @@ farjp: macro
 endm
 
 
-push_bank_rom: macro
+macro push_bank_rom
     ld a, [w_bank_rom]
     push af
     ld a, \1
@@ -41,7 +41,7 @@ push_bank_rom: macro
     ld [rROMB0], a
 endm
 
-pop_bank_rom: macro
+macro pop_bank_rom
     pop af
     ld [w_bank_rom], a
     ld [rROMB0], a

@@ -257,23 +257,19 @@ text_chars_widths::
     db 0
     db 0
 
-def_tile: macro
+macro def_tile
 ; The image is 2bpp, 8x8 tiles, but the characters themselves are 16x10...
-_x = \1
-_y = \2
-_pos = $20 * (_x + 8 * _y)  ; Max char width = 2 tiles, width = 8 chars
-_pos = _pos + 4 * _y  ; Characters are 2 pixels taller than a tile
-_pos = _pos + $f0 * (_y / 4)  ; Every 4 rows skip a whole tile
+    def _x = \1
+    def _y = \2
+    def _pos = $20 * (_x + 8 * _y)  ; Max char width = 2 tiles, width = 8 chars
+    def _pos = _pos + 4 * _y  ; Characters are 2 pixels taller than a tile
+    def _pos = _pos + $f0 * (_y / 4)  ; Every 4 rows skip a whole tile
     dw _pos
 endm
 
 text_chars_offsets::
-y = 0
-rept 32  ; height of image in characters
-x = 0
-rept 8   ; width of image in characters
+for y, 32 ; height of image in characters
+for x, 8  ; width of image in characters
     def_tile x, y
-x = x + 1
 endr
-y = y + 1
 endr
