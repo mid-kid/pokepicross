@@ -1956,7 +1956,7 @@ function_00_0d91::
 
     ldh a, [rIE]
     push af
-    res IEF_VBLANK_BIT, a
+    res IEB_VBLANK, a
     ldh [rIE], a
     di
     ld a, [w_c35a]
@@ -2683,7 +2683,7 @@ SECTION "serial, etc", ROM0[$2836]
 serial::
     push af
     ldh a, [rSC]
-    bit SC_TRANSFER_START_FLAG_BIT, a
+    bit SCB_START, a
     jr nz, .skip
     push bc
     push de
